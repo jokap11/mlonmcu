@@ -104,6 +104,7 @@ class DebugArena(BackendFeature):
 
 
 @register_feature("validate")
+# class Validate(FrontendFeature, PlatformFeature, TargetFeature):
 class Validate(FrontendFeature, PlatformFeature):
     """Enable validaton of inout and output tensors."""
 
@@ -115,6 +116,11 @@ class Validate(FrontendFeature, PlatformFeature):
 
     def __init__(self, features=None, config=None):
         super().__init__("validate", features=features, config=config)
+        # self.outputs_file = tempfile.TemporaryFile()
+
+    def __del__(self):
+        pass
+        # self.outputs_file.close()
 
     @property
     def allow_missing(self):
@@ -137,6 +143,17 @@ class Validate(FrontendFeature, PlatformFeature):
                 f"{platform}.fail_on_error": self.fail_on_error,
             }
         )
+
+    # def get_target_callbacks(self, target):
+    #     assert target in ["spike", "etiss_pulpino"], f"Unsupported feature '{self.name}' for target '{target}'"
+    #     if self.enabled:
+
+    #         def pre_callback(cwd, args):
+    #             """TODO"""
+    #         def post_callback():
+    #             """TODO"""
+
+    #         return pre_callback, post_callback
 
 
 @register_feature("muriscvnn")

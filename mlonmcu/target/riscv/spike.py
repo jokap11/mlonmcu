@@ -172,6 +172,10 @@ class SpikeTarget(RISCVTarget):
         if self.timeout_sec > 0:
             raise NotImplementedError
 
+        # print("cwd", cwd)
+        # input()
+        # outputs_file = Path(cwd) / "outputs.txt"
+        # outputs_file.touch()
         ret = execute(
             self.spike_exe.resolve(),
             *spike_args,
@@ -179,8 +183,15 @@ class SpikeTarget(RISCVTarget):
             *spikepk_args,
             program,
             *args,
+            cwd=cwd,
             **kwargs,
         )
+        # with open(outputs_file, "r") as handle:
+        #     text = handle.read()
+
+        # print("text", text)
+        # print("cwd", cwd)
+        # input()
         return ret
 
     def parse_stdout(self, out):
