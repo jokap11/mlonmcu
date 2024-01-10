@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>mlonmcu.flow.tflm.backend.backend &mdash; ML on MCU 0.3.0dev0 documentation</title>
+  <title>mlonmcu.flow.tflm.backend.backend &mdash; ML on MCU 0.4.dev0 documentation</title>
       <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -31,7 +31,7 @@
             ML on MCU
           </a>
               <div class="version">
-                0.3.0dev0
+                0.4.dev0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
@@ -112,12 +112,14 @@
 
     <span class="n">name</span> <span class="o">=</span> <span class="kc">None</span>
 
+    <span class="n">FEATURES</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
     <span class="n">DEFAULTS</span> <span class="o">=</span> <span class="p">{}</span>
 
-    <span class="n">REQUIRED</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">REQUIRED</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">framework</span><span class="o">=</span><span class="s2">&quot;tflm&quot;</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">framework</span><span class="o">=</span><span class="s2">&quot;tflm&quot;</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="n">features</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">supported_formats</span> <span class="o">=</span> <span class="p">[</span><span class="n">ModelFormats</span><span class="o">.</span><span class="n">TFLITE</span><span class="p">]</span>
 
@@ -126,7 +128,7 @@
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
         <span class="bp">cls</span><span class="o">.</span><span class="n">registry</span><span class="p">[</span><span class="bp">cls</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="bp">cls</span>
 
-<div class="viewcode-block" id="TFLMBackend.load_model"><a class="viewcode-back" href="../../../../../mlonmcu.flow.tflm.backend.html#mlonmcu.flow.tflm.TFLMBackend.load_model">[docs]</a>    <span class="k">def</span> <span class="nf">load_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+<div class="viewcode-block" id="TFLMBackend.load_model"><a class="viewcode-back" href="../../../../../mlonmcu.flow.tflm.backend.html#mlonmcu.flow.tflm.TFLMBackend.load_model">[docs]</a>    <span class="k">def</span> <span class="nf">load_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">input_shapes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">output_shapes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">input_types</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">output_types</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
         <span class="n">ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">model</span><span class="p">)[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span>
         <span class="n">fmt</span> <span class="o">=</span> <span class="n">ModelFormats</span><span class="o">.</span><span class="n">from_extension</span><span class="p">(</span><span class="n">ext</span><span class="p">)</span>

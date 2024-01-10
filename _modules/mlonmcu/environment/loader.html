@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>mlonmcu.environment.loader &mdash; ML on MCU 0.3.0dev0 documentation</title>
+  <title>mlonmcu.environment.loader &mdash; ML on MCU 0.4.dev0 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -31,7 +31,7 @@
             ML on MCU
           </a>
               <div class="version">
-                0.3.0dev0
+                0.4.dev0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -196,12 +196,12 @@
             <span class="n">repos</span> <span class="o">=</span> <span class="p">{}</span>
             <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">loaded</span><span class="p">[</span><span class="s2">&quot;repos&quot;</span><span class="p">]:</span>
                 <span class="n">repo</span> <span class="o">=</span> <span class="n">loaded</span><span class="p">[</span><span class="s2">&quot;repos&quot;</span><span class="p">][</span><span class="n">key</span><span class="p">]</span>
-                <span class="k">if</span> <span class="s2">&quot;url&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">repo</span><span class="p">:</span>
+                <span class="n">url</span> <span class="o">=</span> <span class="n">repo</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;url&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">url</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Missing field &#39;url&#39; in YAML file&quot;</span><span class="p">)</span>
-                <span class="k">if</span> <span class="s2">&quot;ref&quot;</span> <span class="ow">in</span> <span class="n">repo</span><span class="p">:</span>
-                    <span class="n">repos</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">RepoConfig</span><span class="p">(</span><span class="n">repo</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">],</span> <span class="n">ref</span><span class="o">=</span><span class="n">repo</span><span class="p">[</span><span class="s2">&quot;ref&quot;</span><span class="p">])</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">repos</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">RepoConfig</span><span class="p">(</span><span class="n">repo</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">])</span>
+                <span class="n">ref</span> <span class="o">=</span> <span class="n">repo</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ref&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+                <span class="n">options</span> <span class="o">=</span> <span class="n">repo</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;options&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+                <span class="n">repos</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">RepoConfig</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">ref</span><span class="o">=</span><span class="n">ref</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">repos</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="n">default_framework</span> <span class="o">=</span> <span class="kc">None</span>

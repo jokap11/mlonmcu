@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>mlonmcu.setup.tasks.ara &mdash; ML on MCU 0.3.0dev0 documentation</title>
+  <title>mlonmcu.setup.tasks.ara &mdash; ML on MCU 0.4.dev0 documentation</title>
       <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -31,7 +31,7 @@
             ML on MCU
           </a>
               <div class="version">
-                0.3.0dev0
+                0.4.dev0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
@@ -141,9 +141,7 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">rebuild</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">utils</span><span class="o">.</span><span class="n">is_populated</span><span class="p">(</span><span class="n">araSrcDir</span><span class="p">):</span>
             <span class="n">araRepo</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">environment</span><span class="o">.</span><span class="n">repos</span><span class="p">[</span><span class="s2">&quot;ara&quot;</span><span class="p">]</span>
-            <span class="n">utils</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span>
-                <span class="n">araRepo</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">araSrcDir</span><span class="p">,</span> <span class="n">branch</span><span class="o">=</span><span class="n">araRepo</span><span class="o">.</span><span class="n">ref</span><span class="p">,</span> <span class="n">submodules</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;hardware&quot;</span><span class="p">],</span> <span class="n">refresh</span><span class="o">=</span><span class="n">rebuild</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">True</span>
-            <span class="p">)</span>
+            <span class="n">utils</span><span class="o">.</span><span class="n">clone_wrapper</span><span class="p">(</span><span class="n">araRepo</span><span class="p">,</span> <span class="n">araSrcDir</span><span class="p">,</span> <span class="n">refresh</span><span class="o">=</span><span class="n">rebuild</span><span class="p">)</span>
             <span class="n">utils</span><span class="o">.</span><span class="n">exec_getout</span><span class="p">(</span><span class="s2">&quot;make&quot;</span><span class="p">,</span> <span class="s2">&quot;apply-patches&quot;</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="n">araSrcDir</span> <span class="o">/</span> <span class="s2">&quot;hardware&quot;</span><span class="p">)</span>
     <span class="n">context</span><span class="o">.</span><span class="n">cache</span><span class="p">[</span><span class="s2">&quot;ara.src_dir&quot;</span><span class="p">,</span> <span class="n">flags</span><span class="p">]</span> <span class="o">=</span> <span class="n">araSrcDir</span></div>
 </pre></div>

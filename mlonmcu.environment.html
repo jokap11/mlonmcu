@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>mlonmcu.environment package &mdash; ML on MCU 0.3.0dev0 documentation</title>
+  <title>mlonmcu.environment package &mdash; ML on MCU 0.4.dev0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -34,7 +34,7 @@
             ML on MCU
           </a>
               <div class="version">
-                0.3.0dev0
+                0.4.dev0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -66,6 +66,7 @@
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.html#module-mlonmcu.mlonmcu">mlonmcu.mlonmcu module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.html#module-mlonmcu.plugins">mlonmcu.plugins module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.html#module-mlonmcu.report">mlonmcu.report module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.html#module-mlonmcu.timeout">mlonmcu.timeout module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.html#module-mlonmcu.utils">mlonmcu.utils module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.html#module-mlonmcu.version">mlonmcu.version module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.html#module-mlonmcu">Module contents</a></li>
@@ -220,8 +221,23 @@
 
 <dl class="py class">
 <dt class="sig sig-object py" id="mlonmcu.environment.config.RepoConfig">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mlonmcu.environment.config.</span></span><span class="sig-name descname"><span class="pre">RepoConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/environment/config.html#RepoConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.environment.config.RepoConfig" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mlonmcu.environment.config.</span></span><span class="sig-name descname"><span class="pre">RepoConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/environment/config.html#RepoConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.environment.config.RepoConfig" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#mlonmcu.environment.config.BaseConfig" title="mlonmcu.environment.config.BaseConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlonmcu.environment.config.BaseConfig</span></code></a></p>
+<dl class="py property">
+<dt class="sig sig-object py" id="mlonmcu.environment.config.RepoConfig.recursive">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">recursive</span></span><a class="headerlink" href="#mlonmcu.environment.config.RepoConfig.recursive" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mlonmcu.environment.config.RepoConfig.single_branch">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">single_branch</span></span><a class="headerlink" href="#mlonmcu.environment.config.RepoConfig.single_branch" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mlonmcu.environment.config.RepoConfig.submodules">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">submodules</span></span><a class="headerlink" href="#mlonmcu.environment.config.RepoConfig.submodules" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 <dl class="py class">

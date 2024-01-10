@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>mlonmcu.models.model &mdash; ML on MCU 0.3.0dev0 documentation</title>
+  <title>mlonmcu.models.model &mdash; ML on MCU 0.4.dev0 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -31,7 +31,7 @@
             ML on MCU
           </a>
               <div class="version">
-                0.3.0dev0
+                0.4.dev0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -101,6 +101,8 @@
 <span class="c1"># See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
 <span class="c1">#</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
 <span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
@@ -146,29 +148,148 @@
     <span class="k">return</span> <span class="kc">None</span></div>
 
 
-<div class="viewcode-block" id="Model"><a class="viewcode-back" href="../../../mlonmcu.models.html#mlonmcu.models.model.Model">[docs]</a><span class="k">class</span> <span class="nc">Model</span><span class="p">:</span>
+<div class="viewcode-block" id="parse_shape_string"><a class="viewcode-back" href="../../../mlonmcu.models.html#mlonmcu.models.model.parse_shape_string">[docs]</a><span class="k">def</span> <span class="nf">parse_shape_string</span><span class="p">(</span><span class="n">inputs_string</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parse an input shape dictionary string to a usable dictionary.</span>
+
+<span class="sd">    Taken from: https://github.com/apache/tvm/blob/main/python/tvm/driver/tvmc/shape_parser.py</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    inputs_string: str</span>
+<span class="sd">        A string of the form &quot;input_name:[dim1,dim2,...,dimn] input_name2:[dim1,dim2]&quot; that</span>
+<span class="sd">        indicates the desired shape for specific model inputs. Colons, forward slashes and dots</span>
+<span class="sd">        within input_names are supported. Spaces are supported inside of dimension arrays.</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    shape_dict: dict</span>
+<span class="sd">        A dictionary mapping input names to their shape for use in relay frontend converters.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Create a regex pattern that extracts each separate input mapping.</span>
+    <span class="c1"># We want to be able to handle:</span>
+    <span class="c1"># * Spaces inside arrays</span>
+    <span class="c1"># * forward slashes inside names (but not at the beginning or end)</span>
+    <span class="c1"># * colons inside names (but not at the beginning or end)</span>
+    <span class="c1"># * dots inside names</span>
+    <span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;(?:\w+\/)?[:\w.]+\:\s*\[\-?\d+(?:\,\s*\-?\d+)*\]&quot;</span>
+    <span class="n">input_mappings</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">inputs_string</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">input_mappings</span>
+    <span class="n">shape_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">mapping</span> <span class="ow">in</span> <span class="n">input_mappings</span><span class="p">:</span>
+        <span class="c1"># Remove whitespace.</span>
+        <span class="n">mapping</span> <span class="o">=</span> <span class="n">mapping</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="c1"># Split mapping into name and shape.</span>
+        <span class="n">name</span><span class="p">,</span> <span class="n">shape_string</span> <span class="o">=</span> <span class="n">mapping</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># Convert shape string into a list of integers or Anys if negative.</span>
+        <span class="n">shape</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">shape_string</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;][&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)]</span>
+        <span class="c1"># Add parsed mapping to shape dictionary.</span>
+        <span class="n">shape_dict</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">shape</span>
+
+    <span class="k">return</span> <span class="n">shape_dict</span></div>
+
+
+<div class="viewcode-block" id="parse_type_string"><a class="viewcode-back" href="../../../mlonmcu.models.html#mlonmcu.models.model.parse_type_string">[docs]</a><span class="k">def</span> <span class="nf">parse_type_string</span><span class="p">(</span><span class="n">inputs_string</span><span class="p">):</span>
+    <span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;(?:\w+\/)?[:\w.]+\:\s*\-?\w+(?:\s*\-?\w+)*&quot;</span>
+    <span class="n">input_mappings</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">inputs_string</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">input_mappings</span>
+    <span class="n">type_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">mapping</span> <span class="ow">in</span> <span class="n">input_mappings</span><span class="p">:</span>
+        <span class="c1"># Remove whitespace.</span>
+        <span class="n">mapping</span> <span class="o">=</span> <span class="n">mapping</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="c1"># Split mapping into name and type.</span>
+        <span class="n">name</span><span class="p">,</span> <span class="n">type_string</span> <span class="o">=</span> <span class="n">mapping</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">type_dict</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">type_string</span>
+
+    <span class="k">return</span> <span class="n">type_dict</span></div>
+
+
+<div class="viewcode-block" id="Workload"><a class="viewcode-back" href="../../../mlonmcu.models.html#mlonmcu.models.model.Workload">[docs]</a><span class="k">class</span> <span class="nc">Workload</span><span class="p">:</span>
+    <span class="n">DEFAULTS</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">alt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">alt</span> <span class="o">=</span> <span class="n">alt</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">filter_config</span><span class="p">(</span><span class="n">config</span> <span class="k">if</span> <span class="n">config</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">{},</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">DEFAULTS</span><span class="p">,</span> <span class="nb">set</span><span class="p">(),</span> <span class="nb">set</span><span class="p">())</span>
+
+<div class="viewcode-block" id="Workload.get_platform_config"><a class="viewcode-back" href="../../../mlonmcu.models.html#mlonmcu.models.model.Workload.get_platform_config">[docs]</a>    <span class="k">def</span> <span class="nf">get_platform_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">platform</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{}</span></div>
+
+<div class="viewcode-block" id="Workload.add_platform_config"><a class="viewcode-back" href="../../../mlonmcu.models.html#mlonmcu.models.model.Workload.add_platform_config">[docs]</a>    <span class="k">def</span> <span class="nf">add_platform_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">platform</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+        <span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_platform_config</span><span class="p">(</span><span class="n">platform</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Workload.get_platform_defs"><a class="viewcode-back" href="../../../mlonmcu.models.html#mlonmcu.models.model.Workload.get_platform_defs">[docs]</a>    <span class="k">def</span> <span class="nf">get_platform_defs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">platform</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{}</span></div>
+
+<div class="viewcode-block" id="Workload.add_platform_defs"><a class="viewcode-back" href="../../../mlonmcu.models.html#mlonmcu.models.model.Workload.add_platform_defs">[docs]</a>    <span class="k">def</span> <span class="nf">add_platform_defs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">platform</span><span class="p">,</span> <span class="n">defs</span><span class="p">):</span>
+        <span class="n">defs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_platform_defs</span><span class="p">(</span><span class="n">platform</span><span class="p">))</span></div></div>
+
+
+<div class="viewcode-block" id="Model"><a class="viewcode-back" href="../../../mlonmcu.models.html#mlonmcu.models.model.Model">[docs]</a><span class="k">class</span> <span class="nc">Model</span><span class="p">(</span><span class="n">Workload</span><span class="p">):</span>
     <span class="n">DEFAULTS</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="o">**</span><span class="n">Workload</span><span class="o">.</span><span class="n">DEFAULTS</span><span class="p">,</span>
         <span class="s2">&quot;metadata_path&quot;</span><span class="p">:</span> <span class="s2">&quot;definition.yml&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;input_shapes&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">&quot;output_shapes&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">&quot;input_types&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">&quot;output_types&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
         <span class="s2">&quot;support_path&quot;</span><span class="p">:</span> <span class="s2">&quot;support&quot;</span><span class="p">,</span>
         <span class="s2">&quot;inputs_path&quot;</span><span class="p">:</span> <span class="s2">&quot;input&quot;</span><span class="p">,</span>
         <span class="s2">&quot;outputs_path&quot;</span><span class="p">:</span> <span class="s2">&quot;output&quot;</span><span class="p">,</span>
     <span class="p">}</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">paths</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">alt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">formats</span><span class="o">=</span><span class="n">ModelFormats</span><span class="o">.</span><span class="n">TFLITE</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">alt</span><span class="o">=</span><span class="n">alt</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">paths</span> <span class="o">=</span> <span class="n">paths</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">paths</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">paths</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">alt</span> <span class="o">=</span> <span class="n">alt</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">formats</span> <span class="o">=</span> <span class="n">formats</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">formats</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">formats</span> <span class="o">=</span> <span class="p">[</span><span class="n">formats</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">filter_config</span><span class="p">(</span><span class="n">config</span> <span class="k">if</span> <span class="n">config</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">{},</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">DEFAULTS</span><span class="p">,</span> <span class="p">[],</span> <span class="p">[])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="n">parse_metadata_from_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">metadata_path</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">metadata_path</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;metadata_path&quot;</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">input_shapes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;input_shapes&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">temp</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">temp</span> <span class="o">=</span> <span class="n">parse_shape_string</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">temp</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">output_shapes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;output_shapes&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">temp</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">temp</span> <span class="o">=</span> <span class="n">parse_shape_string</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">temp</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">input_types</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;input_types&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">temp</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">temp</span> <span class="o">=</span> <span class="n">parse_type_string</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">temp</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">output_types</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;output_types&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">temp</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">temp</span> <span class="o">=</span> <span class="n">parse_type_string</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">temp</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">support_path</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -197,6 +318,147 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">alt</span><span class="p">:</span>
             <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Model(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">,alt=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">alt</span><span class="si">}</span><span class="s2">)&quot;</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Model(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">)&quot;</span></div>
+
+
+<div class="viewcode-block" id="Program"><a class="viewcode-back" href="../../../mlonmcu.models.html#mlonmcu.models.model.Program">[docs]</a><span class="k">class</span> <span class="nc">Program</span><span class="p">(</span><span class="n">Workload</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">alt</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Program(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">,alt=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">alt</span><span class="si">}</span><span class="s2">)&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Program(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">)&quot;</span></div>
+
+
+<div class="viewcode-block" id="ExampleProgram"><a class="viewcode-back" href="../../../mlonmcu.models.html#mlonmcu.models.model.ExampleProgram">[docs]</a><span class="k">class</span> <span class="nc">ExampleProgram</span><span class="p">(</span><span class="n">Program</span><span class="p">):</span>
+<div class="viewcode-block" id="ExampleProgram.get_platform_defs"><a class="viewcode-back" href="../../../mlonmcu.models.html#mlonmcu.models.model.ExampleProgram.get_platform_defs">[docs]</a>    <span class="k">def</span> <span class="nf">get_platform_defs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">platform</span><span class="p">):</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="n">platform</span> <span class="o">==</span> <span class="s2">&quot;mlif&quot;</span><span class="p">:</span>
+            <span class="n">ret</span><span class="p">[</span><span class="s2">&quot;EXAMPLE_BENCHMARK&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">return</span> <span class="n">ret</span></div></div>
+
+
+<div class="viewcode-block" id="EmbenchProgram"><a class="viewcode-back" href="../../../mlonmcu.models.html#mlonmcu.models.model.EmbenchProgram">[docs]</a><span class="k">class</span> <span class="nc">EmbenchProgram</span><span class="p">(</span><span class="n">Program</span><span class="p">):</span>
+<div class="viewcode-block" id="EmbenchProgram.get_platform_defs"><a class="viewcode-back" href="../../../mlonmcu.models.html#mlonmcu.models.model.EmbenchProgram.get_platform_defs">[docs]</a>    <span class="k">def</span> <span class="nf">get_platform_defs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">platform</span><span class="p">):</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="n">platform</span> <span class="o">==</span> <span class="s2">&quot;mlif&quot;</span><span class="p">:</span>
+            <span class="n">ret</span><span class="p">[</span><span class="s2">&quot;EMBENCH_BENCHMARK&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">return</span> <span class="n">ret</span></div></div>
+
+
+<div class="viewcode-block" id="TaclebenchProgram"><a class="viewcode-back" href="../../../mlonmcu.models.html#mlonmcu.models.model.TaclebenchProgram">[docs]</a><span class="k">class</span> <span class="nc">TaclebenchProgram</span><span class="p">(</span><span class="n">Program</span><span class="p">):</span>
+<div class="viewcode-block" id="TaclebenchProgram.get_platform_defs"><a class="viewcode-back" href="../../../mlonmcu.models.html#mlonmcu.models.model.TaclebenchProgram.get_platform_defs">[docs]</a>    <span class="k">def</span> <span class="nf">get_platform_defs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">platform</span><span class="p">):</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="n">platform</span> <span class="o">==</span> <span class="s2">&quot;mlif&quot;</span><span class="p">:</span>
+            <span class="n">ret</span><span class="p">[</span><span class="s2">&quot;TACLEBENCH_BENCHMARK&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">return</span> <span class="n">ret</span></div></div>
+
+
+<div class="viewcode-block" id="PolybenchProgram"><a class="viewcode-back" href="../../../mlonmcu.models.html#mlonmcu.models.model.PolybenchProgram">[docs]</a><span class="k">class</span> <span class="nc">PolybenchProgram</span><span class="p">(</span><span class="n">Program</span><span class="p">):</span>
+<div class="viewcode-block" id="PolybenchProgram.get_platform_defs"><a class="viewcode-back" href="../../../mlonmcu.models.html#mlonmcu.models.model.PolybenchProgram.get_platform_defs">[docs]</a>    <span class="k">def</span> <span class="nf">get_platform_defs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">platform</span><span class="p">):</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="n">platform</span> <span class="o">==</span> <span class="s2">&quot;mlif&quot;</span><span class="p">:</span>
+            <span class="n">ret</span><span class="p">[</span><span class="s2">&quot;POLYBENCH_BENCHMARK&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">return</span> <span class="n">ret</span></div></div>
+
+
+<div class="viewcode-block" id="MibenchProgram"><a class="viewcode-back" href="../../../mlonmcu.models.html#mlonmcu.models.model.MibenchProgram">[docs]</a><span class="k">class</span> <span class="nc">MibenchProgram</span><span class="p">(</span><span class="n">Program</span><span class="p">):</span>
+<div class="viewcode-block" id="MibenchProgram.get_platform_defs"><a class="viewcode-back" href="../../../mlonmcu.models.html#mlonmcu.models.model.MibenchProgram.get_platform_defs">[docs]</a>    <span class="k">def</span> <span class="nf">get_platform_defs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">platform</span><span class="p">):</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="n">platform</span> <span class="o">==</span> <span class="s2">&quot;mlif&quot;</span><span class="p">:</span>
+            <span class="n">ret</span><span class="p">[</span><span class="s2">&quot;MIBENCH_BENCHMARK&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">return</span> <span class="n">ret</span></div></div>
+
+
+<div class="viewcode-block" id="MathisProgram"><a class="viewcode-back" href="../../../mlonmcu.models.html#mlonmcu.models.model.MathisProgram">[docs]</a><span class="k">class</span> <span class="nc">MathisProgram</span><span class="p">(</span><span class="n">Program</span><span class="p">):</span>
+    <span class="n">DEFAULTS</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="mi">1024</span><span class="p">,</span>
+        <span class="c1"># &quot;size&quot;: 65536,</span>
+    <span class="p">}</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;size&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="n">value</span>
+
+<div class="viewcode-block" id="MathisProgram.get_nargs"><a class="viewcode-back" href="../../../mlonmcu.models.html#mlonmcu.models.model.MathisProgram.get_nargs">[docs]</a>    <span class="k">def</span> <span class="nf">get_nargs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;to_upper&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s2">&quot;add8&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="s2">&quot;add16&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="s2">&quot;gather_add8&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="s2">&quot;gather_add16&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="s2">&quot;scatter_add8&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="s2">&quot;scatter_add16&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="s2">&quot;dot8&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+            <span class="s2">&quot;dot16&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+            <span class="s2">&quot;saxpy8&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+            <span class="s2">&quot;saxpy16&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+            <span class="s2">&quot;matmul8&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="s2">&quot;matmul16&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="s2">&quot;matmul8_a&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="s2">&quot;matmul16_a&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="s2">&quot;transposed_matmul8&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="s2">&quot;transposed_matmul16&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="s2">&quot;transposed_matmul8_a&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="s2">&quot;transposed_matmul16_a&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="s2">&quot;transposed_matmul8_b&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="s2">&quot;transposed_matmul16_b&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="p">}[</span><span class="n">name</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="MathisProgram.get_elem_size"><a class="viewcode-back" href="../../../mlonmcu.models.html#mlonmcu.models.model.MathisProgram.get_elem_size">[docs]</a>    <span class="k">def</span> <span class="nf">get_elem_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;to_upper&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+            <span class="s2">&quot;add8&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+            <span class="s2">&quot;add16&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+            <span class="s2">&quot;gather_add8&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+            <span class="s2">&quot;gather_add16&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+            <span class="s2">&quot;scatter_add8&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+            <span class="s2">&quot;scatter_add16&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+            <span class="s2">&quot;dot8&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+            <span class="s2">&quot;dot16&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+            <span class="s2">&quot;saxpy8&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+            <span class="s2">&quot;saxpy16&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+            <span class="s2">&quot;matmul8&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+            <span class="s2">&quot;matmul16&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+            <span class="s2">&quot;matmul8&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+            <span class="s2">&quot;matmul16&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+            <span class="s2">&quot;matmul8_a&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+            <span class="s2">&quot;matmul16_a&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+            <span class="s2">&quot;transposed_matmul8&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+            <span class="s2">&quot;transposed_matmul16&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+            <span class="s2">&quot;transposed_matmul8_a&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+            <span class="s2">&quot;transposed_matmul16_a&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+            <span class="s2">&quot;transposed_matmul8_b&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+            <span class="s2">&quot;transposed_matmul16_b&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+        <span class="p">}[</span><span class="n">name</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="MathisProgram.get_platform_defs"><a class="viewcode-back" href="../../../mlonmcu.models.html#mlonmcu.models.model.MathisProgram.get_platform_defs">[docs]</a>    <span class="k">def</span> <span class="nf">get_platform_defs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">platform</span><span class="p">):</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="n">platform</span> <span class="o">==</span> <span class="s2">&quot;mlif&quot;</span><span class="p">:</span>
+            <span class="n">ret</span><span class="p">[</span><span class="s2">&quot;MATHIS_TEST&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+            <span class="n">ret</span><span class="p">[</span><span class="s2">&quot;MATHIS_NARGS&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_nargs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="n">ret</span><span class="p">[</span><span class="s2">&quot;MATHIS_ELEM_SIZE&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_elem_size</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="n">ret</span><span class="p">[</span><span class="s2">&quot;MATHIS_SIZE&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span>
+            <span class="n">ret</span><span class="p">[</span><span class="s2">&quot;MATHIS_N&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">))</span> <span class="k">if</span> <span class="s2">&quot;matmul&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span>
+        <span class="k">return</span> <span class="n">ret</span></div></div>
+
+
+<div class="viewcode-block" id="CoremarkProgram"><a class="viewcode-back" href="../../../mlonmcu.models.html#mlonmcu.models.model.CoremarkProgram">[docs]</a><span class="k">class</span> <span class="nc">CoremarkProgram</span><span class="p">(</span><span class="n">Program</span><span class="p">):</span>
+<div class="viewcode-block" id="CoremarkProgram.get_platform_defs"><a class="viewcode-back" href="../../../mlonmcu.models.html#mlonmcu.models.model.CoremarkProgram.get_platform_defs">[docs]</a>    <span class="k">def</span> <span class="nf">get_platform_defs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">platform</span><span class="p">):</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="n">platform</span> <span class="o">==</span> <span class="s2">&quot;mlif&quot;</span><span class="p">:</span>
+            <span class="n">ret</span><span class="p">[</span><span class="s2">&quot;COREMARK_ITERATIONS&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
+        <span class="k">return</span> <span class="n">ret</span></div></div>
+
+
+<div class="viewcode-block" id="DhrystoneProgram"><a class="viewcode-back" href="../../../mlonmcu.models.html#mlonmcu.models.model.DhrystoneProgram">[docs]</a><span class="k">class</span> <span class="nc">DhrystoneProgram</span><span class="p">(</span><span class="n">Program</span><span class="p">):</span>
+<div class="viewcode-block" id="DhrystoneProgram.get_platform_defs"><a class="viewcode-back" href="../../../mlonmcu.models.html#mlonmcu.models.model.DhrystoneProgram.get_platform_defs">[docs]</a>    <span class="k">def</span> <span class="nf">get_platform_defs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">platform</span><span class="p">):</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="n">platform</span> <span class="o">==</span> <span class="s2">&quot;mlif&quot;</span><span class="p">:</span>
+            <span class="n">ret</span><span class="p">[</span><span class="s2">&quot;DHRYSTONE_ITERATIONS&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10000</span>
+        <span class="k">return</span> <span class="n">ret</span></div></div>
 </pre></div>
 
            </div>

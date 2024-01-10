@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>mlonmcu.platform.microtvm.microtvm_zephyr_target &mdash; ML on MCU 0.3.0dev0 documentation</title>
+  <title>mlonmcu.platform.microtvm.microtvm_zephyr_target &mdash; ML on MCU 0.4.dev0 documentation</title>
       <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -31,7 +31,7 @@
             ML on MCU
           </a>
               <div class="version">
-                0.3.0dev0
+                0.4.dev0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
@@ -112,8 +112,6 @@
 
 
 <div class="viewcode-block" id="ZephyrMicroTvmPlatformTarget"><a class="viewcode-back" href="../../../../mlonmcu.platform.microtvm.html#mlonmcu.platform.microtvm.microtvm_zephyr_target.ZephyrMicroTvmPlatformTarget">[docs]</a><span class="k">class</span> <span class="nc">ZephyrMicroTvmPlatformTarget</span><span class="p">(</span><span class="n">TemplateMicroTvmPlatformTarget</span><span class="p">):</span>
-    <span class="n">FEATURES</span> <span class="o">=</span> <span class="n">Target</span><span class="o">.</span><span class="n">FEATURES</span> <span class="o">+</span> <span class="p">[]</span>
-
     <span class="n">DEFAULTS</span> <span class="o">=</span> <span class="p">{</span>
         <span class="o">**</span><span class="n">Target</span><span class="o">.</span><span class="n">DEFAULTS</span><span class="p">,</span>
         <span class="s2">&quot;extra_files_tar&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
@@ -131,7 +129,7 @@
         <span class="s2">&quot;openocd_serial&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
         <span class="s2">&quot;port&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># Workaround to overwrite esptool detection</span>
     <span class="p">}</span>
-    <span class="n">REQUIRED</span> <span class="o">=</span> <span class="n">Target</span><span class="o">.</span><span class="n">REQUIRED</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;zephyr.install_dir&quot;</span><span class="p">,</span> <span class="s2">&quot;zephyr.sdk_dir&quot;</span><span class="p">]</span>
+    <span class="n">REQUIRED</span> <span class="o">=</span> <span class="n">Target</span><span class="o">.</span><span class="n">REQUIRED</span> <span class="o">|</span> <span class="p">{</span><span class="s2">&quot;zephyr.install_dir&quot;</span><span class="p">,</span> <span class="s2">&quot;zephyr.sdk_dir&quot;</span><span class="p">}</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="n">features</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>

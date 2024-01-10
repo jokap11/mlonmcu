@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>mlonmcu.flow.tvm.backend.wrapper &mdash; ML on MCU 0.3.0dev0 documentation</title>
+  <title>mlonmcu.flow.tvm.backend.wrapper &mdash; ML on MCU 0.4.dev0 documentation</title>
       <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -31,7 +31,7 @@
             ML on MCU
           </a>
               <div class="version">
-                0.3.0dev0
+                0.4.dev0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
@@ -127,11 +127,11 @@
 
 <span class="s2">#include &lt;stddef.h&gt;</span>
 
-<span class="s2">void TVMWrap_Init();</span>
+<span class="s2">int TVMWrap_Init();</span>
 <span class="s2">void *TVMWrap_GetInputPtr(int index);</span>
 <span class="s2">size_t TVMWrap_GetInputSize(int index);</span>
 <span class="s2">size_t TVMWrap_GetNumInputs();</span>
-<span class="s2">void TVMWrap_Run();</span>
+<span class="s2">int TVMWrap_Run();</span>
 <span class="s2">void *TVMWrap_GetOutputPtr(int index);</span>
 <span class="s2">size_t TVMWrap_GetOutputSize(int index);</span>
 <span class="s2">size_t TVMWrap_GetNumOutputs();</span>
@@ -240,13 +240,13 @@
             <span class="n">out</span> <span class="o">+=</span> <span class="s2">&quot;shape_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;, &quot;</span>
         <span class="n">out</span> <span class="o">+=</span> <span class="s2">&quot;};</span><span class="se">\n</span><span class="s2">&quot;</span>
 
-        <span class="n">out</span> <span class="o">+=</span> <span class="s2">&quot;size_t ndims[] = { &quot;</span>
+        <span class="n">out</span> <span class="o">+=</span> <span class="s2">&quot;    size_t ndims[] = { &quot;</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tensors</span><span class="p">):</span>
             <span class="n">out</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;, &quot;</span>
         <span class="n">out</span> <span class="o">+=</span> <span class="s2">&quot;};</span><span class="se">\n</span><span class="s2">    &quot;</span>
 
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tensors</span><span class="p">):</span>
-            <span class="n">out</span> <span class="o">+=</span> <span class="s2">&quot;    static uint8_t data_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;[&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">size</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;];</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="n">out</span> <span class="o">+=</span> <span class="s2">&quot;static uint8_t data_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;[&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">size</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;];</span><span class="se">\n</span><span class="s2">&quot;</span>
         <span class="n">out</span> <span class="o">+=</span> <span class="s2">&quot;    uint8_t *data[] = { &quot;</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tensors</span><span class="p">):</span>
             <span class="n">out</span> <span class="o">+=</span> <span class="s2">&quot;data_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;, &quot;</span>
@@ -342,7 +342,7 @@
 
 <span class="s2">void *g_handle = NULL;</span>
 
-<span class="s2">void TVMWrap_Init()</span>
+<span class="s2">int TVMWrap_Init()</span>
 <span class="s2">{</span>
 <span class="s2">    int64_t device_type = kDLCPU;</span>
 <span class="s2">    int64_t device_id = 0;</span>
@@ -373,6 +373,7 @@
 
 <span class="s2">    //return graph_executor;</span>
 <span class="s2">    g_handle = graph_executor;</span>
+<span class="s2">    return 0;  // TODO</span>
 <span class="s2">}</span>
 
 <span class="s2">void *TVMWrap_GetInputPtr(int index)</span>
@@ -407,13 +408,14 @@
 <span class="s2">    return $</span><span class="si">{numInputs}</span><span class="s2">;</span>
 <span class="s2">}</span>
 
-<span class="s2">void TVMWrap_Run()</span>
+<span class="s2">int TVMWrap_Run()</span>
 <span class="s2">{</span>
 <span class="s2">    TVMGraphExecutor* graph_executor = (TVMGraphExecutor*)g_handle;</span>
 <span class="s2">    TVMGraphExecutor_Run(graph_executor);</span>
 <span class="s2">#if DEBUG_ARENA_USAGE</span>
 <span class="s2">    DBGPRINTF(&quot;</span><span class="se">\\</span><span class="s2">nGraph executor arena max usage after model invocation: </span><span class="si">%lu</span><span class="s2"> bytes</span><span class="se">\\</span><span class="s2">n&quot;, max_arena_usage);</span>
 <span class="s2">#endif  // DEBUG_ARENA_USAGE</span>
+<span class="s2">    return 0;  // TODO</span>
 <span class="s2">}</span>
 
 <span class="s2">void *TVMWrap_GetOutputPtr(int index)</span>
@@ -622,12 +624,13 @@
 <span class="s2">    return 0;</span>
 <span class="s2">}</span>
 
-<span class="s2">void TVMWrap_Init()</span>
+<span class="s2">int TVMWrap_Init()</span>
 <span class="s2">{</span>
 <span class="s2">&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">workspace_size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">mainCode</span> <span class="o">+=</span> <span class="s2">&quot;    StackMemoryManager_Init(&amp;app_workspace, g_aot_memory, WORKSPACE_SIZE);&quot;</span>
     <span class="n">mainCode</span> <span class="o">+=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    return 0;  // TODO</span>
 <span class="s2">}</span>
 
 <span class="s2">void *TVMWrap_GetInputPtr(int index)</span>
@@ -647,7 +650,7 @@
 <span class="s2">    return $</span><span class="si">{numInputs}</span><span class="s2">;</span>
 <span class="s2">}</span>
 
-<span class="s2">void TVMWrap_Run()</span>
+<span class="s2">int TVMWrap_Run()</span>
 <span class="s2">{&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">api</span> <span class="o">==</span> <span class="s2">&quot;c&quot;</span><span class="p">:</span>
         <span class="n">mainCode</span> <span class="o">+=</span> <span class="s2">&quot;&quot;&quot;</span>
@@ -683,6 +686,7 @@
 <span class="s2">    {</span>
 <span class="s2">        TVMPlatformAbort(kTvmErrorPlatformCheckFailure);</span>
 <span class="s2">    }</span>
+<span class="s2">    return 0;</span>
 
 <span class="s2">&quot;&quot;&quot;</span>
     <span class="k">else</span><span class="p">:</span>
@@ -695,6 +699,7 @@
 <span class="s2">#endif  // DEBUG_ARENA_USAGE</span>
 <span class="s2">&quot;&quot;&quot;</span>
     <span class="n">mainCode</span> <span class="o">+=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    return 0;  // TODO</span>
 <span class="s2">}</span>
 
 <span class="s2">void *TVMWrap_GetOutputPtr(int index)</span>

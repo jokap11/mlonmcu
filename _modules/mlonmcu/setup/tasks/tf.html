@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>mlonmcu.setup.tasks.tf &mdash; ML on MCU 0.3.0dev0 documentation</title>
+  <title>mlonmcu.setup.tasks.tf &mdash; ML on MCU 0.4.dev0 documentation</title>
       <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -31,7 +31,7 @@
             ML on MCU
           </a>
               <div class="version">
-                0.3.0dev0
+                0.4.dev0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
@@ -133,7 +133,7 @@
     <span class="n">tfSrcDir</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">environment</span><span class="o">.</span><span class="n">paths</span><span class="p">[</span><span class="s2">&quot;deps&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">path</span> <span class="o">/</span> <span class="s2">&quot;src&quot;</span> <span class="o">/</span> <span class="n">tfName</span>
     <span class="k">if</span> <span class="n">rebuild</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">utils</span><span class="o">.</span><span class="n">is_populated</span><span class="p">(</span><span class="n">tfSrcDir</span><span class="p">):</span>
         <span class="n">tfRepo</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">environment</span><span class="o">.</span><span class="n">repos</span><span class="p">[</span><span class="s2">&quot;tensorflow&quot;</span><span class="p">]</span>
-        <span class="n">utils</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">tfRepo</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">tfSrcDir</span><span class="p">,</span> <span class="n">branch</span><span class="o">=</span><span class="n">tfRepo</span><span class="o">.</span><span class="n">ref</span><span class="p">,</span> <span class="n">refresh</span><span class="o">=</span><span class="n">rebuild</span><span class="p">)</span>
+        <span class="n">utils</span><span class="o">.</span><span class="n">clone_wrapper</span><span class="p">(</span><span class="n">tfRepo</span><span class="p">,</span> <span class="n">tfSrcDir</span><span class="p">,</span> <span class="n">refresh</span><span class="o">=</span><span class="n">rebuild</span><span class="p">)</span>
     <span class="n">context</span><span class="o">.</span><span class="n">cache</span><span class="p">[</span><span class="s2">&quot;tf.src_dir&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tfSrcDir</span></div>
 
 
@@ -192,7 +192,7 @@
     <span class="n">srcDir</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">environment</span><span class="o">.</span><span class="n">paths</span><span class="p">[</span><span class="s2">&quot;deps&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">path</span> <span class="o">/</span> <span class="s2">&quot;src&quot;</span> <span class="o">/</span> <span class="n">name</span>
     <span class="k">if</span> <span class="n">rebuild</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">utils</span><span class="o">.</span><span class="n">is_populated</span><span class="p">(</span><span class="n">srcDir</span><span class="p">):</span>
         <span class="n">repo</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">environment</span><span class="o">.</span><span class="n">repos</span><span class="p">[</span><span class="s2">&quot;tflite_pack&quot;</span><span class="p">]</span>
-        <span class="n">utils</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">repo</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">srcDir</span><span class="p">,</span> <span class="n">branch</span><span class="o">=</span><span class="n">repo</span><span class="o">.</span><span class="n">ref</span><span class="p">,</span> <span class="n">refresh</span><span class="o">=</span><span class="n">rebuild</span><span class="p">)</span>
+        <span class="n">utils</span><span class="o">.</span><span class="n">clone_wrapper</span><span class="p">(</span><span class="n">repo</span><span class="p">,</span> <span class="n">srcDir</span><span class="p">,</span> <span class="n">refresh</span><span class="o">=</span><span class="n">rebuild</span><span class="p">)</span>
     <span class="n">context</span><span class="o">.</span><span class="n">cache</span><span class="p">[</span><span class="s2">&quot;tflite_pack.src_dir&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">srcDir</span>
     <span class="n">context</span><span class="o">.</span><span class="n">cache</span><span class="p">[</span><span class="s2">&quot;tflite_pack.exe&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">srcDir</span> <span class="o">/</span> <span class="s2">&quot;run.sh&quot;</span></div>
 
@@ -206,7 +206,7 @@
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Install the tflite packing utilities.&quot;&quot;&quot;</span>
     <span class="n">name</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">makeDirName</span><span class="p">(</span><span class="s2">&quot;tflite_pack&quot;</span><span class="p">)</span>
-    <span class="n">srcDir</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">cache</span><span class="p">[</span><span class="s2">&quot;tflite_pack.src_dir&quot;</span><span class="p">]</span>
+    <span class="n">srcDir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">cache</span><span class="p">[</span><span class="s2">&quot;tflite_pack.src_dir&quot;</span><span class="p">])</span>
     <span class="n">installDir</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">environment</span><span class="o">.</span><span class="n">paths</span><span class="p">[</span><span class="s2">&quot;deps&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">path</span> <span class="o">/</span> <span class="s2">&quot;install&quot;</span> <span class="o">/</span> <span class="n">name</span>
     <span class="k">if</span> <span class="n">rebuild</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">utils</span><span class="o">.</span><span class="n">is_populated</span><span class="p">(</span><span class="n">installDir</span><span class="p">):</span>
         <span class="n">installScript</span> <span class="o">=</span> <span class="n">srcDir</span> <span class="o">/</span> <span class="s2">&quot;install.sh&quot;</span>
