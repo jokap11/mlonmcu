@@ -48,7 +48,7 @@ def create_environment_directories(path, directories):
 
 def clone_models_repo(dest, url=None, ref=None, refresh=False, recursive=False):
     if url is None:
-        url = "https://github.com/tum-ei-eda/mlonmcu-models.git"
+        url = "https://github.com/jokap11/mlonmcu-models.git"
     utils.clone(url, dest, ref, refresh=refresh, recursive=False)
 
 
