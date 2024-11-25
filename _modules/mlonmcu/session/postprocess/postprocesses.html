@@ -1,22 +1,20 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>mlonmcu.session.postprocess.postprocesses &mdash; ML on MCU 0.4.dev0 documentation</title>
+  <title>mlonmcu.session.postprocess.postprocesses &mdash; ML on MCU 0.7.dev0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../../_static/documentation_options.js?v=414d5694"></script>
-        <script src="../../../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=3bfbed7b"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
@@ -33,9 +31,6 @@
           <a href="../../../../index.html" class="icon icon-home">
             ML on MCU
           </a>
-              <div class="version">
-                0.4.dev0
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -112,6 +107,7 @@
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span>
 
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
 <span class="kn">from</span> <span class="nn">mlonmcu.artifact</span> <span class="kn">import</span> <span class="n">Artifact</span><span class="p">,</span> <span class="n">ArtifactFormat</span><span class="p">,</span> <span class="n">lookup_artifacts</span>
@@ -119,6 +115,7 @@
 <span class="kn">from</span> <span class="nn">mlonmcu.logging</span> <span class="kn">import</span> <span class="n">get_logger</span>
 
 <span class="kn">from</span> <span class="nn">.postprocess</span> <span class="kn">import</span> <span class="n">SessionPostprocess</span><span class="p">,</span> <span class="n">RunPostprocess</span>
+<span class="kn">from</span> <span class="nn">.validate_metrics</span> <span class="kn">import</span> <span class="n">parse_validate_metrics</span><span class="p">,</span> <span class="n">parse_classify_metrics</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">()</span>
 
@@ -183,19 +180,19 @@
     <span class="k">def</span> <span class="nf">drop_nan</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get drop_nan property.&quot;&quot;&quot;</span>
         <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;drop_nan&quot;</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">str2bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">int</span><span class="p">))</span> <span class="k">else</span> <span class="n">value</span>
+        <span class="k">return</span> <span class="n">str2bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">drop_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get drop_empty property.&quot;&quot;&quot;</span>
         <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;drop_empty&quot;</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">str2bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">int</span><span class="p">))</span> <span class="k">else</span> <span class="n">value</span>
+        <span class="k">return</span> <span class="n">str2bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">drop_const</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get drop_const property.&quot;&quot;&quot;</span>
         <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;drop_const&quot;</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">str2bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">int</span><span class="p">))</span> <span class="k">else</span> <span class="n">value</span>
+        <span class="k">return</span> <span class="n">str2bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
 <div class="viewcode-block" id="FilterColumnsPostprocess.post_session">
 <a class="viewcode-back" href="../../../../mlonmcu.session.postprocess.html#mlonmcu.session.postprocess.postprocesses.FilterColumnsPostprocess.post_session">[docs]</a>
@@ -317,7 +314,7 @@
     <span class="k">def</span> <span class="nf">drop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get drop property.&quot;&quot;&quot;</span>
         <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;drop&quot;</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">str2bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">int</span><span class="p">))</span> <span class="k">else</span> <span class="n">value</span>
+        <span class="k">return</span> <span class="n">str2bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Features2ColumnsPostprocess.post_session">
 <a class="viewcode-back" href="../../../../mlonmcu.session.postprocess.html#mlonmcu.session.postprocess.postprocesses.Features2ColumnsPostprocess.post_session">[docs]</a>
@@ -372,7 +369,7 @@
     <span class="k">def</span> <span class="nf">drop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get drop property.&quot;&quot;&quot;</span>
         <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;drop&quot;</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">str2bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">int</span><span class="p">))</span> <span class="k">else</span> <span class="n">value</span>
+        <span class="k">return</span> <span class="n">str2bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Config2ColumnsPostprocess.post_session">
 <a class="viewcode-back" href="../../../../mlonmcu.session.postprocess.html#mlonmcu.session.postprocess.postprocesses.Config2ColumnsPostprocess.post_session">[docs]</a>
@@ -701,9 +698,11 @@
         <span class="o">**</span><span class="n">RunPostprocess</span><span class="o">.</span><span class="n">DEFAULTS</span><span class="p">,</span>
         <span class="s2">&quot;groups&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
         <span class="s2">&quot;sequences&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s2">&quot;seq_depth&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
         <span class="s2">&quot;top&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
         <span class="s2">&quot;to_df&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
         <span class="s2">&quot;to_file&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s2">&quot;corev&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">}</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -713,30 +712,41 @@
     <span class="k">def</span> <span class="nf">groups</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get groups property.&quot;&quot;&quot;</span>
         <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;groups&quot;</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">str2bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">int</span><span class="p">))</span> <span class="k">else</span> <span class="n">value</span>
+        <span class="k">return</span> <span class="n">str2bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">sequences</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;get sequences property.&quot;&quot;&quot;</span>
         <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;sequences&quot;</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">str2bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">int</span><span class="p">))</span> <span class="k">else</span> <span class="n">value</span>
+        <span class="k">return</span> <span class="n">str2bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">seq_depth</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;get seq_depth property.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;seq_depth&quot;</span><span class="p">])</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">top</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;get sequences property.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;get top property.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;top&quot;</span><span class="p">])</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">to_df</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get to_df property.&quot;&quot;&quot;</span>
         <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;to_df&quot;</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">str2bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">int</span><span class="p">))</span> <span class="k">else</span> <span class="n">value</span>
+        <span class="k">return</span> <span class="n">str2bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">to_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get to_file property.&quot;&quot;&quot;</span>
         <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;to_file&quot;</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">str2bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">int</span><span class="p">))</span> <span class="k">else</span> <span class="n">value</span>
+        <span class="k">return</span> <span class="n">str2bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">corev</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get corev property.&quot;&quot;&quot;</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;corev&quot;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">str2bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
 <div class="viewcode-block" id="AnalyseInstructionsPostprocess.post_run">
 <a class="viewcode-back" href="../../../../mlonmcu.session.postprocess.html#mlonmcu.session.postprocess.postprocesses.AnalyseInstructionsPostprocess.post_run">[docs]</a>
@@ -757,12 +767,70 @@
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sequences</span><span class="p">:</span>
                 <span class="n">names</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;core\s+\d+:\s0x[0-9abcdef]+\s\(0x[0-9abcdef]+\)\s([\w.]+).*&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">is_etiss</span><span class="p">:</span>
-            <span class="n">content</span> <span class="o">=</span> <span class="n">log_artifact</span><span class="o">.</span><span class="n">content</span>
+
+            <span class="c1"># TODO: generalize</span>
+            <span class="k">def</span> <span class="nf">transform_df</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+                <span class="n">df</span><span class="p">[</span><span class="s2">&quot;pc&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;pc&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+                <span class="n">df</span><span class="p">[</span><span class="s2">&quot;pc&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;pc&quot;</span><span class="p">])</span>
+                <span class="c1"># TODO: normalize instr names</span>
+                <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;instr&quot;</span><span class="p">,</span> <span class="s2">&quot;rest&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;rest&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; # &quot;</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">df</span><span class="p">[</span><span class="s2">&quot;instr&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;instr&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+                <span class="n">df</span><span class="p">[</span><span class="s2">&quot;instr&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;instr&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">)</span>
+                <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;bytecode&quot;</span><span class="p">,</span> <span class="s2">&quot;operands&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;rest&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+                <span class="k">def</span> <span class="nf">detect_size</span><span class="p">(</span><span class="n">bytecode</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">bytecode</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;0x&quot;</span><span class="p">:</span>
+                        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">bytecode</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span> <span class="o">/</span> <span class="mi">2</span>
+                    <span class="k">elif</span> <span class="n">bytecode</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;0b&quot;</span><span class="p">:</span>
+                        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">bytecode</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span> <span class="o">/</span> <span class="mi">8</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">bytecode</span><span class="p">))</span> <span class="o">==</span> <span class="mi">2</span>
+                        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">bytecode</span><span class="p">)</span> <span class="o">/</span> <span class="mi">8</span>
+
+                <span class="n">df</span><span class="p">[</span><span class="s2">&quot;size&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;bytecode&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">detect_size</span><span class="p">)</span>
+                <span class="n">df</span><span class="p">[</span><span class="s2">&quot;bytecode&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;bytecode&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+                    <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span> <span class="k">if</span> <span class="s2">&quot;0x&quot;</span> <span class="ow">in</span> <span class="n">x</span> <span class="k">else</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="k">if</span> <span class="s2">&quot;0b&quot;</span> <span class="ow">in</span> <span class="n">x</span> <span class="k">else</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+                <span class="p">)</span>
+                <span class="n">df</span><span class="p">[</span><span class="s2">&quot;bytecode&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bytecode&quot;</span><span class="p">])</span>
+                <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;rest&quot;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">df</span>
+
+            <span class="k">def</span> <span class="nf">process_df</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+                <span class="n">encodings</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="n">names</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">groups</span><span class="p">:</span>
+                    <span class="c1"># encodings = re.compile(r&quot;0x[0-9abcdef]+:\s\w+\s#\s([0-9a-fx]+)\s.*&quot;).findall(content)</span>
+                    <span class="c1"># encodings = [f&quot;{enc}&quot; for enc in encodings]</span>
+                    <span class="n">encodings</span> <span class="o">=</span> <span class="p">[</span><span class="nb">bin</span><span class="p">(</span><span class="n">enc</span><span class="p">)</span> <span class="k">for</span> <span class="n">enc</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;bytecode&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">]</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sequences</span><span class="p">:</span>
+                    <span class="c1"># names = re.compile(r&quot;0x[0-9abcdef]+:\s(\w+)\s#\s[0-9a-fx]+\s.*&quot;).findall(content)</span>
+                    <span class="n">names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;instr&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">encodings</span><span class="p">,</span> <span class="n">names</span>
+
+            <span class="n">log_artifact</span><span class="o">.</span><span class="n">uncache</span><span class="p">()</span>
+            <span class="n">encodings</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">names</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">groups</span><span class="p">:</span>
-                <span class="n">encodings</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;0x[0-9abcdef]+:\s\w+\s#\s([0-9a-fx]+)\s.*&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
-                <span class="c1"># encodings = [f&quot;{enc}&quot; for enc in encodings]</span>
+                <span class="n">encodings</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sequences</span><span class="p">:</span>
-                <span class="n">names</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;0x[0-9abcdef]+:\s(\w+)\s#\s[0-9a-fx]+\s.*&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+                <span class="n">names</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">log_artifact</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;pc&quot;</span><span class="p">,</span> <span class="s2">&quot;rest&quot;</span><span class="p">],</span> <span class="n">chunksize</span><span class="o">=</span><span class="mi">2</span><span class="o">**</span><span class="mi">22</span><span class="p">)</span> <span class="k">as</span> <span class="n">reader</span><span class="p">:</span>  <span class="c1"># TODO: expose chunksize</span>
+                <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+                    <span class="n">df</span> <span class="o">=</span> <span class="n">transform_df</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+
+                    <span class="n">encodings_</span><span class="p">,</span> <span class="n">names_</span> <span class="o">=</span> <span class="n">process_df</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+                    <span class="c1"># input(&quot;&gt;&quot;)</span>
+
+                    <span class="n">encodings</span> <span class="o">=</span> <span class="n">encodings_</span>
+                    <span class="n">names</span> <span class="o">+=</span> <span class="n">names_</span>
+            <span class="c1"># df = None</span>
+            <span class="c1"># content = log_artifact.content</span>
+            <span class="c1"># if self.groups:</span>
+            <span class="c1">#     encodings = re.compile(r&quot;0x[0-9abcdef]+:\s\w+\s#\s([0-9a-fx]+)\s.*&quot;).findall(content)</span>
+            <span class="c1">#     encodings = [f&quot;0b{enc}&quot; for enc in encodings]</span>
+            <span class="c1">#     # encodings = [f&quot;{enc}&quot; for enc in encodings]</span>
+            <span class="c1"># if self.sequences:</span>
+            <span class="c1">#     names = re.compile(r&quot;0x[0-9abcdef]+:\s(\w+)\s#\s[0-9a-fx]+\s.*&quot;).findall(content)</span>
         <span class="k">elif</span> <span class="n">is_ovpsim</span><span class="p">:</span>
             <span class="n">content</span> <span class="o">=</span> <span class="n">log_artifact</span><span class="o">.</span><span class="n">content</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">groups</span><span class="p">:</span>
@@ -783,7 +851,7 @@
             <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">counts</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">top</span><span class="p">)),</span> <span class="nb">dict</span><span class="p">(</span><span class="n">probs</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">top</span><span class="p">))</span>
 
         <span class="k">def</span> <span class="nf">_gen_csv</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">counts</span><span class="p">,</span> <span class="n">probs</span><span class="p">):</span>
-            <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2">,Count,Probablity&quot;</span><span class="p">]</span>
+            <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2">,Count,Probability&quot;</span><span class="p">]</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">counts</span><span class="p">:</span>
                 <span class="n">line</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">counts</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">probs</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span>
                 <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
@@ -874,7 +942,7 @@
                 <span class="n">post_df</span><span class="p">[</span><span class="s2">&quot;AnalyseInstructionsMajorsProbs&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">major_probs</span><span class="p">)</span>
                 <span class="n">report</span><span class="o">.</span><span class="n">post_df</span> <span class="o">=</span> <span class="n">post_df</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sequences</span><span class="p">:</span>
-            <span class="n">max_len</span> <span class="o">=</span> <span class="mi">3</span>
+            <span class="n">max_len</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq_depth</span>
 
             <span class="k">def</span> <span class="nf">_get_sublists</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="n">length</span><span class="p">):</span>
                 <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
@@ -897,6 +965,208 @@
                     <span class="n">post_df</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;AnalyseInstructionsSeq</span><span class="si">{</span><span class="n">length</span><span class="si">}</span><span class="s2">Counts&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
                     <span class="n">post_df</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;AnalyseInstructionsSeq</span><span class="si">{</span><span class="n">length</span><span class="si">}</span><span class="s2">Probs&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">probs</span><span class="p">)</span>
                     <span class="n">report</span><span class="o">.</span><span class="n">post_df</span> <span class="o">=</span> <span class="n">post_df</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">corev</span><span class="p">:</span>
+            <span class="n">XCVMAC_INSNS</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;cv.mac&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.msu&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.mulun&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.mulhhun&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.mulsn&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.mulhhsn&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.mulurn&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.mulhhurn&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.mulsrn&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.mulhhsrn&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.macun&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.machhun&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.macsn&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.machhsn&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.macurn&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.machhurn&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.macsrn&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.machhsrn&quot;</span><span class="p">,</span>
+            <span class="p">}</span>
+            <span class="n">XCVMEM_INSNS</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;cv.lb_ri_inc&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.lbu_ri_inc&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.lh_ri_inc&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.lhu_ri_inc&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.lw_ri_inc&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.lb_ri_inc&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.lbu_ri_inc&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.lh_ri_inc&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.lhu_ri_inc&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.lw_ri_inc&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.lb_rr_inc&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.lbu_rr_inc&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.lh_rr_inc&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.lhu_rr_inc&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.lw_rr_inc&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.lb_rr_inc&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.lbu_rr_inc&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.lh_rr_inc&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.lhu_rr_inc&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.lw_rr_inc&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.lb_rr&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.lbu_rr&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.lh_rr&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.lhu_rr&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.lw_rr&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.sb_ri_inc&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.sh_ri_inc&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.sw_ri_inc&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.sb_ri_inc&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.sh_ri_inc&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.sw_ri_inc&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.sb_rr_inc&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.sh_rr_inc&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.sw_rr_inc&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.sb_rr_inc&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.sh_rr_inc&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.sw_rr_inc&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.sb_rr&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.sh_rr&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.sw_rr&quot;</span><span class="p">,</span>
+            <span class="p">}</span>
+            <span class="n">XCVBI_INSNS</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;cv.bneimm&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.beqimm&quot;</span><span class="p">,</span>
+            <span class="p">}</span>
+            <span class="n">XCVALU_INSNS</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;cv.slet&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.min&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.addnr&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.addunr&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.addn&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.maxu&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.subun&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.extbz&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.addun&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.clip&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.clipu&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.subn&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.max&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.extbs&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.abs&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.addurn&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.exths&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.exthz&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.minu&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.sletu&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.suburn&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.addrn&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.clipur&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.subrn&quot;</span><span class="p">,</span>
+            <span class="p">}</span>
+            <span class="n">XCVBITMANIP_INSNS</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;cv.ror&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.clb&quot;</span><span class="p">,</span>
+            <span class="p">}</span>
+            <span class="n">XCVSIMD_INSNS</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;cv.add.h&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.add.sc.b&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.add.sc.h&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.add.sci.h&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.and.b&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.and.h&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.and.sc.h&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.and.sci.h&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.cmpeq.sc.h&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.cmpge.sci.h&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.cmpgtu.h&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.cmplt.sci.h&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.cmpltu.sci.b&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.cmpne.sc.h&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.cmpne.sci.b&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.extract.b&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.extract.h&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.extractu.b&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.extractu.h&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.insert.h&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.max.h&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.max.sci.h&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.maxu.h&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.or.b&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.or.h&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.pack&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.packhi.b&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.packlo.b&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.shuffle2.b&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.shuffle2.h&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.shufflei0.sci.b&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.sll.sci.h&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.sra.h&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.sra.sci.h&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.srl.h&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.srl.sci.h&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.sub.b&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.sub.h&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.xor.b&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.xor.sci.b&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.add.sci.b&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.cmpeq.b&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.cmpgtu.sc.h&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.cmpleu.sc.h&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.sdotup.h&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.sdotup.b&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.shuffle.sci.h&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.xor.sc.b&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.xor.sc.h&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.sdotsp.h&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.cmpeq.sci.b&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.and.sci.b&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.dotsp.h&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.dotsp.b&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.sdotsp.b&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.add.b&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.dotup.sci.b&quot;</span><span class="p">,</span>
+            <span class="p">}</span>
+            <span class="n">XCVHWLP_INSNS</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;cv.count&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.counti&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.start&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.starti&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.end&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.endi&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.setup&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cv.setupi&quot;</span><span class="p">,</span>
+            <span class="p">}</span>
+
+            <span class="k">def</span> <span class="nf">apply_mapping</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;cv_&quot;</span><span class="p">,</span> <span class="s2">&quot;cv.&quot;</span><span class="p">)</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_sc&quot;</span><span class="p">,</span> <span class="s2">&quot;.sc&quot;</span><span class="p">)</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_b&quot;</span><span class="p">,</span> <span class="s2">&quot;.b&quot;</span><span class="p">)</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_h&quot;</span><span class="p">,</span> <span class="s2">&quot;.h&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">XCVMAC_INSNS</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="s2">&quot;XCVMac&quot;</span>
+                <span class="k">elif</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">XCVMEM_INSNS</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="s2">&quot;XCVMem&quot;</span>
+                <span class="k">elif</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">XCVALU_INSNS</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="s2">&quot;XCVAlu&quot;</span>
+                <span class="k">elif</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">XCVBITMANIP_INSNS</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="s2">&quot;XCVBitmanip&quot;</span>
+                <span class="k">elif</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">XCVBI_INSNS</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="s2">&quot;XCVBi&quot;</span>
+                <span class="k">elif</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">XCVSIMD_INSNS</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="s2">&quot;XCVSimd&quot;</span>
+                <span class="k">elif</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">XCVHWLP_INSNS</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="s2">&quot;XCVHwlp&quot;</span>
+                <span class="k">elif</span> <span class="s2">&quot;cv.&quot;</span> <span class="ow">in</span> <span class="n">x</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="s2">&quot;XCV?&quot;</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="s2">&quot;Other&quot;</span>
+
+            <span class="n">names_</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">apply_mapping</span><span class="p">,</span> <span class="n">names</span><span class="p">))</span>
+            <span class="n">cv_ext_counts</span><span class="p">,</span> <span class="n">cv_ext_probs</span> <span class="o">=</span> <span class="n">_helper</span><span class="p">(</span><span class="n">names_</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">top</span><span class="p">)</span>
+            <span class="n">corev_csv</span> <span class="o">=</span> <span class="n">_gen_csv</span><span class="p">(</span><span class="s2">&quot;Set&quot;</span><span class="p">,</span> <span class="n">cv_ext_counts</span><span class="p">,</span> <span class="n">cv_ext_probs</span><span class="p">)</span>
+            <span class="n">artifact</span> <span class="o">=</span> <span class="n">Artifact</span><span class="p">(</span><span class="s2">&quot;analyse_instructions_corev.csv&quot;</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="n">corev_csv</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="n">ArtifactFormat</span><span class="o">.</span><span class="n">TEXT</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_file</span><span class="p">:</span>
+                <span class="n">ret_artifacts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">artifact</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_df</span><span class="p">:</span>
+                <span class="n">post_df</span> <span class="o">=</span> <span class="n">report</span><span class="o">.</span><span class="n">post_df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+                <span class="n">post_df</span><span class="p">[</span><span class="s2">&quot;CoreVSetCounts&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">cv_ext_counts</span><span class="p">)</span>
+                <span class="n">post_df</span><span class="p">[</span><span class="s2">&quot;CoreVSetProbs&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">cv_ext_probs</span><span class="p">)</span>
+                <span class="n">report</span><span class="o">.</span><span class="n">post_df</span> <span class="o">=</span> <span class="n">post_df</span>
         <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_file</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_df</span><span class="p">,</span> <span class="s2">&quot;Either to_file or to_df have to be true&quot;</span>
         <span class="k">return</span> <span class="n">ret_artifacts</span></div>
 </div>
@@ -966,7 +1236,7 @@
         <span class="n">post_df</span> <span class="o">=</span> <span class="n">report</span><span class="o">.</span><span class="n">post_df</span>
         <span class="n">group_by</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">group_by</span>
         <span class="k">if</span> <span class="n">group_by</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">group_by</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">pre_df</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="s2">&quot;Run&quot;</span><span class="p">]</span>
+            <span class="n">group_by</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">pre_df</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;Run&quot;</span><span class="p">,</span> <span class="s2">&quot;Sub&quot;</span><span class="p">]]</span>
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">group_by</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span>
         <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="n">col</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">pre_df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">post_df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">group_by</span><span class="p">),</span> <span class="s2">&quot;Cols mssing in df&quot;</span>
         <span class="n">to_compare</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_compare</span>
@@ -1020,13 +1290,13 @@
     <span class="k">def</span> <span class="nf">to_df</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get to_df property.&quot;&quot;&quot;</span>
         <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;to_df&quot;</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">str2bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">int</span><span class="p">))</span> <span class="k">else</span> <span class="n">value</span>
+        <span class="k">return</span> <span class="n">str2bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">to_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get to_file property.&quot;&quot;&quot;</span>
         <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;to_file&quot;</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">str2bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">int</span><span class="p">))</span> <span class="k">else</span> <span class="n">value</span>
+        <span class="k">return</span> <span class="n">str2bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
 <div class="viewcode-block" id="AnalyseDumpPostprocess.post_run">
 <a class="viewcode-back" href="../../../../mlonmcu.session.postprocess.html#mlonmcu.session.postprocess.postprocesses.AnalyseDumpPostprocess.post_run">[docs]</a>
@@ -1107,13 +1377,13 @@
     <span class="k">def</span> <span class="nf">to_df</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get to_df property.&quot;&quot;&quot;</span>
         <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;to_df&quot;</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">str2bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">int</span><span class="p">))</span> <span class="k">else</span> <span class="n">value</span>
+        <span class="k">return</span> <span class="n">str2bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">to_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get to_file property.&quot;&quot;&quot;</span>
         <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;to_file&quot;</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">str2bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">int</span><span class="p">))</span> <span class="k">else</span> <span class="n">value</span>
+        <span class="k">return</span> <span class="n">str2bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
 <div class="viewcode-block" id="AnalyseCoreVCountsPostprocess.post_run">
 <a class="viewcode-back" href="../../../../mlonmcu.session.postprocess.html#mlonmcu.session.postprocess.postprocesses.AnalyseCoreVCountsPostprocess.post_run">[docs]</a>
@@ -1406,6 +1676,413 @@
             <span class="n">report</span><span class="o">.</span><span class="n">post_df</span> <span class="o">=</span> <span class="n">post_df</span>
         <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_file</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_df</span><span class="p">,</span> <span class="s2">&quot;Either to_file or to_df have to be true&quot;</span>
         <span class="k">return</span> <span class="n">ret_artifacts</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="ValidateOutputsPostprocess">
+<a class="viewcode-back" href="../../../../mlonmcu.session.postprocess.html#mlonmcu.session.postprocess.postprocesses.ValidateOutputsPostprocess">[docs]</a>
+<span class="k">class</span> <span class="nc">ValidateOutputsPostprocess</span><span class="p">(</span><span class="n">RunPostprocess</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Postprocess for comparing model outputs with golden reference.&quot;&quot;&quot;</span>
+
+    <span class="n">DEFAULTS</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="o">**</span><span class="n">RunPostprocess</span><span class="o">.</span><span class="n">DEFAULTS</span><span class="p">,</span>
+        <span class="s2">&quot;report&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s2">&quot;validate_metrics&quot;</span><span class="p">:</span> <span class="s2">&quot;topk(n=1);topk(n=2)&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;validate_range&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;validate_outputs&quot;</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="n">features</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">validate_metrics</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get validate_metrics property.&quot;&quot;&quot;</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;validate_metrics&quot;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">report</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get report property.&quot;&quot;&quot;</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;report&quot;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">str2bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">validate_range</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get validate_range property.&quot;&quot;&quot;</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;validate_range&quot;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">str2bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ValidateOutputsPostprocess.post_run">
+<a class="viewcode-back" href="../../../../mlonmcu.session.postprocess.html#mlonmcu.session.postprocess.postprocesses.ValidateOutputsPostprocess.post_run">[docs]</a>
+    <span class="k">def</span> <span class="nf">post_run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">report</span><span class="p">,</span> <span class="n">artifacts</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Called at the end of a run.&quot;&quot;&quot;</span>
+        <span class="n">model_info_artifact</span> <span class="o">=</span> <span class="n">lookup_artifacts</span><span class="p">(</span><span class="n">artifacts</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;model_info.yml&quot;</span><span class="p">,</span> <span class="n">first_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">model_info_artifact</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Could not find artifact: model_info.yml&quot;</span>
+        <span class="n">model_info_artifact</span> <span class="o">=</span> <span class="n">model_info_artifact</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="kn">import</span> <span class="nn">yaml</span>
+
+        <span class="n">model_info_data</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">model_info_artifact</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">model_info_data</span><span class="p">[</span><span class="s2">&quot;output_names&quot;</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Multi-outputs not yet supported.&quot;</span><span class="p">)</span>
+        <span class="n">outputs_ref_artifact</span> <span class="o">=</span> <span class="n">lookup_artifacts</span><span class="p">(</span><span class="n">artifacts</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;outputs_ref.npy&quot;</span><span class="p">,</span> <span class="n">first_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">outputs_ref_artifact</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Could not find artifact: outputs_ref.npy&quot;</span>
+        <span class="n">outputs_ref_artifact</span> <span class="o">=</span> <span class="n">outputs_ref_artifact</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+        <span class="n">outputs_ref</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">outputs_ref_artifact</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">allow_pickle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="c1"># import copy</span>
+        <span class="c1"># outputs = copy.deepcopy(outputs_ref)</span>
+        <span class="c1"># outputs[1][list(outputs[1].keys())[0]][0] = 42</span>
+        <span class="n">outputs_artifact</span> <span class="o">=</span> <span class="n">lookup_artifacts</span><span class="p">(</span><span class="n">artifacts</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;outputs.npy&quot;</span><span class="p">,</span> <span class="n">first_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">outputs_artifact</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Could not find artifact: outputs.npy&quot;</span>
+        <span class="n">outputs_artifact</span> <span class="o">=</span> <span class="n">outputs_artifact</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">outputs_artifact</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">allow_pickle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">in_data</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="c1"># compared = 0</span>
+        <span class="c1"># matching = 0</span>
+        <span class="c1"># missing = 0</span>
+        <span class="c1"># metrics = {</span>
+        <span class="c1">#     &quot;allclose(atol=0.0,rtol=0.0)&quot;: None,</span>
+        <span class="c1">#     &quot;allclose(atol=0.05,rtol=0.05)&quot;: None,</span>
+        <span class="c1">#     &quot;allclose(atol=0.1,rtol=0.1)&quot;: None,</span>
+        <span class="c1">#     &quot;topk(n=1)&quot;: None,</span>
+        <span class="c1">#     &quot;topk(n=2)&quot;: None,</span>
+        <span class="c1">#     &quot;topk(n=inf)&quot;: None,</span>
+        <span class="c1">#     &quot;toy&quot;: None,</span>
+        <span class="c1">#     &quot;mse(thr=0.1)&quot;: None,</span>
+        <span class="c1">#     &quot;mse(thr=0.05)&quot;: None,</span>
+        <span class="c1">#     &quot;mse(thr=0.01)&quot;: None,</span>
+        <span class="c1">#     &quot;+-1&quot;: None,</span>
+        <span class="c1"># }</span>
+        <span class="n">validate_metrics_str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">validate_metrics</span>
+        <span class="n">validate_metrics</span> <span class="o">=</span> <span class="n">parse_validate_metrics</span><span class="p">(</span><span class="n">validate_metrics_str</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">output_ref</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">outputs_ref</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">outputs</span><span class="p">):</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Missing output sample&quot;</span><span class="p">)</span>
+                <span class="c1"># missing += 1</span>
+                <span class="k">break</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="n">outputs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">ii</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">out_name</span><span class="p">,</span> <span class="n">out_ref_data</span> <span class="ow">in</span> <span class="n">output_ref</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">out_name</span> <span class="ow">in</span> <span class="n">output</span><span class="p">:</span>
+                    <span class="n">out_data</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="n">out_name</span><span class="p">]</span>
+                <span class="k">elif</span> <span class="n">ii</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">output</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                        <span class="c1"># fallback for custom name-based npy dict</span>
+                        <span class="n">out_data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">values</span><span class="p">())[</span><span class="n">ii</span><span class="p">]</span>
+                    <span class="k">else</span><span class="p">:</span>  <span class="c1"># fallback for index-based npy array</span>
+                        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">)),</span> <span class="s2">&quot;expected dict, list or np.array type&quot;</span>
+                        <span class="n">out_data</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Output not found: </span><span class="si">{</span><span class="n">out_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="c1"># optional dequantize</span>
+                <span class="c1"># print(&quot;out_data_before_quant&quot;, out_data)</span>
+                <span class="c1"># print(&quot;sum(out_data_before_quant&quot;, np.sum(out_data))</span>
+
+                <span class="n">quant</span> <span class="o">=</span> <span class="n">model_info_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;output_quant_details&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+                <span class="n">rng</span> <span class="o">=</span> <span class="n">model_info_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;output_ranges&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">quant</span><span class="p">:</span>
+
+                    <span class="k">def</span> <span class="nf">ref_quant_helper</span><span class="p">(</span><span class="n">quant</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>  <span class="c1"># TODO: move somewhere else</span>
+                        <span class="k">if</span> <span class="n">quant</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                            <span class="k">return</span> <span class="n">data</span>
+                        <span class="n">quant_scale</span><span class="p">,</span> <span class="n">quant_zero_point</span><span class="p">,</span> <span class="n">quant_dtype</span><span class="p">,</span> <span class="n">quant_range</span> <span class="o">=</span> <span class="n">quant</span>
+                        <span class="k">if</span> <span class="n">quant_dtype</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">data</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">quant_dtype</span><span class="p">:</span>
+                            <span class="k">return</span> <span class="n">data</span>
+                        <span class="k">assert</span> <span class="n">data</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;float32&quot;</span><span class="p">],</span> <span class="s2">&quot;Quantization only supported for float32 input&quot;</span>
+                        <span class="k">assert</span> <span class="n">quant_dtype</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;int8&quot;</span><span class="p">],</span> <span class="s2">&quot;Quantization only supported for int8 output&quot;</span>
+                        <span class="k">if</span> <span class="n">quant_range</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">validate_range</span><span class="p">:</span>
+                            <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">quant_range</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;Range should be a tuple (lower, upper)&quot;</span>
+                            <span class="n">lower</span><span class="p">,</span> <span class="n">upper</span> <span class="o">=</span> <span class="n">quant_range</span>
+                            <span class="c1"># print(&quot;quant_range&quot;, quant_range)</span>
+                            <span class="c1"># print(&quot;np.min(data)&quot;, np.min(data))</span>
+                            <span class="c1"># print(&quot;np.max(data)&quot;, np.max(data))</span>
+                            <span class="k">assert</span> <span class="n">lower</span> <span class="o">&lt;=</span> <span class="n">upper</span>
+                            <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">lower</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">upper</span><span class="p">,</span> <span class="s2">&quot;Range missmatch&quot;</span>
+
+                        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">around</span><span class="p">((</span><span class="n">data</span> <span class="o">/</span> <span class="n">quant_scale</span><span class="p">)</span> <span class="o">+</span> <span class="n">quant_zero_point</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;int8&quot;</span><span class="p">)</span>
+
+                    <span class="k">def</span> <span class="nf">dequant_helper</span><span class="p">(</span><span class="n">quant</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>  <span class="c1"># TODO: move somewhere else</span>
+                        <span class="k">if</span> <span class="n">quant</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                            <span class="k">return</span> <span class="n">data</span>
+                        <span class="n">quant_scale</span><span class="p">,</span> <span class="n">quant_zero_point</span><span class="p">,</span> <span class="n">quant_dtype</span><span class="p">,</span> <span class="n">quant_range</span> <span class="o">=</span> <span class="n">quant</span>
+                        <span class="k">if</span> <span class="n">quant_dtype</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">data</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">quant_dtype</span><span class="p">:</span>
+                            <span class="k">return</span> <span class="n">data</span>
+                        <span class="k">assert</span> <span class="n">data</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;int8&quot;</span><span class="p">],</span> <span class="s2">&quot;Dequantization only supported for int8 input&quot;</span>
+                        <span class="k">assert</span> <span class="n">quant_dtype</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;float32&quot;</span><span class="p">],</span> <span class="s2">&quot;Dequantization only supported for float32 output&quot;</span>
+                        <span class="n">ret</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;float32&quot;</span><span class="p">)</span> <span class="o">-</span> <span class="n">quant_zero_point</span><span class="p">)</span> <span class="o">*</span> <span class="n">quant_scale</span>
+                        <span class="k">if</span> <span class="n">quant_range</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">validate_range</span><span class="p">:</span>
+                            <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">quant_range</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;Range should be a tuple (lower, upper)&quot;</span>
+                            <span class="c1"># print(&quot;quant_range&quot;, quant_range)</span>
+                            <span class="c1"># print(&quot;np.min(ret)&quot;, np.min(ret))</span>
+                            <span class="c1"># print(&quot;np.max(ret)&quot;, np.max(ret))</span>
+                            <span class="n">lower</span><span class="p">,</span> <span class="n">upper</span> <span class="o">=</span> <span class="n">quant_range</span>
+                            <span class="k">assert</span> <span class="n">lower</span> <span class="o">&lt;=</span> <span class="n">upper</span>
+                            <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">lower</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">upper</span><span class="p">,</span> <span class="s2">&quot;Range missmatch&quot;</span>
+                        <span class="k">return</span> <span class="n">ret</span>
+
+                    <span class="k">assert</span> <span class="n">ii</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">rng</span><span class="p">)</span>
+                    <span class="n">rng_</span> <span class="o">=</span> <span class="n">rng</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">rng_</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">validate_range</span><span class="p">:</span>
+                        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">rng_</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;Range should be a tuple (lower, upper)&quot;</span>
+                        <span class="n">lower</span><span class="p">,</span> <span class="n">upper</span> <span class="o">=</span> <span class="n">rng_</span>
+                        <span class="k">assert</span> <span class="n">lower</span> <span class="o">&lt;=</span> <span class="n">upper</span>
+                        <span class="c1"># print(&quot;rng_&quot;, rng_)</span>
+                        <span class="c1"># print(&quot;np.min(out_data)&quot;, np.min(out_data))</span>
+                        <span class="c1"># print(&quot;np.max(out_data)&quot;, np.max(out_data))</span>
+                        <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">out_data</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">lower</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">out_data</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">upper</span><span class="p">,</span> <span class="s2">&quot;Range missmatch&quot;</span>
+                    <span class="k">assert</span> <span class="n">ii</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">quant</span><span class="p">)</span>
+                    <span class="n">quant_</span> <span class="o">=</span> <span class="n">quant</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">quant_</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">out_ref_data_quant</span> <span class="o">=</span> <span class="n">ref_quant_helper</span><span class="p">(</span><span class="n">quant_</span><span class="p">,</span> <span class="n">out_ref_data</span><span class="p">)</span>
+                        <span class="k">for</span> <span class="n">vm</span> <span class="ow">in</span> <span class="n">validate_metrics</span><span class="p">:</span>
+                            <span class="n">vm</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">out_data</span><span class="p">,</span> <span class="n">out_ref_data_quant</span><span class="p">,</span> <span class="n">in_data</span><span class="o">=</span><span class="n">in_data</span><span class="p">,</span> <span class="n">quant</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                        <span class="n">out_data</span> <span class="o">=</span> <span class="n">dequant_helper</span><span class="p">(</span><span class="n">quant_</span><span class="p">,</span> <span class="n">out_data</span><span class="p">)</span>
+                <span class="c1"># print(&quot;out_data&quot;, out_data)</span>
+                <span class="c1"># print(&quot;sum(out_data)&quot;, np.sum(out_data))</span>
+                <span class="c1"># print(&quot;out_ref_data&quot;, out_ref_data)</span>
+                <span class="c1"># print(&quot;sum(out_ref_data)&quot;, np.sum(out_ref_data))</span>
+                <span class="c1"># input(&quot;TIAW&quot;)</span>
+                <span class="k">assert</span> <span class="n">out_data</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">out_ref_data</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="s2">&quot;dtype missmatch&quot;</span>
+                <span class="k">assert</span> <span class="n">out_data</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="n">out_ref_data</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="s2">&quot;shape missmatch&quot;</span>
+
+                <span class="k">for</span> <span class="n">vm</span> <span class="ow">in</span> <span class="n">validate_metrics</span><span class="p">:</span>
+                    <span class="n">vm</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">out_data</span><span class="p">,</span> <span class="n">out_ref_data</span><span class="p">,</span> <span class="n">in_data</span><span class="o">=</span><span class="n">in_data</span><span class="p">,</span> <span class="n">quant</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                <span class="n">ii</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">report</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+        <span class="k">for</span> <span class="n">vm</span> <span class="ow">in</span> <span class="n">validate_metrics</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">vm</span><span class="o">.</span><span class="n">get_summary</span><span class="p">()</span>
+            <span class="n">report</span><span class="o">.</span><span class="n">post_df</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">vm</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span>
+        <span class="k">return</span> <span class="p">[]</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="ValidateLabelsPostprocess">
+<a class="viewcode-back" href="../../../../mlonmcu.session.postprocess.html#mlonmcu.session.postprocess.postprocesses.ValidateLabelsPostprocess">[docs]</a>
+<span class="k">class</span> <span class="nc">ValidateLabelsPostprocess</span><span class="p">(</span><span class="n">RunPostprocess</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Postprocess for comparing model outputs with golden reference.&quot;&quot;&quot;</span>
+
+    <span class="n">DEFAULTS</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="o">**</span><span class="n">RunPostprocess</span><span class="o">.</span><span class="n">DEFAULTS</span><span class="p">,</span>
+        <span class="s2">&quot;report&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s2">&quot;classify_metrics&quot;</span><span class="p">:</span> <span class="s2">&quot;topk_label(n=1);topk_label(n=2)&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;validate_labels&quot;</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="n">features</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">classify_metrics</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get classify_metrics property.&quot;&quot;&quot;</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;classify_metrics&quot;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">report</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get report property.&quot;&quot;&quot;</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;report&quot;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">str2bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ValidateLabelsPostprocess.post_run">
+<a class="viewcode-back" href="../../../../mlonmcu.session.postprocess.html#mlonmcu.session.postprocess.postprocesses.ValidateLabelsPostprocess.post_run">[docs]</a>
+    <span class="k">def</span> <span class="nf">post_run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">report</span><span class="p">,</span> <span class="n">artifacts</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Called at the end of a run.&quot;&quot;&quot;</span>
+        <span class="n">model_info_artifact</span> <span class="o">=</span> <span class="n">lookup_artifacts</span><span class="p">(</span><span class="n">artifacts</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;model_info.yml&quot;</span><span class="p">,</span> <span class="n">first_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">model_info_artifact</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Could not find artifact: model_info.yml&quot;</span>
+        <span class="n">model_info_artifact</span> <span class="o">=</span> <span class="n">model_info_artifact</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="kn">import</span> <span class="nn">yaml</span>
+
+        <span class="n">model_info_data</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">model_info_artifact</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">model_info_data</span><span class="p">[</span><span class="s2">&quot;output_names&quot;</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Multi-outputs not yet supported.&quot;</span><span class="p">)</span>
+        <span class="n">labels_ref_artifact</span> <span class="o">=</span> <span class="n">lookup_artifacts</span><span class="p">(</span><span class="n">artifacts</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;labels_ref.npy&quot;</span><span class="p">,</span> <span class="n">first_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="p">(</span>
+            <span class="nb">len</span><span class="p">(</span><span class="n">labels_ref_artifact</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+        <span class="p">),</span> <span class="s2">&quot;Could not find artifact: labels_ref.npy (Run classify_labels postprocess first!)&quot;</span>
+        <span class="n">labels_ref_artifact</span> <span class="o">=</span> <span class="n">labels_ref_artifact</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+        <span class="n">labels_ref</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">labels_ref_artifact</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">allow_pickle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">outputs_artifact</span> <span class="o">=</span> <span class="n">lookup_artifacts</span><span class="p">(</span><span class="n">artifacts</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;outputs.npy&quot;</span><span class="p">,</span> <span class="n">first_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">outputs_artifact</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Could not find artifact: outputs.npy&quot;</span>
+        <span class="n">outputs_artifact</span> <span class="o">=</span> <span class="n">outputs_artifact</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">outputs_artifact</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">allow_pickle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="c1"># missing = 0</span>
+        <span class="n">classify_metrics_str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">classify_metrics</span>
+        <span class="n">classify_metrics</span> <span class="o">=</span> <span class="n">parse_classify_metrics</span><span class="p">(</span><span class="n">classify_metrics_str</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">output</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">outputs</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>  <span class="c1"># name based lookup</span>
+                <span class="k">pass</span>
+            <span class="k">else</span><span class="p">:</span>  <span class="c1"># index based lookup</span>
+                <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">)),</span> <span class="s2">&quot;expected dict, list or np.array&quot;</span>
+                <span class="n">output_names</span> <span class="o">=</span> <span class="n">model_info_data</span><span class="p">[</span><span class="s2">&quot;output_names&quot;</span><span class="p">]</span>
+                <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">output</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">output_names</span><span class="p">)</span>
+                <span class="n">output</span> <span class="o">=</span> <span class="p">{</span><span class="n">output_names</span><span class="p">[</span><span class="n">idx</span><span class="p">]:</span> <span class="n">out</span> <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">out</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">output</span><span class="p">)}</span>
+            <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">output</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Only supporting single-output models&quot;</span>
+            <span class="n">out_data</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]]</span>
+            <span class="c1"># print(&quot;out_data&quot;, out_data)</span>
+            <span class="k">assert</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels_ref</span><span class="p">),</span> <span class="s2">&quot;Missing reference labels&quot;</span>
+            <span class="n">label_ref</span> <span class="o">=</span> <span class="n">labels_ref</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="c1"># print(&quot;label_ref&quot;, label_ref)</span>
+            <span class="k">for</span> <span class="n">cm</span> <span class="ow">in</span> <span class="n">classify_metrics</span><span class="p">:</span>
+                <span class="n">cm</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">out_data</span><span class="p">,</span> <span class="n">label_ref</span><span class="p">,</span> <span class="n">quant</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">report</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+        <span class="k">for</span> <span class="n">cm</span> <span class="ow">in</span> <span class="n">classify_metrics</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">get_summary</span><span class="p">()</span>
+            <span class="n">report</span><span class="o">.</span><span class="n">post_df</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cm</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span>
+        <span class="k">return</span> <span class="p">[]</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="ExportOutputsPostprocess">
+<a class="viewcode-back" href="../../../../mlonmcu.session.postprocess.html#mlonmcu.session.postprocess.postprocesses.ExportOutputsPostprocess">[docs]</a>
+<span class="k">class</span> <span class="nc">ExportOutputsPostprocess</span><span class="p">(</span><span class="n">RunPostprocess</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Postprocess for writing model outputs to a directory.&quot;&quot;&quot;</span>
+
+    <span class="n">DEFAULTS</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="o">**</span><span class="n">RunPostprocess</span><span class="o">.</span><span class="n">DEFAULTS</span><span class="p">,</span>
+        <span class="s2">&quot;dest&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># if none: export as artifact</span>
+        <span class="s2">&quot;use_ref&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s2">&quot;skip_dequant&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s2">&quot;fmt&quot;</span><span class="p">:</span> <span class="s2">&quot;bin&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;archive_fmt&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;export_outputs&quot;</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="n">features</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">dest</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get dest property.&quot;&quot;&quot;</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;dest&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Path</span><span class="p">):</span>
+                <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">use_ref</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get use_ref property.&quot;&quot;&quot;</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;use_ref&quot;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">str2bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">skip_dequant</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get skip_dequant property.&quot;&quot;&quot;</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;skip_dequant&quot;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">str2bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">fmt</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get fmt property.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;fmt&quot;</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">archive_fmt</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get archive_fmt property.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;archive_fmt&quot;</span><span class="p">]</span>
+
+<div class="viewcode-block" id="ExportOutputsPostprocess.post_run">
+<a class="viewcode-back" href="../../../../mlonmcu.session.postprocess.html#mlonmcu.session.postprocess.postprocesses.ExportOutputsPostprocess.post_run">[docs]</a>
+    <span class="k">def</span> <span class="nf">post_run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">report</span><span class="p">,</span> <span class="n">artifacts</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Called at the end of a run.&quot;&quot;&quot;</span>
+        <span class="n">model_info_artifact</span> <span class="o">=</span> <span class="n">lookup_artifacts</span><span class="p">(</span><span class="n">artifacts</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;model_info.yml&quot;</span><span class="p">,</span> <span class="n">first_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">model_info_artifact</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Could not find artifact: model_info.yml&quot;</span>
+        <span class="n">model_info_artifact</span> <span class="o">=</span> <span class="n">model_info_artifact</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="kn">import</span> <span class="nn">yaml</span>
+
+        <span class="n">model_info_data</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">model_info_artifact</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+        <span class="c1"># print(&quot;model_info_data&quot;, model_info_data)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">model_info_data</span><span class="p">[</span><span class="s2">&quot;output_names&quot;</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Multi-outputs not yet supported.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_ref</span><span class="p">:</span>
+            <span class="n">outputs_ref_artifact</span> <span class="o">=</span> <span class="n">lookup_artifacts</span><span class="p">(</span><span class="n">artifacts</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;outputs_ref.npy&quot;</span><span class="p">,</span> <span class="n">first_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">outputs_ref_artifact</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Could not find artifact: outputs_ref.npy&quot;</span>
+            <span class="n">outputs_ref_artifact</span> <span class="o">=</span> <span class="n">outputs_ref_artifact</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">outputs_ref</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">outputs_ref_artifact</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">allow_pickle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">outputs</span> <span class="o">=</span> <span class="n">outputs_ref</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">outputs_artifact</span> <span class="o">=</span> <span class="n">lookup_artifacts</span><span class="p">(</span><span class="n">artifacts</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;outputs.npy&quot;</span><span class="p">,</span> <span class="n">first_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">outputs_artifact</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Could not find artifact: outputs.npy&quot;</span>
+            <span class="n">outputs_artifact</span> <span class="o">=</span> <span class="n">outputs_artifact</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">outputs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">outputs_artifact</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">allow_pickle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dest</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">temp_dir</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span>
+            <span class="n">dest_</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">temp_dir</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">temp_dir</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">dest</span><span class="o">.</span><span class="n">is_dir</span><span class="p">(),</span> <span class="sa">f</span><span class="s2">&quot;Not a directory: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dest</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">dest_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dest</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">fmt</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;bin&quot;</span><span class="p">,</span> <span class="s2">&quot;npy&quot;</span><span class="p">],</span> <span class="sa">f</span><span class="s2">&quot;Invalid format: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">fmt</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">filenames</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">output</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">outputs</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>  <span class="c1"># name based lookup</span>
+                <span class="k">pass</span>
+            <span class="k">else</span><span class="p">:</span>  <span class="c1"># index based lookup</span>
+                <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">)),</span> <span class="s2">&quot;expected dict, list or np.array&quot;</span>
+                <span class="n">output_names</span> <span class="o">=</span> <span class="n">model_info_data</span><span class="p">[</span><span class="s2">&quot;output_names&quot;</span><span class="p">]</span>
+                <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">output</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">output_names</span><span class="p">)</span>
+                <span class="n">output</span> <span class="o">=</span> <span class="p">{</span><span class="n">output_names</span><span class="p">[</span><span class="n">idx</span><span class="p">]:</span> <span class="n">out</span> <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">out</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">output</span><span class="p">)}</span>
+            <span class="n">quant</span> <span class="o">=</span> <span class="n">model_info_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;output_quant_details&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">quant</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">skip_dequant</span><span class="p">:</span>
+
+                <span class="k">def</span> <span class="nf">dequant_helper</span><span class="p">(</span><span class="n">quant</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">quant</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="k">return</span> <span class="n">data</span>
+                    <span class="n">quant_scale</span><span class="p">,</span> <span class="n">quant_zero_point</span><span class="p">,</span> <span class="n">quant_dtype</span><span class="p">,</span> <span class="n">quant_range</span> <span class="o">=</span> <span class="n">quant</span>
+                    <span class="k">if</span> <span class="n">quant_dtype</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">data</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">quant_dtype</span><span class="p">:</span>
+                        <span class="k">return</span> <span class="n">data</span>
+                    <span class="k">assert</span> <span class="n">data</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;int8&quot;</span><span class="p">],</span> <span class="s2">&quot;Dequantization only supported for int8 input&quot;</span>
+                    <span class="k">assert</span> <span class="n">quant_dtype</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;float32&quot;</span><span class="p">],</span> <span class="s2">&quot;Dequantization only supported for float32 output&quot;</span>
+                    <span class="k">return</span> <span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;float32&quot;</span><span class="p">)</span> <span class="o">-</span> <span class="n">quant_zero_point</span><span class="p">)</span> <span class="o">*</span> <span class="n">quant_scale</span>
+
+                <span class="n">output</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="n">out_name</span><span class="p">:</span> <span class="n">dequant_helper</span><span class="p">(</span><span class="n">quant</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">output</span><span class="p">[</span><span class="n">out_name</span><span class="p">])</span> <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">out_name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+                <span class="p">}</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">fmt</span> <span class="o">==</span> <span class="s2">&quot;npy&quot;</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;npy export&quot;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">fmt</span> <span class="o">==</span> <span class="s2">&quot;bin&quot;</span><span class="p">:</span>
+                <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Multi-outputs not supported&quot;</span>
+                <span class="n">output_data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">values</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">output_data</span><span class="o">.</span><span class="n">tobytes</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="s2">&quot;C&quot;</span><span class="p">)</span>
+                <span class="n">file_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">.bin&quot;</span>
+                <span class="n">file_dest</span> <span class="o">=</span> <span class="n">dest_</span> <span class="o">/</span> <span class="n">file_name</span>
+                <span class="n">filenames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">file_dest</span><span class="p">)</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_dest</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">assert</span> <span class="kc">False</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;fmt not supported: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">fmt</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">artifacts</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">archive_fmt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">archive_fmt</span>
+        <span class="n">create_artifact</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dest</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">archive_fmt</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">create_artifact</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">archive_fmt</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">dest</span> <span class="ow">is</span> <span class="kc">None</span>
+                <span class="n">archive_fmt</span> <span class="o">=</span> <span class="s2">&quot;tar.gz&quot;</span>  <span class="c1"># Default fallback</span>
+            <span class="k">assert</span> <span class="n">archive_fmt</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;tar.xz&quot;</span><span class="p">,</span> <span class="s2">&quot;tar.gz&quot;</span><span class="p">,</span> <span class="s2">&quot;zip&quot;</span><span class="p">]</span>
+            <span class="n">archive_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;output_data.</span><span class="si">{</span><span class="n">archive_fmt</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">archive_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">dest_</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">archive_fmt</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="k">if</span> <span class="n">archive_fmt</span> <span class="o">==</span> <span class="s2">&quot;tar.gz&quot;</span><span class="p">:</span>
+                <span class="kn">import</span> <span class="nn">tarfile</span>
+
+                <span class="k">with</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">archive_path</span><span class="p">,</span> <span class="s2">&quot;w:gz&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">tar</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">:</span>
+                        <span class="n">tar</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">arcname</span><span class="o">=</span><span class="n">filename</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;archive_fmt=</span><span class="si">{</span><span class="n">archive_fmt</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">archive_path</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">raw</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+            <span class="n">artifact</span> <span class="o">=</span> <span class="n">Artifact</span><span class="p">(</span><span class="n">archive_name</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="n">raw</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="n">ArtifactFormat</span><span class="o">.</span><span class="n">BIN</span><span class="p">)</span>
+            <span class="n">artifacts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">artifact</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">temp_dir</span><span class="p">:</span>
+            <span class="n">temp_dir</span><span class="o">.</span><span class="n">cleanup</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">artifacts</span></div>
 </div>
 
 </pre></div>

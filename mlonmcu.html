@@ -1,23 +1,21 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="./">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>mlonmcu package &mdash; ML on MCU 0.4.dev0 documentation</title>
+  <title>mlonmcu package &mdash; ML on MCU 0.7.dev0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=414d5694"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=3bfbed7b"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -36,9 +34,6 @@
           <a href="index.html" class="icon icon-home">
             ML on MCU
           </a>
-              <div class="version">
-                0.4.dev0
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -379,6 +374,7 @@
 <li class="toctree-l3"><a class="reference internal" href="mlonmcu.environment.html#mlonmcu.environment.templates.fill_template"><code class="docutils literal notranslate"><span class="pre">fill_template()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="mlonmcu.environment.html#mlonmcu.environment.templates.get_template_names"><code class="docutils literal notranslate"><span class="pre">get_template_names()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="mlonmcu.environment.html#mlonmcu.environment.templates.get_template_text"><code class="docutils literal notranslate"><span class="pre">get_template_text()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mlonmcu.environment.html#mlonmcu.environment.templates.get_ubuntu_version"><code class="docutils literal notranslate"><span class="pre">get_ubuntu_version()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="mlonmcu.environment.html#mlonmcu.environment.templates.write_environment_yaml_from_template"><code class="docutils literal notranslate"><span class="pre">write_environment_yaml_from_template()</span></code></a></li>
 </ul>
 </li>
@@ -630,10 +626,29 @@
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.Frontend.add_platform_config"><code class="docutils literal notranslate"><span class="pre">Frontend.add_platform_config()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.Frontend.add_platform_defs"><code class="docutils literal notranslate"><span class="pre">Frontend.add_platform_defs()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.Frontend.export_artifacts"><code class="docutils literal notranslate"><span class="pre">Frontend.export_artifacts()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.Frontend.extract_model_info"><code class="docutils literal notranslate"><span class="pre">Frontend.extract_model_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.Frontend.gen_data"><code class="docutils literal notranslate"><span class="pre">Frontend.gen_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.Frontend.gen_data_file"><code class="docutils literal notranslate"><span class="pre">Frontend.gen_data_file</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.Frontend.gen_data_fill_mode"><code class="docutils literal notranslate"><span class="pre">Frontend.gen_data_fill_mode</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.Frontend.gen_data_fmt"><code class="docutils literal notranslate"><span class="pre">Frontend.gen_data_fmt</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.Frontend.gen_data_number"><code class="docutils literal notranslate"><span class="pre">Frontend.gen_data_number</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.Frontend.gen_ref_data"><code class="docutils literal notranslate"><span class="pre">Frontend.gen_ref_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.Frontend.gen_ref_data_file"><code class="docutils literal notranslate"><span class="pre">Frontend.gen_ref_data_file</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.Frontend.gen_ref_data_fmt"><code class="docutils literal notranslate"><span class="pre">Frontend.gen_ref_data_fmt</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.Frontend.gen_ref_data_mode"><code class="docutils literal notranslate"><span class="pre">Frontend.gen_ref_data_mode</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.Frontend.gen_ref_labels"><code class="docutils literal notranslate"><span class="pre">Frontend.gen_ref_labels</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.Frontend.gen_ref_labels_file"><code class="docutils literal notranslate"><span class="pre">Frontend.gen_ref_labels_file</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.Frontend.gen_ref_labels_fmt"><code class="docutils literal notranslate"><span class="pre">Frontend.gen_ref_labels_fmt</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.Frontend.gen_ref_labels_mode"><code class="docutils literal notranslate"><span class="pre">Frontend.gen_ref_labels_mode</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.Frontend.generate"><code class="docutils literal notranslate"><span class="pre">Frontend.generate()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.Frontend.generate_artifacts"><code class="docutils literal notranslate"><span class="pre">Frontend.generate_artifacts()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.Frontend.generate_input_data"><code class="docutils literal notranslate"><span class="pre">Frontend.generate_input_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.Frontend.generate_model_info"><code class="docutils literal notranslate"><span class="pre">Frontend.generate_model_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.Frontend.generate_output_ref_data"><code class="docutils literal notranslate"><span class="pre">Frontend.generate_output_ref_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.Frontend.generate_ref_labels"><code class="docutils literal notranslate"><span class="pre">Frontend.generate_ref_labels()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.Frontend.get_platform_config"><code class="docutils literal notranslate"><span class="pre">Frontend.get_platform_config()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.Frontend.get_platform_defs"><code class="docutils literal notranslate"><span class="pre">Frontend.get_platform_defs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.Frontend.inference"><code class="docutils literal notranslate"><span class="pre">Frontend.inference()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.Frontend.lookup_models"><code class="docutils literal notranslate"><span class="pre">Frontend.lookup_models()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.Frontend.process_features"><code class="docutils literal notranslate"><span class="pre">Frontend.process_features()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.Frontend.process_metadata"><code class="docutils literal notranslate"><span class="pre">Frontend.process_metadata()</span></code></a></li>
@@ -670,6 +685,13 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.ONNXFrontend"><code class="docutils literal notranslate"><span class="pre">ONNXFrontend</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.OpenASIPFrontend"><code class="docutils literal notranslate"><span class="pre">OpenASIPFrontend</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.OpenASIPFrontend.generate"><code class="docutils literal notranslate"><span class="pre">OpenASIPFrontend.generate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.OpenASIPFrontend.get_platform_config"><code class="docutils literal notranslate"><span class="pre">OpenASIPFrontend.get_platform_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.OpenASIPFrontend.lookup_models"><code class="docutils literal notranslate"><span class="pre">OpenASIPFrontend.lookup_models()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.OpenASIPFrontend.supported_names"><code class="docutils literal notranslate"><span class="pre">OpenASIPFrontend.supported_names</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.PBFrontend"><code class="docutils literal notranslate"><span class="pre">PBFrontend</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.PackedFrontend"><code class="docutils literal notranslate"><span class="pre">PackedFrontend</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.PackedFrontend.DEFAULTS"><code class="docutils literal notranslate"><span class="pre">PackedFrontend.DEFAULTS</span></code></a></li>
@@ -684,6 +706,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.PaddleFrontend"><code class="docutils literal notranslate"><span class="pre">PaddleFrontend</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.PolybenchFrontend"><code class="docutils literal notranslate"><span class="pre">PolybenchFrontend</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.PolybenchFrontend.DEFAULTS"><code class="docutils literal notranslate"><span class="pre">PolybenchFrontend.DEFAULTS</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.PolybenchFrontend.REQUIRED"><code class="docutils literal notranslate"><span class="pre">PolybenchFrontend.REQUIRED</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.PolybenchFrontend.generate"><code class="docutils literal notranslate"><span class="pre">PolybenchFrontend.generate()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.PolybenchFrontend.get_platform_config"><code class="docutils literal notranslate"><span class="pre">PolybenchFrontend.get_platform_config()</span></code></a></li>
@@ -723,7 +746,9 @@
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.TfLiteFrontend.REQUIRED"><code class="docutils literal notranslate"><span class="pre">TfLiteFrontend.REQUIRED</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.TfLiteFrontend.analyze_enable"><code class="docutils literal notranslate"><span class="pre">TfLiteFrontend.analyze_enable</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.TfLiteFrontend.analyze_script"><code class="docutils literal notranslate"><span class="pre">TfLiteFrontend.analyze_script</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.TfLiteFrontend.extract_model_info"><code class="docutils literal notranslate"><span class="pre">TfLiteFrontend.extract_model_info()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.TfLiteFrontend.generate"><code class="docutils literal notranslate"><span class="pre">TfLiteFrontend.generate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.TfLiteFrontend.inference"><code class="docutils literal notranslate"><span class="pre">TfLiteFrontend.inference()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.TfLiteFrontend.pack_script"><code class="docutils literal notranslate"><span class="pre">TfLiteFrontend.pack_script</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.TfLiteFrontend.produce_artifacts"><code class="docutils literal notranslate"><span class="pre">TfLiteFrontend.produce_artifacts()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.frontend.TfLiteFrontend.split_layers"><code class="docutils literal notranslate"><span class="pre">TfLiteFrontend.split_layers</span></code></a></li>
@@ -791,6 +816,7 @@
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.model.Model.input_types"><code class="docutils literal notranslate"><span class="pre">Model.input_types</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.model.Model.inputs_path"><code class="docutils literal notranslate"><span class="pre">Model.inputs_path</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.model.Model.metadata_path"><code class="docutils literal notranslate"><span class="pre">Model.metadata_path</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.model.Model.output_labels_path"><code class="docutils literal notranslate"><span class="pre">Model.output_labels_path</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.model.Model.output_shapes"><code class="docutils literal notranslate"><span class="pre">Model.output_shapes</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.model.Model.output_types"><code class="docutils literal notranslate"><span class="pre">Model.output_types</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.model.Model.outputs_path"><code class="docutils literal notranslate"><span class="pre">Model.outputs_path</span></code></a></li>
@@ -816,6 +842,12 @@
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.model.ModelFormats.extension"><code class="docutils literal notranslate"><span class="pre">ModelFormats.extension</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.model.ModelFormats.extensions"><code class="docutils literal notranslate"><span class="pre">ModelFormats.extensions</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.model.ModelFormats.from_extension"><code class="docutils literal notranslate"><span class="pre">ModelFormats.from_extension()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.model.OpenASIPProgram"><code class="docutils literal notranslate"><span class="pre">OpenASIPProgram</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.model.OpenASIPProgram.DEFAULTS"><code class="docutils literal notranslate"><span class="pre">OpenASIPProgram.DEFAULTS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.model.OpenASIPProgram.crc_mode"><code class="docutils literal notranslate"><span class="pre">OpenASIPProgram.crc_mode</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.model.OpenASIPProgram.get_platform_defs"><code class="docutils literal notranslate"><span class="pre">OpenASIPProgram.get_platform_defs()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.model.PolybenchProgram"><code class="docutils literal notranslate"><span class="pre">PolybenchProgram</span></code></a><ul>
@@ -849,6 +881,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="mlonmcu.models.html#module-mlonmcu.models.utils">mlonmcu.models.utils module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.utils.fill_data_source"><code class="docutils literal notranslate"><span class="pre">fill_data_source()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.utils.fill_data_source_inputs_only"><code class="docutils literal notranslate"><span class="pre">fill_data_source_inputs_only()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.utils.get_data_source"><code class="docutils literal notranslate"><span class="pre">get_data_source()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.utils.lookup_data_buffers"><code class="docutils literal notranslate"><span class="pre">lookup_data_buffers()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.utils.make_hex_array"><code class="docutils literal notranslate"><span class="pre">make_hex_array()</span></code></a></li>
@@ -885,7 +918,9 @@
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.TfLiteFrontend.REQUIRED"><code class="docutils literal notranslate"><span class="pre">TfLiteFrontend.REQUIRED</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.TfLiteFrontend.analyze_enable"><code class="docutils literal notranslate"><span class="pre">TfLiteFrontend.analyze_enable</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.TfLiteFrontend.analyze_script"><code class="docutils literal notranslate"><span class="pre">TfLiteFrontend.analyze_script</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.TfLiteFrontend.extract_model_info"><code class="docutils literal notranslate"><span class="pre">TfLiteFrontend.extract_model_info()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.TfLiteFrontend.generate"><code class="docutils literal notranslate"><span class="pre">TfLiteFrontend.generate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.TfLiteFrontend.inference"><code class="docutils literal notranslate"><span class="pre">TfLiteFrontend.inference()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.TfLiteFrontend.pack_script"><code class="docutils literal notranslate"><span class="pre">TfLiteFrontend.pack_script</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.TfLiteFrontend.produce_artifacts"><code class="docutils literal notranslate"><span class="pre">TfLiteFrontend.produce_artifacts()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.models.html#mlonmcu.models.TfLiteFrontend.split_layers"><code class="docutils literal notranslate"><span class="pre">TfLiteFrontend.split_layers</span></code></a></li>
@@ -918,6 +953,7 @@
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.platform.microtvm.html#module-mlonmcu.platform.microtvm.microtvm_corev_ovpsim_target">mlonmcu.platform.microtvm.microtvm_corev_ovpsim_target module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.platform.microtvm.html#module-mlonmcu.platform.microtvm.microtvm_espidf_target">mlonmcu.platform.microtvm.microtvm_espidf_target module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.platform.microtvm.html#module-mlonmcu.platform.microtvm.microtvm_etiss_target">mlonmcu.platform.microtvm.microtvm_etiss_target module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.platform.microtvm.html#module-mlonmcu.platform.microtvm.microtvm_gvsoc_target">mlonmcu.platform.microtvm.microtvm_gvsoc_target module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.platform.microtvm.html#module-mlonmcu.platform.microtvm.microtvm_host_target">mlonmcu.platform.microtvm.microtvm_host_target module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.platform.microtvm.html#module-mlonmcu.platform.microtvm.microtvm_mlonmcu_target">mlonmcu.platform.microtvm.microtvm_mlonmcu_target module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.platform.microtvm.html#module-mlonmcu.platform.microtvm.microtvm_spike_target">mlonmcu.platform.microtvm.microtvm_spike_target module</a></li>
@@ -931,6 +967,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="mlonmcu.platform.mlif.html">mlonmcu.platform.mlif package</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.platform.mlif.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.platform.mlif.html#module-mlonmcu.platform.mlif.interfaces">mlonmcu.platform.mlif.interfaces module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.platform.mlif.html#module-mlonmcu.platform.mlif.mlif">mlonmcu.platform.mlif.mlif module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.platform.mlif.html#module-mlonmcu.platform.mlif.mlif_target">mlonmcu.platform.mlif.mlif_target module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.platform.mlif.html#module-mlonmcu.platform.mlif">Module contents</a></li>
@@ -1050,6 +1087,7 @@
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.session.postprocess.html#submodules">Submodules</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.session.postprocess.html#module-mlonmcu.session.postprocess.postprocess">mlonmcu.session.postprocess.postprocess module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.session.postprocess.html#module-mlonmcu.session.postprocess.postprocesses">mlonmcu.session.postprocess.postprocesses module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.session.postprocess.html#module-mlonmcu.session.postprocess.validate_metrics">mlonmcu.session.postprocess.validate_metrics module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.session.postprocess.html#module-mlonmcu.session.postprocess">Module contents</a></li>
 </ul>
 </li>
@@ -1187,6 +1225,7 @@
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.setup.tasks.html#module-mlonmcu.setup.tasks.corstone300">mlonmcu.setup.tasks.corstone300 module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.setup.tasks.html#module-mlonmcu.setup.tasks.cv32e40p">mlonmcu.setup.tasks.cv32e40p module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.setup.tasks.html#module-mlonmcu.setup.tasks.dtc">mlonmcu.setup.tasks.dtc module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.setup.tasks.html#module-mlonmcu.setup.tasks.ekut">mlonmcu.setup.tasks.ekut module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.setup.tasks.html#module-mlonmcu.setup.tasks.espidf">mlonmcu.setup.tasks.espidf module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.setup.tasks.html#module-mlonmcu.setup.tasks.etiss">mlonmcu.setup.tasks.etiss module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.setup.tasks.html#module-mlonmcu.setup.tasks.layergen">mlonmcu.setup.tasks.layergen module</a></li>
@@ -1303,6 +1342,7 @@
 <li class="toctree-l3"><a class="reference internal" href="mlonmcu.setup.html#mlonmcu.setup.utils.download_and_extract"><code class="docutils literal notranslate"><span class="pre">download_and_extract()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="mlonmcu.setup.html#mlonmcu.setup.utils.exec"><code class="docutils literal notranslate"><span class="pre">exec()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="mlonmcu.setup.html#mlonmcu.setup.utils.exec_getout"><code class="docutils literal notranslate"><span class="pre">exec_getout()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mlonmcu.setup.html#mlonmcu.setup.utils.execute"><code class="docutils literal notranslate"><span class="pre">execute()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="mlonmcu.setup.html#mlonmcu.setup.utils.extract"><code class="docutils literal notranslate"><span class="pre">extract()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="mlonmcu.setup.html#mlonmcu.setup.utils.is_populated"><code class="docutils literal notranslate"><span class="pre">is_populated()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="mlonmcu.setup.html#mlonmcu.setup.utils.make"><code class="docutils literal notranslate"><span class="pre">make()</span></code></a></li>
@@ -1332,6 +1372,7 @@
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.riscv.html#submodules">Submodules</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.riscv.html#module-mlonmcu.target.riscv.ara">mlonmcu.target.riscv.ara module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.riscv.html#module-mlonmcu.target.riscv.ara_rtl">mlonmcu.target.riscv.ara_rtl module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.riscv.html#module-mlonmcu.target.riscv.canmv_k230_ssh">mlonmcu.target.riscv.canmv_k230_ssh module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.riscv.html#module-mlonmcu.target.riscv.corev_ovpsim">mlonmcu.target.riscv.corev_ovpsim module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.riscv.html#module-mlonmcu.target.riscv.cv32e40p">mlonmcu.target.riscv.cv32e40p module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.riscv.html#module-mlonmcu.target.riscv.etiss">mlonmcu.target.riscv.etiss module</a></li>
@@ -1388,6 +1429,16 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="mlonmcu.target.html#module-mlonmcu.target.host_x86_ssh">mlonmcu.target.host_x86_ssh module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.host_x86_ssh.HostX86SSHTarget"><code class="docutils literal notranslate"><span class="pre">HostX86SSHTarget</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.host_x86_ssh.HostX86SSHTarget.DEFAULTS"><code class="docutils literal notranslate"><span class="pre">HostX86SSHTarget.DEFAULTS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.host_x86_ssh.HostX86SSHTarget.FEATURES"><code class="docutils literal notranslate"><span class="pre">HostX86SSHTarget.FEATURES</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.host_x86_ssh.HostX86SSHTarget.exec"><code class="docutils literal notranslate"><span class="pre">HostX86SSHTarget.exec()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.host_x86_ssh.HostX86SSHTarget.get_target_system"><code class="docutils literal notranslate"><span class="pre">HostX86SSHTarget.get_target_system()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="mlonmcu.target.html#module-mlonmcu.target.metrics">mlonmcu.target.metrics module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.metrics.Metrics"><code class="docutils literal notranslate"><span class="pre">Metrics</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.metrics.Metrics.add"><code class="docutils literal notranslate"><span class="pre">Metrics.add()</span></code></a></li>
@@ -1396,6 +1447,24 @@
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.metrics.Metrics.get_data"><code class="docutils literal notranslate"><span class="pre">Metrics.get_data()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.metrics.Metrics.has"><code class="docutils literal notranslate"><span class="pre">Metrics.has()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.metrics.Metrics.to_csv"><code class="docutils literal notranslate"><span class="pre">Metrics.to_csv()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="mlonmcu.target.html#module-mlonmcu.target.ssh_target">mlonmcu.target.ssh_target module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.ssh_target.SSHTarget"><code class="docutils literal notranslate"><span class="pre">SSHTarget</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.ssh_target.SSHTarget.DEFAULTS"><code class="docutils literal notranslate"><span class="pre">SSHTarget.DEFAULTS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.ssh_target.SSHTarget.copy_from_remote"><code class="docutils literal notranslate"><span class="pre">SSHTarget.copy_from_remote()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.ssh_target.SSHTarget.copy_to_remote"><code class="docutils literal notranslate"><span class="pre">SSHTarget.copy_to_remote()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.ssh_target.SSHTarget.create_remote_directory"><code class="docutils literal notranslate"><span class="pre">SSHTarget.create_remote_directory()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.ssh_target.SSHTarget.exec_via_ssh"><code class="docutils literal notranslate"><span class="pre">SSHTarget.exec_via_ssh()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.ssh_target.SSHTarget.hostname"><code class="docutils literal notranslate"><span class="pre">SSHTarget.hostname</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.ssh_target.SSHTarget.ignore_known_hosts"><code class="docutils literal notranslate"><span class="pre">SSHTarget.ignore_known_hosts</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.ssh_target.SSHTarget.parse_exit"><code class="docutils literal notranslate"><span class="pre">SSHTarget.parse_exit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.ssh_target.SSHTarget.password"><code class="docutils literal notranslate"><span class="pre">SSHTarget.password</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.ssh_target.SSHTarget.port"><code class="docutils literal notranslate"><span class="pre">SSHTarget.port</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.ssh_target.SSHTarget.username"><code class="docutils literal notranslate"><span class="pre">SSHTarget.username</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.ssh_target.SSHTarget.workdir"><code class="docutils literal notranslate"><span class="pre">SSHTarget.workdir</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -1422,10 +1491,16 @@
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.target.Target.get_target_system"><code class="docutils literal notranslate"><span class="pre">Target.get_target_system()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.target.Target.inspect"><code class="docutils literal notranslate"><span class="pre">Target.inspect()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.target.Target.parse_exit"><code class="docutils literal notranslate"><span class="pre">Target.parse_exit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.target.Target.parse_stdout"><code class="docutils literal notranslate"><span class="pre">Target.parse_stdout()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.target.Target.print_outputs"><code class="docutils literal notranslate"><span class="pre">Target.print_outputs</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.target.Target.process_features"><code class="docutils literal notranslate"><span class="pre">Target.process_features()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.target.Target.reconfigure"><code class="docutils literal notranslate"><span class="pre">Target.reconfigure()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.target.Target.repeat"><code class="docutils literal notranslate"><span class="pre">Target.repeat</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.target.Target.supports_argv"><code class="docutils literal notranslate"><span class="pre">Target.supports_argv</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.target.Target.supports_filesystem"><code class="docutils literal notranslate"><span class="pre">Target.supports_filesystem</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.target.Target.supports_stdin"><code class="docutils literal notranslate"><span class="pre">Target.supports_stdin</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.target.Target.supports_stdout"><code class="docutils literal notranslate"><span class="pre">Target.supports_stdout</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.target.Target.supports_uart"><code class="docutils literal notranslate"><span class="pre">Target.supports_uart</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -1478,11 +1553,6 @@
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.OVPSimTarget.DEFAULTS"><code class="docutils literal notranslate"><span class="pre">OVPSimTarget.DEFAULTS</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.OVPSimTarget.FEATURES"><code class="docutils literal notranslate"><span class="pre">OVPSimTarget.FEATURES</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.OVPSimTarget.REQUIRED"><code class="docutils literal notranslate"><span class="pre">OVPSimTarget.REQUIRED</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.OVPSimTarget.attr"><code class="docutils literal notranslate"><span class="pre">OVPSimTarget.attr</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.OVPSimTarget.elen"><code class="docutils literal notranslate"><span class="pre">OVPSimTarget.elen</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.OVPSimTarget.embedded_vext"><code class="docutils literal notranslate"><span class="pre">OVPSimTarget.embedded_vext</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.OVPSimTarget.enable_pext"><code class="docutils literal notranslate"><span class="pre">OVPSimTarget.enable_pext</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.OVPSimTarget.enable_vext"><code class="docutils literal notranslate"><span class="pre">OVPSimTarget.enable_vext</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.OVPSimTarget.end_to_end_cycles"><code class="docutils literal notranslate"><span class="pre">OVPSimTarget.end_to_end_cycles</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.OVPSimTarget.exec"><code class="docutils literal notranslate"><span class="pre">OVPSimTarget.exec()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.OVPSimTarget.extensions"><code class="docutils literal notranslate"><span class="pre">OVPSimTarget.extensions</span></code></a></li>
@@ -1495,10 +1565,7 @@
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.OVPSimTarget.get_platform_defs"><code class="docutils literal notranslate"><span class="pre">OVPSimTarget.get_platform_defs()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.OVPSimTarget.ovpsim_exe"><code class="docutils literal notranslate"><span class="pre">OVPSimTarget.ovpsim_exe</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.OVPSimTarget.parse_stdout"><code class="docutils literal notranslate"><span class="pre">OVPSimTarget.parse_stdout()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.OVPSimTarget.pext_spec"><code class="docutils literal notranslate"><span class="pre">OVPSimTarget.pext_spec</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.OVPSimTarget.variant"><code class="docutils literal notranslate"><span class="pre">OVPSimTarget.variant</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.OVPSimTarget.vext_spec"><code class="docutils literal notranslate"><span class="pre">OVPSimTarget.vext_spec</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.OVPSimTarget.vlen"><code class="docutils literal notranslate"><span class="pre">OVPSimTarget.vlen</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.RiscvQemuTarget"><code class="docutils literal notranslate"><span class="pre">RiscvQemuTarget</span></code></a><ul>
@@ -1559,10 +1626,16 @@
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.Target.get_target_system"><code class="docutils literal notranslate"><span class="pre">Target.get_target_system()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.Target.inspect"><code class="docutils literal notranslate"><span class="pre">Target.inspect()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.Target.parse_exit"><code class="docutils literal notranslate"><span class="pre">Target.parse_exit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.Target.parse_stdout"><code class="docutils literal notranslate"><span class="pre">Target.parse_stdout()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.Target.print_outputs"><code class="docutils literal notranslate"><span class="pre">Target.print_outputs</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.Target.process_features"><code class="docutils literal notranslate"><span class="pre">Target.process_features()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.Target.reconfigure"><code class="docutils literal notranslate"><span class="pre">Target.reconfigure()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.Target.repeat"><code class="docutils literal notranslate"><span class="pre">Target.repeat</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.Target.supports_argv"><code class="docutils literal notranslate"><span class="pre">Target.supports_argv</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.Target.supports_filesystem"><code class="docutils literal notranslate"><span class="pre">Target.supports_filesystem</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.Target.supports_stdin"><code class="docutils literal notranslate"><span class="pre">Target.supports_stdin</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.Target.supports_stdout"><code class="docutils literal notranslate"><span class="pre">Target.supports_stdout</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.Target.supports_uart"><code class="docutils literal notranslate"><span class="pre">Target.supports_uart</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.get_targets"><code class="docutils literal notranslate"><span class="pre">get_targets()</span></code></a></li>
@@ -1598,8 +1671,13 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Artifact type.</p>
 <dl class="py method">
+<dt class="sig sig-object py" id="mlonmcu.artifact.Artifact.cache">
+<span class="sig-name descname"><span class="pre">cache</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/artifact.html#Artifact.cache"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.artifact.Artifact.cache" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="mlonmcu.artifact.Artifact.export">
-<span class="sig-name descname"><span class="pre">export</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extract</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/artifact.html#Artifact.export"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.artifact.Artifact.export" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">export</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extract</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_exported</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/artifact.html#Artifact.export"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.artifact.Artifact.export" title="Link to this definition"></a></dt>
 <dd><p>Export the artifact to a given path (file or directory) and update its path.</p>
 </dd></dl>
 
@@ -1614,6 +1692,11 @@
 <span class="sig-name descname"><span class="pre">print_summary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/artifact.html#Artifact.print_summary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.artifact.Artifact.print_summary" title="Link to this definition"></a></dt>
 <dd><p>Utility to print information about an artifact to the cmdline.</p>
 </dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mlonmcu.artifact.Artifact.uncache">
+<span class="sig-name descname"><span class="pre">uncache</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/artifact.html#Artifact.uncache"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.artifact.Artifact.uncache" title="Link to this definition"></a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mlonmcu.artifact.Artifact.validate">

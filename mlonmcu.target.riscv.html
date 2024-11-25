@@ -1,23 +1,21 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="./">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>mlonmcu.target.riscv package &mdash; ML on MCU 0.4.dev0 documentation</title>
+  <title>mlonmcu.target.riscv package &mdash; ML on MCU 0.7.dev0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=414d5694"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=3bfbed7b"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -36,9 +34,6 @@
           <a href="index.html" class="icon icon-home">
             ML on MCU
           </a>
-              <div class="version">
-                0.4.dev0
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -396,6 +391,53 @@
 </dd></dl>
 
 </section>
+<section id="module-mlonmcu.target.riscv.canmv_k230_ssh">
+<span id="mlonmcu-target-riscv-canmv-k230-ssh-module"></span><h2>mlonmcu.target.riscv.canmv_k230_ssh module<a class="headerlink" href="#module-mlonmcu.target.riscv.canmv_k230_ssh" title="Link to this heading"></a></h2>
+<p>MLonMCU Spike Target definitions</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.canmv_k230_ssh.CanMvK230SSHTarget">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mlonmcu.target.riscv.canmv_k230_ssh.</span></span><span class="sig-name descname"><span class="pre">CanMvK230SSHTarget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'canmv_k230_ssh'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/canmv_k230_ssh.html#CanMvK230SSHTarget"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.canmv_k230_ssh.CanMvK230SSHTarget" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.ssh_target.SSHTarget" title="mlonmcu.target.ssh_target.SSHTarget"><code class="xref py py-class docutils literal notranslate"><span class="pre">SSHTarget</span></code></a>, <a class="reference internal" href="#mlonmcu.target.riscv.riscv_vext_target.RVVTarget" title="mlonmcu.target.riscv.riscv_vext_target.RVVTarget"><code class="xref py py-class docutils literal notranslate"><span class="pre">RVVTarget</span></code></a></p>
+<p>TODO.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.canmv_k230_ssh.CanMvK230SSHTarget.DEFAULTS">
+<span class="sig-name descname"><span class="pre">DEFAULTS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'abi':</span> <span class="pre">None,</span> <span class="pre">'arch':</span> <span class="pre">None,</span> <span class="pre">'atomic':</span> <span class="pre">True,</span> <span class="pre">'attr':</span> <span class="pre">'',</span> <span class="pre">'compressed':</span> <span class="pre">True,</span> <span class="pre">'cpu':</span> <span class="pre">None,</span> <span class="pre">'elen':</span> <span class="pre">64,</span> <span class="pre">'embedded':</span> <span class="pre">False,</span> <span class="pre">'embedded_vext':</span> <span class="pre">False,</span> <span class="pre">'enable_vext':</span> <span class="pre">False,</span> <span class="pre">'extensions':</span> <span class="pre">[],</span> <span class="pre">'extra_args':</span> <span class="pre">'',</span> <span class="pre">'fpu':</span> <span class="pre">'double',</span> <span class="pre">'hostname':</span> <span class="pre">None,</span> <span class="pre">'ignore_known_hosts':</span> <span class="pre">True,</span> <span class="pre">'multiply':</span> <span class="pre">True,</span> <span class="pre">'password':</span> <span class="pre">None,</span> <span class="pre">'port':</span> <span class="pre">22,</span> <span class="pre">'print_outputs':</span> <span class="pre">False,</span> <span class="pre">'repeat':</span> <span class="pre">None,</span> <span class="pre">'timeout_sec':</span> <span class="pre">0,</span> <span class="pre">'username':</span> <span class="pre">None,</span> <span class="pre">'vext_spec':</span> <span class="pre">1.0,</span> <span class="pre">'vlen':</span> <span class="pre">128,</span> <span class="pre">'workdir':</span> <span class="pre">None,</span> <span class="pre">'xlen':</span> <span class="pre">64}</span></em><a class="headerlink" href="#mlonmcu.target.riscv.canmv_k230_ssh.CanMvK230SSHTarget.DEFAULTS" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.canmv_k230_ssh.CanMvK230SSHTarget.FEATURES">
+<span class="sig-name descname"><span class="pre">FEATURES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'benchmark',</span> <span class="pre">'vext'}</span></em><a class="headerlink" href="#mlonmcu.target.riscv.canmv_k230_ssh.CanMvK230SSHTarget.FEATURES" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.canmv_k230_ssh.CanMvK230SSHTarget.REQUIRED">
+<span class="sig-name descname"><span class="pre">REQUIRED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'riscv_gcc.install_dir',</span> <span class="pre">'riscv_gcc.name',</span> <span class="pre">'riscv_gcc.variant'}</span></em><a class="headerlink" href="#mlonmcu.target.riscv.canmv_k230_ssh.CanMvK230SSHTarget.REQUIRED" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.canmv_k230_ssh.CanMvK230SSHTarget.exec">
+<span class="sig-name descname"><span class="pre">exec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">program</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cwd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'/home/runner/work/mlonmcu/mlonmcu/docs'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">handle_exit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/canmv_k230_ssh.html#CanMvK230SSHTarget.exec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.canmv_k230_ssh.CanMvK230SSHTarget.exec" title="Link to this definition"></a></dt>
+<dd><p>Use target to execute a executable with given arguments</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.canmv_k230_ssh.CanMvK230SSHTarget.get_metrics">
+<span class="sig-name descname"><span class="pre">get_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">handle_exit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/canmv_k230_ssh.html#CanMvK230SSHTarget.get_metrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.canmv_k230_ssh.CanMvK230SSHTarget.get_metrics" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.canmv_k230_ssh.CanMvK230SSHTarget.get_platform_defs">
+<span class="sig-name descname"><span class="pre">get_platform_defs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">platform</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/canmv_k230_ssh.html#CanMvK230SSHTarget.get_platform_defs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.canmv_k230_ssh.CanMvK230SSHTarget.get_platform_defs" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.canmv_k230_ssh.CanMvK230SSHTarget.parse_stdout">
+<span class="sig-name descname"><span class="pre">parse_stdout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exit_code</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/canmv_k230_ssh.html#CanMvK230SSHTarget.parse_stdout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.canmv_k230_ssh.CanMvK230SSHTarget.parse_stdout" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
 <section id="module-mlonmcu.target.riscv.corev_ovpsim">
 <span id="mlonmcu-target-riscv-corev-ovpsim-module"></span><h2>mlonmcu.target.riscv.corev_ovpsim module<a class="headerlink" href="#module-mlonmcu.target.riscv.corev_ovpsim" title="Link to this heading"></a></h2>
 <p>MLonMCU OVPSimCOREV Target definitions</p>
@@ -665,7 +707,7 @@
 <p>Target using a simple RISC-V VP running in the ETISS simulator</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.etiss.EtissTarget.DEFAULTS">
-<span class="sig-name descname"><span class="pre">DEFAULTS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'abi':</span> <span class="pre">None,</span> <span class="pre">'allow_error':</span> <span class="pre">False,</span> <span class="pre">'arch':</span> <span class="pre">None,</span> <span class="pre">'atomic':</span> <span class="pre">True,</span> <span class="pre">'attr':</span> <span class="pre">'',</span> <span class="pre">'compressed':</span> <span class="pre">True,</span> <span class="pre">'cpu':</span> <span class="pre">None,</span> <span class="pre">'cpu_arch':</span> <span class="pre">None,</span> <span class="pre">'cycle_time_ps':</span> <span class="pre">31250,</span> <span class="pre">'debug_etiss':</span> <span class="pre">False,</span> <span class="pre">'elen':</span> <span class="pre">32,</span> <span class="pre">'embedded':</span> <span class="pre">False,</span> <span class="pre">'embedded_vext':</span> <span class="pre">False,</span> <span class="pre">'enable_pext':</span> <span class="pre">False,</span> <span class="pre">'enable_vext':</span> <span class="pre">False,</span> <span class="pre">'enable_xcorevalu':</span> <span class="pre">False,</span> <span class="pre">'enable_xcorevbi':</span> <span class="pre">False,</span> <span class="pre">'enable_xcorevbitmanip':</span> <span class="pre">False,</span> <span class="pre">'enable_xcorevhwlp':</span> <span class="pre">False,</span> <span class="pre">'enable_xcorevmac':</span> <span class="pre">False,</span> <span class="pre">'enable_xcorevmem':</span> <span class="pre">False,</span> <span class="pre">'enable_xcorevsimd':</span> <span class="pre">False,</span> <span class="pre">'extensions':</span> <span class="pre">[],</span> <span class="pre">'extra_args':</span> <span class="pre">'',</span> <span class="pre">'extra_bool_config':</span> <span class="pre">{},</span> <span class="pre">'extra_int_config':</span> <span class="pre">{},</span> <span class="pre">'extra_plugin_config':</span> <span class="pre">{},</span> <span class="pre">'extra_string_config':</span> <span class="pre">{},</span> <span class="pre">'fpu':</span> <span class="pre">'double',</span> <span class="pre">'gdbserver_attach':</span> <span class="pre">False,</span> <span class="pre">'gdbserver_enable':</span> <span class="pre">False,</span> <span class="pre">'gdbserver_port':</span> <span class="pre">2222,</span> <span class="pre">'jit':</span> <span class="pre">None,</span> <span class="pre">'max_block_size':</span> <span class="pre">None,</span> <span class="pre">'multiply':</span> <span class="pre">True,</span> <span class="pre">'pext_spec':</span> <span class="pre">0.96,</span> <span class="pre">'plugins':</span> <span class="pre">[],</span> <span class="pre">'print_outputs':</span> <span class="pre">False,</span> <span class="pre">'ram_size':</span> <span class="pre">67108864,</span> <span class="pre">'ram_start':</span> <span class="pre">8388608,</span> <span class="pre">'repeat':</span> <span class="pre">None,</span> <span class="pre">'rom_size':</span> <span class="pre">8388608,</span> <span class="pre">'rom_start':</span> <span class="pre">0,</span> <span class="pre">'timeout_sec':</span> <span class="pre">0,</span> <span class="pre">'trace_memory':</span> <span class="pre">False,</span> <span class="pre">'verbose':</span> <span class="pre">False,</span> <span class="pre">'vext_spec':</span> <span class="pre">1.0,</span> <span class="pre">'vlen':</span> <span class="pre">0,</span> <span class="pre">'xlen':</span> <span class="pre">32}</span></em><a class="headerlink" href="#mlonmcu.target.riscv.etiss.EtissTarget.DEFAULTS" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">DEFAULTS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'abi':</span> <span class="pre">None,</span> <span class="pre">'allow_error':</span> <span class="pre">False,</span> <span class="pre">'arch':</span> <span class="pre">None,</span> <span class="pre">'atomic':</span> <span class="pre">True,</span> <span class="pre">'attr':</span> <span class="pre">'',</span> <span class="pre">'compressed':</span> <span class="pre">True,</span> <span class="pre">'cpu':</span> <span class="pre">None,</span> <span class="pre">'cpu_arch':</span> <span class="pre">None,</span> <span class="pre">'cycle_time_ps':</span> <span class="pre">31250,</span> <span class="pre">'debug_etiss':</span> <span class="pre">False,</span> <span class="pre">'elen':</span> <span class="pre">32,</span> <span class="pre">'embedded':</span> <span class="pre">False,</span> <span class="pre">'embedded_vext':</span> <span class="pre">False,</span> <span class="pre">'enable_pext':</span> <span class="pre">False,</span> <span class="pre">'enable_semihosting':</span> <span class="pre">True,</span> <span class="pre">'enable_vext':</span> <span class="pre">False,</span> <span class="pre">'enable_xcorevalu':</span> <span class="pre">False,</span> <span class="pre">'enable_xcorevbi':</span> <span class="pre">False,</span> <span class="pre">'enable_xcorevbitmanip':</span> <span class="pre">False,</span> <span class="pre">'enable_xcorevhwlp':</span> <span class="pre">False,</span> <span class="pre">'enable_xcorevmac':</span> <span class="pre">False,</span> <span class="pre">'enable_xcorevmem':</span> <span class="pre">False,</span> <span class="pre">'enable_xcorevsimd':</span> <span class="pre">False,</span> <span class="pre">'exit_on_loop':</span> <span class="pre">False,</span> <span class="pre">'extensions':</span> <span class="pre">[],</span> <span class="pre">'extra_args':</span> <span class="pre">'',</span> <span class="pre">'extra_bool_config':</span> <span class="pre">{},</span> <span class="pre">'extra_int_config':</span> <span class="pre">{},</span> <span class="pre">'extra_plugin_config':</span> <span class="pre">{},</span> <span class="pre">'extra_string_config':</span> <span class="pre">{},</span> <span class="pre">'fpu':</span> <span class="pre">'double',</span> <span class="pre">'gdbserver_attach':</span> <span class="pre">False,</span> <span class="pre">'gdbserver_enable':</span> <span class="pre">False,</span> <span class="pre">'gdbserver_port':</span> <span class="pre">2222,</span> <span class="pre">'jit':</span> <span class="pre">None,</span> <span class="pre">'jit_debug':</span> <span class="pre">False,</span> <span class="pre">'jit_gcc_cleanup':</span> <span class="pre">True,</span> <span class="pre">'jit_verify':</span> <span class="pre">False,</span> <span class="pre">'load_integrated_libraries':</span> <span class="pre">True,</span> <span class="pre">'log_level':</span> <span class="pre">None,</span> <span class="pre">'log_pc':</span> <span class="pre">False,</span> <span class="pre">'max_block_size':</span> <span class="pre">None,</span> <span class="pre">'multiply':</span> <span class="pre">True,</span> <span class="pre">'output_path_prefix':</span> <span class="pre">'',</span> <span class="pre">'pext_spec':</span> <span class="pre">0.96,</span> <span class="pre">'plugins':</span> <span class="pre">[],</span> <span class="pre">'print_outputs':</span> <span class="pre">False,</span> <span class="pre">'ram_size':</span> <span class="pre">67108864,</span> <span class="pre">'ram_start':</span> <span class="pre">25165824,</span> <span class="pre">'repeat':</span> <span class="pre">None,</span> <span class="pre">'rom_size':</span> <span class="pre">8388608,</span> <span class="pre">'rom_start':</span> <span class="pre">16777216,</span> <span class="pre">'timeout_sec':</span> <span class="pre">0,</span> <span class="pre">'trace_memory':</span> <span class="pre">False,</span> <span class="pre">'use_run_helper':</span> <span class="pre">True,</span> <span class="pre">'verbose':</span> <span class="pre">False,</span> <span class="pre">'vext_spec':</span> <span class="pre">1.0,</span> <span class="pre">'vlen':</span> <span class="pre">0,</span> <span class="pre">'xlen':</span> <span class="pre">32}</span></em><a class="headerlink" href="#mlonmcu.target.riscv.etiss.EtissTarget.DEFAULTS" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -675,7 +717,7 @@
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.etiss.EtissTarget.REQUIRED">
-<span class="sig-name descname"><span class="pre">REQUIRED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'etiss.install_dir',</span> <span class="pre">'etiss.src_dir',</span> <span class="pre">'etissvp.script',</span> <span class="pre">'riscv_gcc.install_dir',</span> <span class="pre">'riscv_gcc.name',</span> <span class="pre">'riscv_gcc.variant'}</span></em><a class="headerlink" href="#mlonmcu.target.riscv.etiss.EtissTarget.REQUIRED" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">REQUIRED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'etiss.install_dir',</span> <span class="pre">'etiss.src_dir',</span> <span class="pre">'etissvp.exe',</span> <span class="pre">'etissvp.script',</span> <span class="pre">'riscv_gcc.install_dir',</span> <span class="pre">'riscv_gcc.name',</span> <span class="pre">'riscv_gcc.variant'}</span></em><a class="headerlink" href="#mlonmcu.target.riscv.etiss.EtissTarget.REQUIRED" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
@@ -714,8 +756,18 @@
 <dd></dd></dl>
 
 <dl class="py property">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.etiss.EtissTarget.enable_dmi">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">enable_dmi</span></span><a class="headerlink" href="#mlonmcu.target.riscv.etiss.EtissTarget.enable_dmi" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.etiss.EtissTarget.enable_pext">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">enable_pext</span></span><a class="headerlink" href="#mlonmcu.target.riscv.etiss.EtissTarget.enable_pext" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.etiss.EtissTarget.enable_semihosting">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">enable_semihosting</span></span><a class="headerlink" href="#mlonmcu.target.riscv.etiss.EtissTarget.enable_semihosting" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
@@ -764,6 +816,11 @@
 <dd></dd></dl>
 
 <dl class="py property">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.etiss.EtissTarget.etiss_exe">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">etiss_exe</span></span><a class="headerlink" href="#mlonmcu.target.riscv.etiss.EtissTarget.etiss_exe" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.etiss.EtissTarget.etiss_script">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">etiss_script</span></span><a class="headerlink" href="#mlonmcu.target.riscv.etiss.EtissTarget.etiss_script" title="Link to this definition"></a></dt>
 <dd></dd></dl>
@@ -778,6 +835,11 @@
 <span class="sig-name descname"><span class="pre">exec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">program</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cwd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'/home/runner/work/mlonmcu/mlonmcu/docs'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/etiss.html#EtissTarget.exec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.etiss.EtissTarget.exec" title="Link to this definition"></a></dt>
 <dd><p>Use target to execute a executable with given arguments</p>
 </dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.etiss.EtissTarget.exit_on_loop">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">exit_on_loop</span></span><a class="headerlink" href="#mlonmcu.target.riscv.etiss.EtissTarget.exit_on_loop" title="Link to this definition"></a></dt>
+<dd></dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.etiss.EtissTarget.extensions">
@@ -826,12 +888,12 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.etiss.EtissTarget.get_ini_bool_config">
-<span class="sig-name descname"><span class="pre">get_ini_bool_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/etiss.html#EtissTarget.get_ini_bool_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.etiss.EtissTarget.get_ini_bool_config" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_ini_bool_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">override</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/etiss.html#EtissTarget.get_ini_bool_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.etiss.EtissTarget.get_ini_bool_config" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.etiss.EtissTarget.get_ini_int_config">
-<span class="sig-name descname"><span class="pre">get_ini_int_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/etiss.html#EtissTarget.get_ini_int_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.etiss.EtissTarget.get_ini_int_config" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_ini_int_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">override</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/etiss.html#EtissTarget.get_ini_int_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.etiss.EtissTarget.get_ini_int_config" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -841,7 +903,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.etiss.EtissTarget.get_ini_string_config">
-<span class="sig-name descname"><span class="pre">get_ini_string_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/etiss.html#EtissTarget.get_ini_string_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.etiss.EtissTarget.get_ini_string_config" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_ini_string_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">override</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/etiss.html#EtissTarget.get_ini_string_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.etiss.EtissTarget.get_ini_string_config" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -855,6 +917,11 @@
 <dd></dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.etiss.EtissTarget.get_plugin_names">
+<span class="sig-name descname"><span class="pre">get_plugin_names</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/etiss.html#EtissTarget.get_plugin_names"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.etiss.EtissTarget.get_plugin_names" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.etiss.EtissTarget.get_target_system">
 <span class="sig-name descname"><span class="pre">get_target_system</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/etiss.html#EtissTarget.get_target_system"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.etiss.EtissTarget.get_target_system" title="Link to this definition"></a></dt>
 <dd></dd></dl>
@@ -865,8 +932,43 @@
 <dd></dd></dl>
 
 <dl class="py property">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.etiss.EtissTarget.jit_debug">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">jit_debug</span></span><a class="headerlink" href="#mlonmcu.target.riscv.etiss.EtissTarget.jit_debug" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.etiss.EtissTarget.jit_gcc_cleanup">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">jit_gcc_cleanup</span></span><a class="headerlink" href="#mlonmcu.target.riscv.etiss.EtissTarget.jit_gcc_cleanup" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.etiss.EtissTarget.jit_verify">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">jit_verify</span></span><a class="headerlink" href="#mlonmcu.target.riscv.etiss.EtissTarget.jit_verify" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.etiss.EtissTarget.load_integrated_libraries">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_integrated_libraries</span></span><a class="headerlink" href="#mlonmcu.target.riscv.etiss.EtissTarget.load_integrated_libraries" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.etiss.EtissTarget.log_level">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">log_level</span></span><a class="headerlink" href="#mlonmcu.target.riscv.etiss.EtissTarget.log_level" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.etiss.EtissTarget.log_pc">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">log_pc</span></span><a class="headerlink" href="#mlonmcu.target.riscv.etiss.EtissTarget.log_pc" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.etiss.EtissTarget.max_block_size">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">max_block_size</span></span><a class="headerlink" href="#mlonmcu.target.riscv.etiss.EtissTarget.max_block_size" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.etiss.EtissTarget.output_path_prefix">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">output_path_prefix</span></span><a class="headerlink" href="#mlonmcu.target.riscv.etiss.EtissTarget.output_path_prefix" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -915,6 +1017,11 @@
 <dd></dd></dl>
 
 <dl class="py property">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.etiss.EtissTarget.use_run_helper">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">use_run_helper</span></span><a class="headerlink" href="#mlonmcu.target.riscv.etiss.EtissTarget.use_run_helper" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.etiss.EtissTarget.verbose">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">verbose</span></span><a class="headerlink" href="#mlonmcu.target.riscv.etiss.EtissTarget.verbose" title="Link to this definition"></a></dt>
 <dd></dd></dl>
@@ -931,7 +1038,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.etiss.EtissTarget.write_ini">
-<span class="sig-name descname"><span class="pre">write_ini</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/etiss.html#EtissTarget.write_ini"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.etiss.EtissTarget.write_ini" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">write_ini</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">override</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/etiss.html#EtissTarget.write_ini"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.etiss.EtissTarget.write_ini" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -947,12 +1054,12 @@
 <p>Target using a Pulpino-like VP running in the ETISS simulator</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.etiss_pulpino.EtissPulpinoTarget.REQUIRED">
-<span class="sig-name descname"><span class="pre">REQUIRED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'etiss.install_dir',</span> <span class="pre">'etiss.src_dir',</span> <span class="pre">'etissvp.script',</span> <span class="pre">'riscv_gcc.install_dir',</span> <span class="pre">'riscv_gcc.name',</span> <span class="pre">'riscv_gcc.variant'}</span></em><a class="headerlink" href="#mlonmcu.target.riscv.etiss_pulpino.EtissPulpinoTarget.REQUIRED" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">REQUIRED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'etiss.install_dir',</span> <span class="pre">'etiss.src_dir',</span> <span class="pre">'etissvp.exe',</span> <span class="pre">'etissvp.script',</span> <span class="pre">'riscv_gcc.install_dir',</span> <span class="pre">'riscv_gcc.name',</span> <span class="pre">'riscv_gcc.variant'}</span></em><a class="headerlink" href="#mlonmcu.target.riscv.etiss_pulpino.EtissPulpinoTarget.REQUIRED" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.etiss_pulpino.EtissPulpinoTarget.get_ini_bool_config">
-<span class="sig-name descname"><span class="pre">get_ini_bool_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/etiss_pulpino.html#EtissPulpinoTarget.get_ini_bool_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.etiss_pulpino.EtissPulpinoTarget.get_ini_bool_config" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_ini_bool_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">override</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/etiss_pulpino.html#EtissPulpinoTarget.get_ini_bool_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.etiss_pulpino.EtissPulpinoTarget.get_ini_bool_config" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -1081,11 +1188,11 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.ovpsim.OVPSimTarget">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mlonmcu.target.riscv.ovpsim.</span></span><span class="sig-name descname"><span class="pre">OVPSimTarget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ovpsim'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/ovpsim.html#OVPSimTarget"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.ovpsim.OVPSimTarget" title="Link to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#mlonmcu.target.riscv.riscv.RISCVTarget" title="mlonmcu.target.riscv.riscv.RISCVTarget"><code class="xref py py-class docutils literal notranslate"><span class="pre">RISCVTarget</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#mlonmcu.target.riscv.riscv_pext_target.RVPTarget" title="mlonmcu.target.riscv.riscv_pext_target.RVPTarget"><code class="xref py py-class docutils literal notranslate"><span class="pre">RVPTarget</span></code></a>, <a class="reference internal" href="#mlonmcu.target.riscv.riscv_vext_target.RVVTarget" title="mlonmcu.target.riscv.riscv_vext_target.RVVTarget"><code class="xref py py-class docutils literal notranslate"><span class="pre">RVVTarget</span></code></a></p>
 <p>Target using an ARM FVP (fixed virtual platform) based on a Cortex M55 with EthosU support</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.ovpsim.OVPSimTarget.DEFAULTS">
-<span class="sig-name descname"><span class="pre">DEFAULTS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'abi':</span> <span class="pre">None,</span> <span class="pre">'arch':</span> <span class="pre">None,</span> <span class="pre">'atomic':</span> <span class="pre">True,</span> <span class="pre">'attr':</span> <span class="pre">'',</span> <span class="pre">'bitmanip_spec':</span> <span class="pre">0.94,</span> <span class="pre">'compressed':</span> <span class="pre">True,</span> <span class="pre">'cpu':</span> <span class="pre">None,</span> <span class="pre">'elen':</span> <span class="pre">32,</span> <span class="pre">'embedded':</span> <span class="pre">False,</span> <span class="pre">'embedded_vext':</span> <span class="pre">False,</span> <span class="pre">'enable_pext':</span> <span class="pre">False,</span> <span class="pre">'enable_vext':</span> <span class="pre">False,</span> <span class="pre">'end_to_end_cycles':</span> <span class="pre">True,</span> <span class="pre">'extensions':</span> <span class="pre">[],</span> <span class="pre">'extra_args':</span> <span class="pre">'',</span> <span class="pre">'fpu':</span> <span class="pre">'double',</span> <span class="pre">'gdbserver_attach':</span> <span class="pre">False,</span> <span class="pre">'gdbserver_enable':</span> <span class="pre">False,</span> <span class="pre">'gdbserver_port':</span> <span class="pre">2222,</span> <span class="pre">'multiply':</span> <span class="pre">True,</span> <span class="pre">'pext_spec':</span> <span class="pre">0.96,</span> <span class="pre">'print_outputs':</span> <span class="pre">False,</span> <span class="pre">'repeat':</span> <span class="pre">None,</span> <span class="pre">'timeout_sec':</span> <span class="pre">0,</span> <span class="pre">'variant':</span> <span class="pre">None,</span> <span class="pre">'vext_spec':</span> <span class="pre">1.0,</span> <span class="pre">'vlen':</span> <span class="pre">0,</span> <span class="pre">'xlen':</span> <span class="pre">32}</span></em><a class="headerlink" href="#mlonmcu.target.riscv.ovpsim.OVPSimTarget.DEFAULTS" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">DEFAULTS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'abi':</span> <span class="pre">None,</span> <span class="pre">'arch':</span> <span class="pre">None,</span> <span class="pre">'atomic':</span> <span class="pre">True,</span> <span class="pre">'attr':</span> <span class="pre">'',</span> <span class="pre">'bitmanip_spec':</span> <span class="pre">0.94,</span> <span class="pre">'compressed':</span> <span class="pre">True,</span> <span class="pre">'cpu':</span> <span class="pre">None,</span> <span class="pre">'elen':</span> <span class="pre">64,</span> <span class="pre">'embedded':</span> <span class="pre">False,</span> <span class="pre">'embedded_vext':</span> <span class="pre">False,</span> <span class="pre">'enable_pext':</span> <span class="pre">False,</span> <span class="pre">'enable_vext':</span> <span class="pre">False,</span> <span class="pre">'end_to_end_cycles':</span> <span class="pre">True,</span> <span class="pre">'extensions':</span> <span class="pre">[],</span> <span class="pre">'extra_args':</span> <span class="pre">'',</span> <span class="pre">'fpu':</span> <span class="pre">'double',</span> <span class="pre">'gdbserver_attach':</span> <span class="pre">False,</span> <span class="pre">'gdbserver_enable':</span> <span class="pre">False,</span> <span class="pre">'gdbserver_port':</span> <span class="pre">2222,</span> <span class="pre">'multiply':</span> <span class="pre">True,</span> <span class="pre">'pext_spec':</span> <span class="pre">0.92,</span> <span class="pre">'print_outputs':</span> <span class="pre">False,</span> <span class="pre">'repeat':</span> <span class="pre">None,</span> <span class="pre">'timeout_sec':</span> <span class="pre">0,</span> <span class="pre">'variant':</span> <span class="pre">None,</span> <span class="pre">'vext_spec':</span> <span class="pre">1.0,</span> <span class="pre">'vlen':</span> <span class="pre">128,</span> <span class="pre">'xlen':</span> <span class="pre">32}</span></em><a class="headerlink" href="#mlonmcu.target.riscv.ovpsim.OVPSimTarget.DEFAULTS" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1096,31 +1203,6 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.ovpsim.OVPSimTarget.REQUIRED">
 <span class="sig-name descname"><span class="pre">REQUIRED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'ovpsim.exe',</span> <span class="pre">'riscv_gcc.install_dir',</span> <span class="pre">'riscv_gcc.name',</span> <span class="pre">'riscv_gcc.variant'}</span></em><a class="headerlink" href="#mlonmcu.target.riscv.ovpsim.OVPSimTarget.REQUIRED" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="mlonmcu.target.riscv.ovpsim.OVPSimTarget.attr">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">attr</span></span><a class="headerlink" href="#mlonmcu.target.riscv.ovpsim.OVPSimTarget.attr" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="mlonmcu.target.riscv.ovpsim.OVPSimTarget.elen">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">elen</span></span><a class="headerlink" href="#mlonmcu.target.riscv.ovpsim.OVPSimTarget.elen" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="mlonmcu.target.riscv.ovpsim.OVPSimTarget.embedded_vext">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">embedded_vext</span></span><a class="headerlink" href="#mlonmcu.target.riscv.ovpsim.OVPSimTarget.embedded_vext" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="mlonmcu.target.riscv.ovpsim.OVPSimTarget.enable_pext">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">enable_pext</span></span><a class="headerlink" href="#mlonmcu.target.riscv.ovpsim.OVPSimTarget.enable_pext" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="mlonmcu.target.riscv.ovpsim.OVPSimTarget.enable_vext">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">enable_vext</span></span><a class="headerlink" href="#mlonmcu.target.riscv.ovpsim.OVPSimTarget.enable_vext" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
@@ -1185,23 +1267,8 @@
 <dd></dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="mlonmcu.target.riscv.ovpsim.OVPSimTarget.pext_spec">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pext_spec</span></span><a class="headerlink" href="#mlonmcu.target.riscv.ovpsim.OVPSimTarget.pext_spec" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py property">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.ovpsim.OVPSimTarget.variant">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">variant</span></span><a class="headerlink" href="#mlonmcu.target.riscv.ovpsim.OVPSimTarget.variant" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="mlonmcu.target.riscv.ovpsim.OVPSimTarget.vext_spec">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">vext_spec</span></span><a class="headerlink" href="#mlonmcu.target.riscv.ovpsim.OVPSimTarget.vext_spec" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="mlonmcu.target.riscv.ovpsim.OVPSimTarget.vlen">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">vlen</span></span><a class="headerlink" href="#mlonmcu.target.riscv.ovpsim.OVPSimTarget.vlen" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -1281,6 +1348,11 @@
 <dd></dd></dl>
 
 <dl class="py property">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.riscv.RISCVTarget.cross_compiler">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cross_compiler</span></span><a class="headerlink" href="#mlonmcu.target.riscv.riscv.RISCVTarget.cross_compiler" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.riscv.RISCVTarget.embedded">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">embedded</span></span><a class="headerlink" href="#mlonmcu.target.riscv.riscv.RISCVTarget.embedded" title="Link to this definition"></a></dt>
 <dd></dd></dl>
@@ -1338,6 +1410,16 @@
 <dl class="py property">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.riscv.RISCVTarget.has_fpu">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">has_fpu</span></span><a class="headerlink" href="#mlonmcu.target.riscv.riscv.RISCVTarget.has_fpu" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.riscv.RISCVTarget.is_bare">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_bare</span></span><a class="headerlink" href="#mlonmcu.target.riscv.riscv.RISCVTarget.is_bare" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.riscv.RISCVTarget.is_cross">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_cross</span></span><a class="headerlink" href="#mlonmcu.target.riscv.riscv.RISCVTarget.is_cross" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
@@ -1622,7 +1704,7 @@
 <p>TODO</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.riscv_vext_target.RVVTarget.DEFAULTS">
-<span class="sig-name descname"><span class="pre">DEFAULTS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'abi':</span> <span class="pre">None,</span> <span class="pre">'arch':</span> <span class="pre">None,</span> <span class="pre">'atomic':</span> <span class="pre">True,</span> <span class="pre">'attr':</span> <span class="pre">'',</span> <span class="pre">'compressed':</span> <span class="pre">True,</span> <span class="pre">'cpu':</span> <span class="pre">None,</span> <span class="pre">'elen':</span> <span class="pre">32,</span> <span class="pre">'embedded':</span> <span class="pre">False,</span> <span class="pre">'embedded_vext':</span> <span class="pre">False,</span> <span class="pre">'enable_vext':</span> <span class="pre">False,</span> <span class="pre">'extensions':</span> <span class="pre">[],</span> <span class="pre">'extra_args':</span> <span class="pre">'',</span> <span class="pre">'fpu':</span> <span class="pre">'double',</span> <span class="pre">'multiply':</span> <span class="pre">True,</span> <span class="pre">'print_outputs':</span> <span class="pre">False,</span> <span class="pre">'repeat':</span> <span class="pre">None,</span> <span class="pre">'timeout_sec':</span> <span class="pre">0,</span> <span class="pre">'vext_spec':</span> <span class="pre">1.0,</span> <span class="pre">'vlen':</span> <span class="pre">0,</span> <span class="pre">'xlen':</span> <span class="pre">32}</span></em><a class="headerlink" href="#mlonmcu.target.riscv.riscv_vext_target.RVVTarget.DEFAULTS" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">DEFAULTS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'abi':</span> <span class="pre">None,</span> <span class="pre">'arch':</span> <span class="pre">None,</span> <span class="pre">'atomic':</span> <span class="pre">True,</span> <span class="pre">'attr':</span> <span class="pre">'',</span> <span class="pre">'compressed':</span> <span class="pre">True,</span> <span class="pre">'cpu':</span> <span class="pre">None,</span> <span class="pre">'elen':</span> <span class="pre">64,</span> <span class="pre">'embedded':</span> <span class="pre">False,</span> <span class="pre">'embedded_vext':</span> <span class="pre">False,</span> <span class="pre">'enable_vext':</span> <span class="pre">False,</span> <span class="pre">'extensions':</span> <span class="pre">[],</span> <span class="pre">'extra_args':</span> <span class="pre">'',</span> <span class="pre">'fpu':</span> <span class="pre">'double',</span> <span class="pre">'multiply':</span> <span class="pre">True,</span> <span class="pre">'print_outputs':</span> <span class="pre">False,</span> <span class="pre">'repeat':</span> <span class="pre">None,</span> <span class="pre">'timeout_sec':</span> <span class="pre">0,</span> <span class="pre">'vext_spec':</span> <span class="pre">1.0,</span> <span class="pre">'vlen':</span> <span class="pre">128,</span> <span class="pre">'xlen':</span> <span class="pre">32}</span></em><a class="headerlink" href="#mlonmcu.target.riscv.riscv_vext_target.RVVTarget.DEFAULTS" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1693,7 +1775,7 @@
 <p>Target using the riscv-isa-sim (Spike) RISC-V simulator.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.spike.SpikeTarget.DEFAULTS">
-<span class="sig-name descname"><span class="pre">DEFAULTS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'abi':</span> <span class="pre">None,</span> <span class="pre">'arch':</span> <span class="pre">None,</span> <span class="pre">'atomic':</span> <span class="pre">True,</span> <span class="pre">'attr':</span> <span class="pre">'',</span> <span class="pre">'bext_spec':</span> <span class="pre">0.92,</span> <span class="pre">'bext_zba':</span> <span class="pre">False,</span> <span class="pre">'bext_zbb':</span> <span class="pre">False,</span> <span class="pre">'bext_zbc':</span> <span class="pre">False,</span> <span class="pre">'bext_zbs':</span> <span class="pre">False,</span> <span class="pre">'compressed':</span> <span class="pre">True,</span> <span class="pre">'cpu':</span> <span class="pre">None,</span> <span class="pre">'elen':</span> <span class="pre">32,</span> <span class="pre">'embedded':</span> <span class="pre">False,</span> <span class="pre">'embedded_vext':</span> <span class="pre">False,</span> <span class="pre">'enable_bext':</span> <span class="pre">False,</span> <span class="pre">'enable_pext':</span> <span class="pre">False,</span> <span class="pre">'enable_vext':</span> <span class="pre">False,</span> <span class="pre">'extensions':</span> <span class="pre">[],</span> <span class="pre">'extra_args':</span> <span class="pre">'',</span> <span class="pre">'fpu':</span> <span class="pre">'double',</span> <span class="pre">'multiply':</span> <span class="pre">True,</span> <span class="pre">'pext_spec':</span> <span class="pre">0.92,</span> <span class="pre">'print_outputs':</span> <span class="pre">False,</span> <span class="pre">'repeat':</span> <span class="pre">None,</span> <span class="pre">'spikepk_extra_args':</span> <span class="pre">[],</span> <span class="pre">'timeout_sec':</span> <span class="pre">0,</span> <span class="pre">'vext_spec':</span> <span class="pre">1.0,</span> <span class="pre">'vlen':</span> <span class="pre">0,</span> <span class="pre">'xlen':</span> <span class="pre">32}</span></em><a class="headerlink" href="#mlonmcu.target.riscv.spike.SpikeTarget.DEFAULTS" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">DEFAULTS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'abi':</span> <span class="pre">None,</span> <span class="pre">'arch':</span> <span class="pre">None,</span> <span class="pre">'atomic':</span> <span class="pre">True,</span> <span class="pre">'attr':</span> <span class="pre">'',</span> <span class="pre">'bext_spec':</span> <span class="pre">0.92,</span> <span class="pre">'bext_zba':</span> <span class="pre">False,</span> <span class="pre">'bext_zbb':</span> <span class="pre">False,</span> <span class="pre">'bext_zbc':</span> <span class="pre">False,</span> <span class="pre">'bext_zbs':</span> <span class="pre">False,</span> <span class="pre">'compressed':</span> <span class="pre">True,</span> <span class="pre">'cpu':</span> <span class="pre">None,</span> <span class="pre">'elen':</span> <span class="pre">64,</span> <span class="pre">'embedded':</span> <span class="pre">False,</span> <span class="pre">'embedded_vext':</span> <span class="pre">False,</span> <span class="pre">'enable_bext':</span> <span class="pre">False,</span> <span class="pre">'enable_pext':</span> <span class="pre">False,</span> <span class="pre">'enable_vext':</span> <span class="pre">False,</span> <span class="pre">'extensions':</span> <span class="pre">[],</span> <span class="pre">'extra_args':</span> <span class="pre">'',</span> <span class="pre">'fpu':</span> <span class="pre">'double',</span> <span class="pre">'multiply':</span> <span class="pre">True,</span> <span class="pre">'pext_spec':</span> <span class="pre">0.92,</span> <span class="pre">'print_outputs':</span> <span class="pre">False,</span> <span class="pre">'repeat':</span> <span class="pre">None,</span> <span class="pre">'spikepk_extra_args':</span> <span class="pre">[],</span> <span class="pre">'timeout_sec':</span> <span class="pre">0,</span> <span class="pre">'vext_spec':</span> <span class="pre">1.0,</span> <span class="pre">'vlen':</span> <span class="pre">128,</span> <span class="pre">'xlen':</span> <span class="pre">32}</span></em><a class="headerlink" href="#mlonmcu.target.riscv.spike.SpikeTarget.DEFAULTS" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1805,7 +1887,7 @@
 <p>Target using a Pulpino-like VP running in the GVSOC simulator</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.vicuna.VicunaTarget.DEFAULTS">
-<span class="sig-name descname"><span class="pre">DEFAULTS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'abi':</span> <span class="pre">None,</span> <span class="pre">'arch':</span> <span class="pre">None,</span> <span class="pre">'atomic':</span> <span class="pre">False,</span> <span class="pre">'attr':</span> <span class="pre">'',</span> <span class="pre">'compressed':</span> <span class="pre">False,</span> <span class="pre">'core':</span> <span class="pre">'cv32e40x',</span> <span class="pre">'cpu':</span> <span class="pre">None,</span> <span class="pre">'dc_line_width':</span> <span class="pre">None,</span> <span class="pre">'dc_size':</span> <span class="pre">0,</span> <span class="pre">'elen':</span> <span class="pre">32,</span> <span class="pre">'embedded':</span> <span class="pre">False,</span> <span class="pre">'embedded_vext':</span> <span class="pre">True,</span> <span class="pre">'enable_vext':</span> <span class="pre">False,</span> <span class="pre">'extensions':</span> <span class="pre">[],</span> <span class="pre">'extra_args':</span> <span class="pre">'',</span> <span class="pre">'fpu':</span> <span class="pre">None,</span> <span class="pre">'ic_line_width':</span> <span class="pre">128,</span> <span class="pre">'ic_size':</span> <span class="pre">0,</span> <span class="pre">'mem_latency':</span> <span class="pre">1,</span> <span class="pre">'mem_size':</span> <span class="pre">524288,</span> <span class="pre">'mem_width':</span> <span class="pre">32,</span> <span class="pre">'multiply':</span> <span class="pre">True,</span> <span class="pre">'print_outputs':</span> <span class="pre">False,</span> <span class="pre">'repeat':</span> <span class="pre">None,</span> <span class="pre">'timeout_sec':</span> <span class="pre">0,</span> <span class="pre">'vext_spec':</span> <span class="pre">1.0,</span> <span class="pre">'vlen':</span> <span class="pre">128,</span> <span class="pre">'vmem_width':</span> <span class="pre">None,</span> <span class="pre">'vport_policy':</span> <span class="pre">None,</span> <span class="pre">'vproc_config':</span> <span class="pre">'compact',</span> <span class="pre">'vproc_pipelines':</span> <span class="pre">None,</span> <span class="pre">'xlen':</span> <span class="pre">32}</span></em><a class="headerlink" href="#mlonmcu.target.riscv.vicuna.VicunaTarget.DEFAULTS" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">DEFAULTS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'abi':</span> <span class="pre">None,</span> <span class="pre">'abort_cycles':</span> <span class="pre">10000000,</span> <span class="pre">'arch':</span> <span class="pre">None,</span> <span class="pre">'atomic':</span> <span class="pre">False,</span> <span class="pre">'attr':</span> <span class="pre">'',</span> <span class="pre">'compressed':</span> <span class="pre">False,</span> <span class="pre">'core':</span> <span class="pre">'cv32e40x',</span> <span class="pre">'cpu':</span> <span class="pre">None,</span> <span class="pre">'dc_line_width':</span> <span class="pre">None,</span> <span class="pre">'dc_size':</span> <span class="pre">0,</span> <span class="pre">'elen':</span> <span class="pre">32,</span> <span class="pre">'embedded':</span> <span class="pre">False,</span> <span class="pre">'embedded_vext':</span> <span class="pre">True,</span> <span class="pre">'enable_vext':</span> <span class="pre">False,</span> <span class="pre">'extensions':</span> <span class="pre">[],</span> <span class="pre">'extra_args':</span> <span class="pre">'',</span> <span class="pre">'extra_cycles':</span> <span class="pre">4096,</span> <span class="pre">'fpu':</span> <span class="pre">None,</span> <span class="pre">'ic_line_width':</span> <span class="pre">128,</span> <span class="pre">'ic_size':</span> <span class="pre">0,</span> <span class="pre">'mem_latency':</span> <span class="pre">1,</span> <span class="pre">'mem_size':</span> <span class="pre">524288,</span> <span class="pre">'mem_width':</span> <span class="pre">32,</span> <span class="pre">'multiply':</span> <span class="pre">True,</span> <span class="pre">'print_outputs':</span> <span class="pre">False,</span> <span class="pre">'repeat':</span> <span class="pre">None,</span> <span class="pre">'timeout_sec':</span> <span class="pre">0,</span> <span class="pre">'vext_spec':</span> <span class="pre">1.0,</span> <span class="pre">'vlen':</span> <span class="pre">128,</span> <span class="pre">'vmem_width':</span> <span class="pre">None,</span> <span class="pre">'vport_policy':</span> <span class="pre">None,</span> <span class="pre">'vproc_config':</span> <span class="pre">'compact',</span> <span class="pre">'vproc_pipelines':</span> <span class="pre">None,</span> <span class="pre">'xlen':</span> <span class="pre">32}</span></em><a class="headerlink" href="#mlonmcu.target.riscv.vicuna.VicunaTarget.DEFAULTS" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1816,6 +1898,11 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.vicuna.VicunaTarget.REQUIRED">
 <span class="sig-name descname"><span class="pre">REQUIRED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'riscv_gcc.install_dir',</span> <span class="pre">'riscv_gcc.name',</span> <span class="pre">'riscv_gcc.variant',</span> <span class="pre">'verilator.install_dir',</span> <span class="pre">'vicuna.src_dir'}</span></em><a class="headerlink" href="#mlonmcu.target.riscv.vicuna.VicunaTarget.REQUIRED" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.vicuna.VicunaTarget.abort_cycles">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">abort_cycles</span></span><a class="headerlink" href="#mlonmcu.target.riscv.vicuna.VicunaTarget.abort_cycles" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
@@ -1838,6 +1925,11 @@
 <span class="sig-name descname"><span class="pre">exec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">program</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cwd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'/home/runner/work/mlonmcu/mlonmcu/docs'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/vicuna.html#VicunaTarget.exec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.vicuna.VicunaTarget.exec" title="Link to this definition"></a></dt>
 <dd><p>Use target to execute an executable with given arguments</p>
 </dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.vicuna.VicunaTarget.extra_cycles">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">extra_cycles</span></span><a class="headerlink" href="#mlonmcu.target.riscv.vicuna.VicunaTarget.extra_cycles" title="Link to this definition"></a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.vicuna.VicunaTarget.get_backend_config">
@@ -1890,8 +1982,13 @@
 <dd></dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.vicuna.VicunaTarget.parse_exit">
+<span class="sig-name descname"><span class="pre">parse_exit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/vicuna.html#VicunaTarget.parse_exit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.vicuna.VicunaTarget.parse_exit" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.vicuna.VicunaTarget.parse_stdout">
-<span class="sig-name descname"><span class="pre">parse_stdout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/vicuna.html#VicunaTarget.parse_stdout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.vicuna.VicunaTarget.parse_stdout" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">parse_stdout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exit_code</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/vicuna.html#VicunaTarget.parse_stdout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.vicuna.VicunaTarget.parse_stdout" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -2468,18 +2565,61 @@ TRACE_SIGS ?= ‘*’</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.CanMvK230SSHTarget">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mlonmcu.target.riscv.</span></span><span class="sig-name descname"><span class="pre">CanMvK230SSHTarget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'canmv_k230_ssh'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/canmv_k230_ssh.html#CanMvK230SSHTarget"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.CanMvK230SSHTarget" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="mlonmcu.target.html#mlonmcu.target.ssh_target.SSHTarget" title="mlonmcu.target.ssh_target.SSHTarget"><code class="xref py py-class docutils literal notranslate"><span class="pre">SSHTarget</span></code></a>, <a class="reference internal" href="#mlonmcu.target.riscv.riscv_vext_target.RVVTarget" title="mlonmcu.target.riscv.riscv_vext_target.RVVTarget"><code class="xref py py-class docutils literal notranslate"><span class="pre">RVVTarget</span></code></a></p>
+<p>TODO.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.CanMvK230SSHTarget.DEFAULTS">
+<span class="sig-name descname"><span class="pre">DEFAULTS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'abi':</span> <span class="pre">None,</span> <span class="pre">'arch':</span> <span class="pre">None,</span> <span class="pre">'atomic':</span> <span class="pre">True,</span> <span class="pre">'attr':</span> <span class="pre">'',</span> <span class="pre">'compressed':</span> <span class="pre">True,</span> <span class="pre">'cpu':</span> <span class="pre">None,</span> <span class="pre">'elen':</span> <span class="pre">64,</span> <span class="pre">'embedded':</span> <span class="pre">False,</span> <span class="pre">'embedded_vext':</span> <span class="pre">False,</span> <span class="pre">'enable_vext':</span> <span class="pre">False,</span> <span class="pre">'extensions':</span> <span class="pre">[],</span> <span class="pre">'extra_args':</span> <span class="pre">'',</span> <span class="pre">'fpu':</span> <span class="pre">'double',</span> <span class="pre">'hostname':</span> <span class="pre">None,</span> <span class="pre">'ignore_known_hosts':</span> <span class="pre">True,</span> <span class="pre">'multiply':</span> <span class="pre">True,</span> <span class="pre">'password':</span> <span class="pre">None,</span> <span class="pre">'port':</span> <span class="pre">22,</span> <span class="pre">'print_outputs':</span> <span class="pre">False,</span> <span class="pre">'repeat':</span> <span class="pre">None,</span> <span class="pre">'timeout_sec':</span> <span class="pre">0,</span> <span class="pre">'username':</span> <span class="pre">None,</span> <span class="pre">'vext_spec':</span> <span class="pre">1.0,</span> <span class="pre">'vlen':</span> <span class="pre">128,</span> <span class="pre">'workdir':</span> <span class="pre">None,</span> <span class="pre">'xlen':</span> <span class="pre">64}</span></em><a class="headerlink" href="#mlonmcu.target.riscv.CanMvK230SSHTarget.DEFAULTS" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.CanMvK230SSHTarget.FEATURES">
+<span class="sig-name descname"><span class="pre">FEATURES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'benchmark',</span> <span class="pre">'vext'}</span></em><a class="headerlink" href="#mlonmcu.target.riscv.CanMvK230SSHTarget.FEATURES" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.CanMvK230SSHTarget.REQUIRED">
+<span class="sig-name descname"><span class="pre">REQUIRED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'riscv_gcc.install_dir',</span> <span class="pre">'riscv_gcc.name',</span> <span class="pre">'riscv_gcc.variant'}</span></em><a class="headerlink" href="#mlonmcu.target.riscv.CanMvK230SSHTarget.REQUIRED" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.CanMvK230SSHTarget.exec">
+<span class="sig-name descname"><span class="pre">exec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">program</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cwd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'/home/runner/work/mlonmcu/mlonmcu/docs'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">handle_exit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/canmv_k230_ssh.html#CanMvK230SSHTarget.exec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.CanMvK230SSHTarget.exec" title="Link to this definition"></a></dt>
+<dd><p>Use target to execute a executable with given arguments</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.CanMvK230SSHTarget.get_metrics">
+<span class="sig-name descname"><span class="pre">get_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">handle_exit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/canmv_k230_ssh.html#CanMvK230SSHTarget.get_metrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.CanMvK230SSHTarget.get_metrics" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.CanMvK230SSHTarget.get_platform_defs">
+<span class="sig-name descname"><span class="pre">get_platform_defs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">platform</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/canmv_k230_ssh.html#CanMvK230SSHTarget.get_platform_defs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.CanMvK230SSHTarget.get_platform_defs" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.CanMvK230SSHTarget.parse_stdout">
+<span class="sig-name descname"><span class="pre">parse_stdout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exit_code</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/canmv_k230_ssh.html#CanMvK230SSHTarget.parse_stdout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.CanMvK230SSHTarget.parse_stdout" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.EtissPulpinoTarget">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mlonmcu.target.riscv.</span></span><span class="sig-name descname"><span class="pre">EtissPulpinoTarget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'etiss_pulpino'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/etiss_pulpino.html#EtissPulpinoTarget"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.EtissPulpinoTarget" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#mlonmcu.target.riscv.etiss.EtissTarget" title="mlonmcu.target.riscv.etiss.EtissTarget"><code class="xref py py-class docutils literal notranslate"><span class="pre">EtissTarget</span></code></a></p>
 <p>Target using a Pulpino-like VP running in the ETISS simulator</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.EtissPulpinoTarget.REQUIRED">
-<span class="sig-name descname"><span class="pre">REQUIRED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'etiss.install_dir',</span> <span class="pre">'etiss.src_dir',</span> <span class="pre">'etissvp.script',</span> <span class="pre">'riscv_gcc.install_dir',</span> <span class="pre">'riscv_gcc.name',</span> <span class="pre">'riscv_gcc.variant'}</span></em><a class="headerlink" href="#mlonmcu.target.riscv.EtissPulpinoTarget.REQUIRED" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">REQUIRED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'etiss.install_dir',</span> <span class="pre">'etiss.src_dir',</span> <span class="pre">'etissvp.exe',</span> <span class="pre">'etissvp.script',</span> <span class="pre">'riscv_gcc.install_dir',</span> <span class="pre">'riscv_gcc.name',</span> <span class="pre">'riscv_gcc.variant'}</span></em><a class="headerlink" href="#mlonmcu.target.riscv.EtissPulpinoTarget.REQUIRED" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.EtissPulpinoTarget.get_ini_bool_config">
-<span class="sig-name descname"><span class="pre">get_ini_bool_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/etiss_pulpino.html#EtissPulpinoTarget.get_ini_bool_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.EtissPulpinoTarget.get_ini_bool_config" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_ini_bool_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">override</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/etiss_pulpino.html#EtissPulpinoTarget.get_ini_bool_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.EtissPulpinoTarget.get_ini_bool_config" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -2496,7 +2636,7 @@ TRACE_SIGS ?= ‘*’</p>
 <p>Target using a simple RISC-V VP running in the ETISS simulator</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.EtissTarget.DEFAULTS">
-<span class="sig-name descname"><span class="pre">DEFAULTS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'abi':</span> <span class="pre">None,</span> <span class="pre">'allow_error':</span> <span class="pre">False,</span> <span class="pre">'arch':</span> <span class="pre">None,</span> <span class="pre">'atomic':</span> <span class="pre">True,</span> <span class="pre">'attr':</span> <span class="pre">'',</span> <span class="pre">'compressed':</span> <span class="pre">True,</span> <span class="pre">'cpu':</span> <span class="pre">None,</span> <span class="pre">'cpu_arch':</span> <span class="pre">None,</span> <span class="pre">'cycle_time_ps':</span> <span class="pre">31250,</span> <span class="pre">'debug_etiss':</span> <span class="pre">False,</span> <span class="pre">'elen':</span> <span class="pre">32,</span> <span class="pre">'embedded':</span> <span class="pre">False,</span> <span class="pre">'embedded_vext':</span> <span class="pre">False,</span> <span class="pre">'enable_pext':</span> <span class="pre">False,</span> <span class="pre">'enable_vext':</span> <span class="pre">False,</span> <span class="pre">'enable_xcorevalu':</span> <span class="pre">False,</span> <span class="pre">'enable_xcorevbi':</span> <span class="pre">False,</span> <span class="pre">'enable_xcorevbitmanip':</span> <span class="pre">False,</span> <span class="pre">'enable_xcorevhwlp':</span> <span class="pre">False,</span> <span class="pre">'enable_xcorevmac':</span> <span class="pre">False,</span> <span class="pre">'enable_xcorevmem':</span> <span class="pre">False,</span> <span class="pre">'enable_xcorevsimd':</span> <span class="pre">False,</span> <span class="pre">'extensions':</span> <span class="pre">[],</span> <span class="pre">'extra_args':</span> <span class="pre">'',</span> <span class="pre">'extra_bool_config':</span> <span class="pre">{},</span> <span class="pre">'extra_int_config':</span> <span class="pre">{},</span> <span class="pre">'extra_plugin_config':</span> <span class="pre">{},</span> <span class="pre">'extra_string_config':</span> <span class="pre">{},</span> <span class="pre">'fpu':</span> <span class="pre">'double',</span> <span class="pre">'gdbserver_attach':</span> <span class="pre">False,</span> <span class="pre">'gdbserver_enable':</span> <span class="pre">False,</span> <span class="pre">'gdbserver_port':</span> <span class="pre">2222,</span> <span class="pre">'jit':</span> <span class="pre">None,</span> <span class="pre">'max_block_size':</span> <span class="pre">None,</span> <span class="pre">'multiply':</span> <span class="pre">True,</span> <span class="pre">'pext_spec':</span> <span class="pre">0.96,</span> <span class="pre">'plugins':</span> <span class="pre">[],</span> <span class="pre">'print_outputs':</span> <span class="pre">False,</span> <span class="pre">'ram_size':</span> <span class="pre">67108864,</span> <span class="pre">'ram_start':</span> <span class="pre">8388608,</span> <span class="pre">'repeat':</span> <span class="pre">None,</span> <span class="pre">'rom_size':</span> <span class="pre">8388608,</span> <span class="pre">'rom_start':</span> <span class="pre">0,</span> <span class="pre">'timeout_sec':</span> <span class="pre">0,</span> <span class="pre">'trace_memory':</span> <span class="pre">False,</span> <span class="pre">'verbose':</span> <span class="pre">False,</span> <span class="pre">'vext_spec':</span> <span class="pre">1.0,</span> <span class="pre">'vlen':</span> <span class="pre">0,</span> <span class="pre">'xlen':</span> <span class="pre">32}</span></em><a class="headerlink" href="#mlonmcu.target.riscv.EtissTarget.DEFAULTS" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">DEFAULTS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'abi':</span> <span class="pre">None,</span> <span class="pre">'allow_error':</span> <span class="pre">False,</span> <span class="pre">'arch':</span> <span class="pre">None,</span> <span class="pre">'atomic':</span> <span class="pre">True,</span> <span class="pre">'attr':</span> <span class="pre">'',</span> <span class="pre">'compressed':</span> <span class="pre">True,</span> <span class="pre">'cpu':</span> <span class="pre">None,</span> <span class="pre">'cpu_arch':</span> <span class="pre">None,</span> <span class="pre">'cycle_time_ps':</span> <span class="pre">31250,</span> <span class="pre">'debug_etiss':</span> <span class="pre">False,</span> <span class="pre">'elen':</span> <span class="pre">32,</span> <span class="pre">'embedded':</span> <span class="pre">False,</span> <span class="pre">'embedded_vext':</span> <span class="pre">False,</span> <span class="pre">'enable_pext':</span> <span class="pre">False,</span> <span class="pre">'enable_semihosting':</span> <span class="pre">True,</span> <span class="pre">'enable_vext':</span> <span class="pre">False,</span> <span class="pre">'enable_xcorevalu':</span> <span class="pre">False,</span> <span class="pre">'enable_xcorevbi':</span> <span class="pre">False,</span> <span class="pre">'enable_xcorevbitmanip':</span> <span class="pre">False,</span> <span class="pre">'enable_xcorevhwlp':</span> <span class="pre">False,</span> <span class="pre">'enable_xcorevmac':</span> <span class="pre">False,</span> <span class="pre">'enable_xcorevmem':</span> <span class="pre">False,</span> <span class="pre">'enable_xcorevsimd':</span> <span class="pre">False,</span> <span class="pre">'exit_on_loop':</span> <span class="pre">False,</span> <span class="pre">'extensions':</span> <span class="pre">[],</span> <span class="pre">'extra_args':</span> <span class="pre">'',</span> <span class="pre">'extra_bool_config':</span> <span class="pre">{},</span> <span class="pre">'extra_int_config':</span> <span class="pre">{},</span> <span class="pre">'extra_plugin_config':</span> <span class="pre">{},</span> <span class="pre">'extra_string_config':</span> <span class="pre">{},</span> <span class="pre">'fpu':</span> <span class="pre">'double',</span> <span class="pre">'gdbserver_attach':</span> <span class="pre">False,</span> <span class="pre">'gdbserver_enable':</span> <span class="pre">False,</span> <span class="pre">'gdbserver_port':</span> <span class="pre">2222,</span> <span class="pre">'jit':</span> <span class="pre">None,</span> <span class="pre">'jit_debug':</span> <span class="pre">False,</span> <span class="pre">'jit_gcc_cleanup':</span> <span class="pre">True,</span> <span class="pre">'jit_verify':</span> <span class="pre">False,</span> <span class="pre">'load_integrated_libraries':</span> <span class="pre">True,</span> <span class="pre">'log_level':</span> <span class="pre">None,</span> <span class="pre">'log_pc':</span> <span class="pre">False,</span> <span class="pre">'max_block_size':</span> <span class="pre">None,</span> <span class="pre">'multiply':</span> <span class="pre">True,</span> <span class="pre">'output_path_prefix':</span> <span class="pre">'',</span> <span class="pre">'pext_spec':</span> <span class="pre">0.96,</span> <span class="pre">'plugins':</span> <span class="pre">[],</span> <span class="pre">'print_outputs':</span> <span class="pre">False,</span> <span class="pre">'ram_size':</span> <span class="pre">67108864,</span> <span class="pre">'ram_start':</span> <span class="pre">25165824,</span> <span class="pre">'repeat':</span> <span class="pre">None,</span> <span class="pre">'rom_size':</span> <span class="pre">8388608,</span> <span class="pre">'rom_start':</span> <span class="pre">16777216,</span> <span class="pre">'timeout_sec':</span> <span class="pre">0,</span> <span class="pre">'trace_memory':</span> <span class="pre">False,</span> <span class="pre">'use_run_helper':</span> <span class="pre">True,</span> <span class="pre">'verbose':</span> <span class="pre">False,</span> <span class="pre">'vext_spec':</span> <span class="pre">1.0,</span> <span class="pre">'vlen':</span> <span class="pre">0,</span> <span class="pre">'xlen':</span> <span class="pre">32}</span></em><a class="headerlink" href="#mlonmcu.target.riscv.EtissTarget.DEFAULTS" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -2506,7 +2646,7 @@ TRACE_SIGS ?= ‘*’</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.EtissTarget.REQUIRED">
-<span class="sig-name descname"><span class="pre">REQUIRED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'etiss.install_dir',</span> <span class="pre">'etiss.src_dir',</span> <span class="pre">'etissvp.script',</span> <span class="pre">'riscv_gcc.install_dir',</span> <span class="pre">'riscv_gcc.name',</span> <span class="pre">'riscv_gcc.variant'}</span></em><a class="headerlink" href="#mlonmcu.target.riscv.EtissTarget.REQUIRED" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">REQUIRED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'etiss.install_dir',</span> <span class="pre">'etiss.src_dir',</span> <span class="pre">'etissvp.exe',</span> <span class="pre">'etissvp.script',</span> <span class="pre">'riscv_gcc.install_dir',</span> <span class="pre">'riscv_gcc.name',</span> <span class="pre">'riscv_gcc.variant'}</span></em><a class="headerlink" href="#mlonmcu.target.riscv.EtissTarget.REQUIRED" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
@@ -2545,8 +2685,18 @@ TRACE_SIGS ?= ‘*’</p>
 <dd></dd></dl>
 
 <dl class="py property">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.EtissTarget.enable_dmi">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">enable_dmi</span></span><a class="headerlink" href="#mlonmcu.target.riscv.EtissTarget.enable_dmi" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.EtissTarget.enable_pext">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">enable_pext</span></span><a class="headerlink" href="#mlonmcu.target.riscv.EtissTarget.enable_pext" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.EtissTarget.enable_semihosting">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">enable_semihosting</span></span><a class="headerlink" href="#mlonmcu.target.riscv.EtissTarget.enable_semihosting" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
@@ -2595,6 +2745,11 @@ TRACE_SIGS ?= ‘*’</p>
 <dd></dd></dl>
 
 <dl class="py property">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.EtissTarget.etiss_exe">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">etiss_exe</span></span><a class="headerlink" href="#mlonmcu.target.riscv.EtissTarget.etiss_exe" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.EtissTarget.etiss_script">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">etiss_script</span></span><a class="headerlink" href="#mlonmcu.target.riscv.EtissTarget.etiss_script" title="Link to this definition"></a></dt>
 <dd></dd></dl>
@@ -2609,6 +2764,11 @@ TRACE_SIGS ?= ‘*’</p>
 <span class="sig-name descname"><span class="pre">exec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">program</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cwd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'/home/runner/work/mlonmcu/mlonmcu/docs'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/etiss.html#EtissTarget.exec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.EtissTarget.exec" title="Link to this definition"></a></dt>
 <dd><p>Use target to execute a executable with given arguments</p>
 </dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.EtissTarget.exit_on_loop">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">exit_on_loop</span></span><a class="headerlink" href="#mlonmcu.target.riscv.EtissTarget.exit_on_loop" title="Link to this definition"></a></dt>
+<dd></dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.EtissTarget.extensions">
@@ -2657,12 +2817,12 @@ TRACE_SIGS ?= ‘*’</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.EtissTarget.get_ini_bool_config">
-<span class="sig-name descname"><span class="pre">get_ini_bool_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/etiss.html#EtissTarget.get_ini_bool_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.EtissTarget.get_ini_bool_config" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_ini_bool_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">override</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/etiss.html#EtissTarget.get_ini_bool_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.EtissTarget.get_ini_bool_config" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.EtissTarget.get_ini_int_config">
-<span class="sig-name descname"><span class="pre">get_ini_int_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/etiss.html#EtissTarget.get_ini_int_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.EtissTarget.get_ini_int_config" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_ini_int_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">override</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/etiss.html#EtissTarget.get_ini_int_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.EtissTarget.get_ini_int_config" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -2672,7 +2832,7 @@ TRACE_SIGS ?= ‘*’</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.EtissTarget.get_ini_string_config">
-<span class="sig-name descname"><span class="pre">get_ini_string_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/etiss.html#EtissTarget.get_ini_string_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.EtissTarget.get_ini_string_config" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_ini_string_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">override</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/etiss.html#EtissTarget.get_ini_string_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.EtissTarget.get_ini_string_config" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -2686,6 +2846,11 @@ TRACE_SIGS ?= ‘*’</p>
 <dd></dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.EtissTarget.get_plugin_names">
+<span class="sig-name descname"><span class="pre">get_plugin_names</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/etiss.html#EtissTarget.get_plugin_names"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.EtissTarget.get_plugin_names" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.EtissTarget.get_target_system">
 <span class="sig-name descname"><span class="pre">get_target_system</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/etiss.html#EtissTarget.get_target_system"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.EtissTarget.get_target_system" title="Link to this definition"></a></dt>
 <dd></dd></dl>
@@ -2696,8 +2861,43 @@ TRACE_SIGS ?= ‘*’</p>
 <dd></dd></dl>
 
 <dl class="py property">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.EtissTarget.jit_debug">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">jit_debug</span></span><a class="headerlink" href="#mlonmcu.target.riscv.EtissTarget.jit_debug" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.EtissTarget.jit_gcc_cleanup">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">jit_gcc_cleanup</span></span><a class="headerlink" href="#mlonmcu.target.riscv.EtissTarget.jit_gcc_cleanup" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.EtissTarget.jit_verify">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">jit_verify</span></span><a class="headerlink" href="#mlonmcu.target.riscv.EtissTarget.jit_verify" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.EtissTarget.load_integrated_libraries">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_integrated_libraries</span></span><a class="headerlink" href="#mlonmcu.target.riscv.EtissTarget.load_integrated_libraries" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.EtissTarget.log_level">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">log_level</span></span><a class="headerlink" href="#mlonmcu.target.riscv.EtissTarget.log_level" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.EtissTarget.log_pc">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">log_pc</span></span><a class="headerlink" href="#mlonmcu.target.riscv.EtissTarget.log_pc" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.EtissTarget.max_block_size">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">max_block_size</span></span><a class="headerlink" href="#mlonmcu.target.riscv.EtissTarget.max_block_size" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.EtissTarget.output_path_prefix">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">output_path_prefix</span></span><a class="headerlink" href="#mlonmcu.target.riscv.EtissTarget.output_path_prefix" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -2746,6 +2946,11 @@ TRACE_SIGS ?= ‘*’</p>
 <dd></dd></dl>
 
 <dl class="py property">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.EtissTarget.use_run_helper">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">use_run_helper</span></span><a class="headerlink" href="#mlonmcu.target.riscv.EtissTarget.use_run_helper" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.EtissTarget.verbose">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">verbose</span></span><a class="headerlink" href="#mlonmcu.target.riscv.EtissTarget.verbose" title="Link to this definition"></a></dt>
 <dd></dd></dl>
@@ -2762,7 +2967,7 @@ TRACE_SIGS ?= ‘*’</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.EtissTarget.write_ini">
-<span class="sig-name descname"><span class="pre">write_ini</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/etiss.html#EtissTarget.write_ini"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.EtissTarget.write_ini" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">write_ini</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">override</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/etiss.html#EtissTarget.write_ini"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.EtissTarget.write_ini" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -2878,11 +3083,11 @@ TRACE_SIGS ?= ‘*’</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.OVPSimTarget">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mlonmcu.target.riscv.</span></span><span class="sig-name descname"><span class="pre">OVPSimTarget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ovpsim'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/ovpsim.html#OVPSimTarget"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.OVPSimTarget" title="Link to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#mlonmcu.target.riscv.riscv.RISCVTarget" title="mlonmcu.target.riscv.riscv.RISCVTarget"><code class="xref py py-class docutils literal notranslate"><span class="pre">RISCVTarget</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#mlonmcu.target.riscv.riscv_pext_target.RVPTarget" title="mlonmcu.target.riscv.riscv_pext_target.RVPTarget"><code class="xref py py-class docutils literal notranslate"><span class="pre">RVPTarget</span></code></a>, <a class="reference internal" href="#mlonmcu.target.riscv.riscv_vext_target.RVVTarget" title="mlonmcu.target.riscv.riscv_vext_target.RVVTarget"><code class="xref py py-class docutils literal notranslate"><span class="pre">RVVTarget</span></code></a></p>
 <p>Target using an ARM FVP (fixed virtual platform) based on a Cortex M55 with EthosU support</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.OVPSimTarget.DEFAULTS">
-<span class="sig-name descname"><span class="pre">DEFAULTS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'abi':</span> <span class="pre">None,</span> <span class="pre">'arch':</span> <span class="pre">None,</span> <span class="pre">'atomic':</span> <span class="pre">True,</span> <span class="pre">'attr':</span> <span class="pre">'',</span> <span class="pre">'bitmanip_spec':</span> <span class="pre">0.94,</span> <span class="pre">'compressed':</span> <span class="pre">True,</span> <span class="pre">'cpu':</span> <span class="pre">None,</span> <span class="pre">'elen':</span> <span class="pre">32,</span> <span class="pre">'embedded':</span> <span class="pre">False,</span> <span class="pre">'embedded_vext':</span> <span class="pre">False,</span> <span class="pre">'enable_pext':</span> <span class="pre">False,</span> <span class="pre">'enable_vext':</span> <span class="pre">False,</span> <span class="pre">'end_to_end_cycles':</span> <span class="pre">True,</span> <span class="pre">'extensions':</span> <span class="pre">[],</span> <span class="pre">'extra_args':</span> <span class="pre">'',</span> <span class="pre">'fpu':</span> <span class="pre">'double',</span> <span class="pre">'gdbserver_attach':</span> <span class="pre">False,</span> <span class="pre">'gdbserver_enable':</span> <span class="pre">False,</span> <span class="pre">'gdbserver_port':</span> <span class="pre">2222,</span> <span class="pre">'multiply':</span> <span class="pre">True,</span> <span class="pre">'pext_spec':</span> <span class="pre">0.96,</span> <span class="pre">'print_outputs':</span> <span class="pre">False,</span> <span class="pre">'repeat':</span> <span class="pre">None,</span> <span class="pre">'timeout_sec':</span> <span class="pre">0,</span> <span class="pre">'variant':</span> <span class="pre">None,</span> <span class="pre">'vext_spec':</span> <span class="pre">1.0,</span> <span class="pre">'vlen':</span> <span class="pre">0,</span> <span class="pre">'xlen':</span> <span class="pre">32}</span></em><a class="headerlink" href="#mlonmcu.target.riscv.OVPSimTarget.DEFAULTS" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">DEFAULTS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'abi':</span> <span class="pre">None,</span> <span class="pre">'arch':</span> <span class="pre">None,</span> <span class="pre">'atomic':</span> <span class="pre">True,</span> <span class="pre">'attr':</span> <span class="pre">'',</span> <span class="pre">'bitmanip_spec':</span> <span class="pre">0.94,</span> <span class="pre">'compressed':</span> <span class="pre">True,</span> <span class="pre">'cpu':</span> <span class="pre">None,</span> <span class="pre">'elen':</span> <span class="pre">64,</span> <span class="pre">'embedded':</span> <span class="pre">False,</span> <span class="pre">'embedded_vext':</span> <span class="pre">False,</span> <span class="pre">'enable_pext':</span> <span class="pre">False,</span> <span class="pre">'enable_vext':</span> <span class="pre">False,</span> <span class="pre">'end_to_end_cycles':</span> <span class="pre">True,</span> <span class="pre">'extensions':</span> <span class="pre">[],</span> <span class="pre">'extra_args':</span> <span class="pre">'',</span> <span class="pre">'fpu':</span> <span class="pre">'double',</span> <span class="pre">'gdbserver_attach':</span> <span class="pre">False,</span> <span class="pre">'gdbserver_enable':</span> <span class="pre">False,</span> <span class="pre">'gdbserver_port':</span> <span class="pre">2222,</span> <span class="pre">'multiply':</span> <span class="pre">True,</span> <span class="pre">'pext_spec':</span> <span class="pre">0.92,</span> <span class="pre">'print_outputs':</span> <span class="pre">False,</span> <span class="pre">'repeat':</span> <span class="pre">None,</span> <span class="pre">'timeout_sec':</span> <span class="pre">0,</span> <span class="pre">'variant':</span> <span class="pre">None,</span> <span class="pre">'vext_spec':</span> <span class="pre">1.0,</span> <span class="pre">'vlen':</span> <span class="pre">128,</span> <span class="pre">'xlen':</span> <span class="pre">32}</span></em><a class="headerlink" href="#mlonmcu.target.riscv.OVPSimTarget.DEFAULTS" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -2893,31 +3098,6 @@ TRACE_SIGS ?= ‘*’</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.OVPSimTarget.REQUIRED">
 <span class="sig-name descname"><span class="pre">REQUIRED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'ovpsim.exe',</span> <span class="pre">'riscv_gcc.install_dir',</span> <span class="pre">'riscv_gcc.name',</span> <span class="pre">'riscv_gcc.variant'}</span></em><a class="headerlink" href="#mlonmcu.target.riscv.OVPSimTarget.REQUIRED" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="mlonmcu.target.riscv.OVPSimTarget.attr">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">attr</span></span><a class="headerlink" href="#mlonmcu.target.riscv.OVPSimTarget.attr" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="mlonmcu.target.riscv.OVPSimTarget.elen">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">elen</span></span><a class="headerlink" href="#mlonmcu.target.riscv.OVPSimTarget.elen" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="mlonmcu.target.riscv.OVPSimTarget.embedded_vext">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">embedded_vext</span></span><a class="headerlink" href="#mlonmcu.target.riscv.OVPSimTarget.embedded_vext" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="mlonmcu.target.riscv.OVPSimTarget.enable_pext">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">enable_pext</span></span><a class="headerlink" href="#mlonmcu.target.riscv.OVPSimTarget.enable_pext" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="mlonmcu.target.riscv.OVPSimTarget.enable_vext">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">enable_vext</span></span><a class="headerlink" href="#mlonmcu.target.riscv.OVPSimTarget.enable_vext" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
@@ -2982,23 +3162,8 @@ TRACE_SIGS ?= ‘*’</p>
 <dd></dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="mlonmcu.target.riscv.OVPSimTarget.pext_spec">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pext_spec</span></span><a class="headerlink" href="#mlonmcu.target.riscv.OVPSimTarget.pext_spec" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py property">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.OVPSimTarget.variant">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">variant</span></span><a class="headerlink" href="#mlonmcu.target.riscv.OVPSimTarget.variant" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="mlonmcu.target.riscv.OVPSimTarget.vext_spec">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">vext_spec</span></span><a class="headerlink" href="#mlonmcu.target.riscv.OVPSimTarget.vext_spec" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="mlonmcu.target.riscv.OVPSimTarget.vlen">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">vlen</span></span><a class="headerlink" href="#mlonmcu.target.riscv.OVPSimTarget.vlen" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -3108,7 +3273,7 @@ TRACE_SIGS ?= ‘*’</p>
 <p>Target using the riscv-isa-sim (Spike) RISC-V simulator.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.SpikeTarget.DEFAULTS">
-<span class="sig-name descname"><span class="pre">DEFAULTS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'abi':</span> <span class="pre">None,</span> <span class="pre">'arch':</span> <span class="pre">None,</span> <span class="pre">'atomic':</span> <span class="pre">True,</span> <span class="pre">'attr':</span> <span class="pre">'',</span> <span class="pre">'bext_spec':</span> <span class="pre">0.92,</span> <span class="pre">'bext_zba':</span> <span class="pre">False,</span> <span class="pre">'bext_zbb':</span> <span class="pre">False,</span> <span class="pre">'bext_zbc':</span> <span class="pre">False,</span> <span class="pre">'bext_zbs':</span> <span class="pre">False,</span> <span class="pre">'compressed':</span> <span class="pre">True,</span> <span class="pre">'cpu':</span> <span class="pre">None,</span> <span class="pre">'elen':</span> <span class="pre">32,</span> <span class="pre">'embedded':</span> <span class="pre">False,</span> <span class="pre">'embedded_vext':</span> <span class="pre">False,</span> <span class="pre">'enable_bext':</span> <span class="pre">False,</span> <span class="pre">'enable_pext':</span> <span class="pre">False,</span> <span class="pre">'enable_vext':</span> <span class="pre">False,</span> <span class="pre">'extensions':</span> <span class="pre">[],</span> <span class="pre">'extra_args':</span> <span class="pre">'',</span> <span class="pre">'fpu':</span> <span class="pre">'double',</span> <span class="pre">'multiply':</span> <span class="pre">True,</span> <span class="pre">'pext_spec':</span> <span class="pre">0.92,</span> <span class="pre">'print_outputs':</span> <span class="pre">False,</span> <span class="pre">'repeat':</span> <span class="pre">None,</span> <span class="pre">'spikepk_extra_args':</span> <span class="pre">[],</span> <span class="pre">'timeout_sec':</span> <span class="pre">0,</span> <span class="pre">'vext_spec':</span> <span class="pre">1.0,</span> <span class="pre">'vlen':</span> <span class="pre">0,</span> <span class="pre">'xlen':</span> <span class="pre">32}</span></em><a class="headerlink" href="#mlonmcu.target.riscv.SpikeTarget.DEFAULTS" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">DEFAULTS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'abi':</span> <span class="pre">None,</span> <span class="pre">'arch':</span> <span class="pre">None,</span> <span class="pre">'atomic':</span> <span class="pre">True,</span> <span class="pre">'attr':</span> <span class="pre">'',</span> <span class="pre">'bext_spec':</span> <span class="pre">0.92,</span> <span class="pre">'bext_zba':</span> <span class="pre">False,</span> <span class="pre">'bext_zbb':</span> <span class="pre">False,</span> <span class="pre">'bext_zbc':</span> <span class="pre">False,</span> <span class="pre">'bext_zbs':</span> <span class="pre">False,</span> <span class="pre">'compressed':</span> <span class="pre">True,</span> <span class="pre">'cpu':</span> <span class="pre">None,</span> <span class="pre">'elen':</span> <span class="pre">64,</span> <span class="pre">'embedded':</span> <span class="pre">False,</span> <span class="pre">'embedded_vext':</span> <span class="pre">False,</span> <span class="pre">'enable_bext':</span> <span class="pre">False,</span> <span class="pre">'enable_pext':</span> <span class="pre">False,</span> <span class="pre">'enable_vext':</span> <span class="pre">False,</span> <span class="pre">'extensions':</span> <span class="pre">[],</span> <span class="pre">'extra_args':</span> <span class="pre">'',</span> <span class="pre">'fpu':</span> <span class="pre">'double',</span> <span class="pre">'multiply':</span> <span class="pre">True,</span> <span class="pre">'pext_spec':</span> <span class="pre">0.92,</span> <span class="pre">'print_outputs':</span> <span class="pre">False,</span> <span class="pre">'repeat':</span> <span class="pre">None,</span> <span class="pre">'spikepk_extra_args':</span> <span class="pre">[],</span> <span class="pre">'timeout_sec':</span> <span class="pre">0,</span> <span class="pre">'vext_spec':</span> <span class="pre">1.0,</span> <span class="pre">'vlen':</span> <span class="pre">128,</span> <span class="pre">'xlen':</span> <span class="pre">32}</span></em><a class="headerlink" href="#mlonmcu.target.riscv.SpikeTarget.DEFAULTS" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -3181,7 +3346,7 @@ TRACE_SIGS ?= ‘*’</p>
 <p>Target using a Pulpino-like VP running in the GVSOC simulator</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.VicunaTarget.DEFAULTS">
-<span class="sig-name descname"><span class="pre">DEFAULTS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'abi':</span> <span class="pre">None,</span> <span class="pre">'arch':</span> <span class="pre">None,</span> <span class="pre">'atomic':</span> <span class="pre">False,</span> <span class="pre">'attr':</span> <span class="pre">'',</span> <span class="pre">'compressed':</span> <span class="pre">False,</span> <span class="pre">'core':</span> <span class="pre">'cv32e40x',</span> <span class="pre">'cpu':</span> <span class="pre">None,</span> <span class="pre">'dc_line_width':</span> <span class="pre">None,</span> <span class="pre">'dc_size':</span> <span class="pre">0,</span> <span class="pre">'elen':</span> <span class="pre">32,</span> <span class="pre">'embedded':</span> <span class="pre">False,</span> <span class="pre">'embedded_vext':</span> <span class="pre">True,</span> <span class="pre">'enable_vext':</span> <span class="pre">False,</span> <span class="pre">'extensions':</span> <span class="pre">[],</span> <span class="pre">'extra_args':</span> <span class="pre">'',</span> <span class="pre">'fpu':</span> <span class="pre">None,</span> <span class="pre">'ic_line_width':</span> <span class="pre">128,</span> <span class="pre">'ic_size':</span> <span class="pre">0,</span> <span class="pre">'mem_latency':</span> <span class="pre">1,</span> <span class="pre">'mem_size':</span> <span class="pre">524288,</span> <span class="pre">'mem_width':</span> <span class="pre">32,</span> <span class="pre">'multiply':</span> <span class="pre">True,</span> <span class="pre">'print_outputs':</span> <span class="pre">False,</span> <span class="pre">'repeat':</span> <span class="pre">None,</span> <span class="pre">'timeout_sec':</span> <span class="pre">0,</span> <span class="pre">'vext_spec':</span> <span class="pre">1.0,</span> <span class="pre">'vlen':</span> <span class="pre">128,</span> <span class="pre">'vmem_width':</span> <span class="pre">None,</span> <span class="pre">'vport_policy':</span> <span class="pre">None,</span> <span class="pre">'vproc_config':</span> <span class="pre">'compact',</span> <span class="pre">'vproc_pipelines':</span> <span class="pre">None,</span> <span class="pre">'xlen':</span> <span class="pre">32}</span></em><a class="headerlink" href="#mlonmcu.target.riscv.VicunaTarget.DEFAULTS" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">DEFAULTS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'abi':</span> <span class="pre">None,</span> <span class="pre">'abort_cycles':</span> <span class="pre">10000000,</span> <span class="pre">'arch':</span> <span class="pre">None,</span> <span class="pre">'atomic':</span> <span class="pre">False,</span> <span class="pre">'attr':</span> <span class="pre">'',</span> <span class="pre">'compressed':</span> <span class="pre">False,</span> <span class="pre">'core':</span> <span class="pre">'cv32e40x',</span> <span class="pre">'cpu':</span> <span class="pre">None,</span> <span class="pre">'dc_line_width':</span> <span class="pre">None,</span> <span class="pre">'dc_size':</span> <span class="pre">0,</span> <span class="pre">'elen':</span> <span class="pre">32,</span> <span class="pre">'embedded':</span> <span class="pre">False,</span> <span class="pre">'embedded_vext':</span> <span class="pre">True,</span> <span class="pre">'enable_vext':</span> <span class="pre">False,</span> <span class="pre">'extensions':</span> <span class="pre">[],</span> <span class="pre">'extra_args':</span> <span class="pre">'',</span> <span class="pre">'extra_cycles':</span> <span class="pre">4096,</span> <span class="pre">'fpu':</span> <span class="pre">None,</span> <span class="pre">'ic_line_width':</span> <span class="pre">128,</span> <span class="pre">'ic_size':</span> <span class="pre">0,</span> <span class="pre">'mem_latency':</span> <span class="pre">1,</span> <span class="pre">'mem_size':</span> <span class="pre">524288,</span> <span class="pre">'mem_width':</span> <span class="pre">32,</span> <span class="pre">'multiply':</span> <span class="pre">True,</span> <span class="pre">'print_outputs':</span> <span class="pre">False,</span> <span class="pre">'repeat':</span> <span class="pre">None,</span> <span class="pre">'timeout_sec':</span> <span class="pre">0,</span> <span class="pre">'vext_spec':</span> <span class="pre">1.0,</span> <span class="pre">'vlen':</span> <span class="pre">128,</span> <span class="pre">'vmem_width':</span> <span class="pre">None,</span> <span class="pre">'vport_policy':</span> <span class="pre">None,</span> <span class="pre">'vproc_config':</span> <span class="pre">'compact',</span> <span class="pre">'vproc_pipelines':</span> <span class="pre">None,</span> <span class="pre">'xlen':</span> <span class="pre">32}</span></em><a class="headerlink" href="#mlonmcu.target.riscv.VicunaTarget.DEFAULTS" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -3192,6 +3357,11 @@ TRACE_SIGS ?= ‘*’</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.VicunaTarget.REQUIRED">
 <span class="sig-name descname"><span class="pre">REQUIRED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'riscv_gcc.install_dir',</span> <span class="pre">'riscv_gcc.name',</span> <span class="pre">'riscv_gcc.variant',</span> <span class="pre">'verilator.install_dir',</span> <span class="pre">'vicuna.src_dir'}</span></em><a class="headerlink" href="#mlonmcu.target.riscv.VicunaTarget.REQUIRED" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.VicunaTarget.abort_cycles">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">abort_cycles</span></span><a class="headerlink" href="#mlonmcu.target.riscv.VicunaTarget.abort_cycles" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
@@ -3214,6 +3384,11 @@ TRACE_SIGS ?= ‘*’</p>
 <span class="sig-name descname"><span class="pre">exec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">program</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cwd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'/home/runner/work/mlonmcu/mlonmcu/docs'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/vicuna.html#VicunaTarget.exec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.VicunaTarget.exec" title="Link to this definition"></a></dt>
 <dd><p>Use target to execute an executable with given arguments</p>
 </dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.VicunaTarget.extra_cycles">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">extra_cycles</span></span><a class="headerlink" href="#mlonmcu.target.riscv.VicunaTarget.extra_cycles" title="Link to this definition"></a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.VicunaTarget.get_backend_config">
@@ -3266,8 +3441,13 @@ TRACE_SIGS ?= ‘*’</p>
 <dd></dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="mlonmcu.target.riscv.VicunaTarget.parse_exit">
+<span class="sig-name descname"><span class="pre">parse_exit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/vicuna.html#VicunaTarget.parse_exit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.VicunaTarget.parse_exit" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="mlonmcu.target.riscv.VicunaTarget.parse_stdout">
-<span class="sig-name descname"><span class="pre">parse_stdout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/vicuna.html#VicunaTarget.parse_stdout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.VicunaTarget.parse_stdout" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">parse_stdout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exit_code</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlonmcu/target/riscv/vicuna.html#VicunaTarget.parse_stdout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlonmcu.target.riscv.VicunaTarget.parse_stdout" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
