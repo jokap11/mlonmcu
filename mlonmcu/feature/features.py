@@ -747,7 +747,7 @@ class Usmp(BackendFeature):
 
     DEFAULTS = {
         **FeatureBase.DEFAULTS,
-        "algorithm": "greedy_by_conflicts",  # options: greedy_by_conflicts, greedy_by_size, hill_climb
+        "algorithm": "hill_climb",  # options: greedy_by_conflicts, greedy_by_size, hill_climb
     }
 
     def __init__(self, features=None, config=None):
