@@ -39,13 +39,13 @@ class RISCVTarget(Target):
         # Default: rv32gc
         "xlen": 32,
         "embedded": False,
-        "compressed": True,
-        "atomic": True,
+        "compressed": False,
+        "atomic": False,
         "multiply": True,
         "extra_args": "",
         "timeout_sec": 0,  # disabled
         "extensions": [],  # Should only be used for unhandled custom exts
-        "fpu": "double",  # allowed: none, single, double
+        "fpu": None,  # allowed: none, single, double
         "arch": None,  # Please use above properties if possible
         "abi": None,  # Please use above properties if possible
         "attr": "",  # Please avoid using this directly
