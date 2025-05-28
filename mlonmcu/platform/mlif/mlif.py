@@ -69,17 +69,17 @@ class MlifPlatform(CompilePlatform, TargetPlatform):
         "model_support_dir": None,
         "toolchain": "gcc",
         "prebuild_lib_path": None,
-        "optimize": None,  # values: 0,1,2,3,s
+        "optimize": "3",  # values: 0,1,2,3,s
         "input_data_path": None,
         "output_data_path": None,
         "mem_only": False,
         "debug_symbols": False,
         "verbose_makefile": False,
-        "lto": False,
+        "lto": True,
         "slim_cpp": True,
         "garbage_collect": True,
         "fuse_ld": None,
-        "strip_strings": False,
+        "strip_strings": True,
         "goal": "generic_mlonmcu",  # Use 'generic_mlif' for older version of MLIF
     }
 

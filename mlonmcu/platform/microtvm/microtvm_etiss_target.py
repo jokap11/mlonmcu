@@ -43,7 +43,7 @@ class EtissMicroTvmPlatformTarget(TemplateMicroTvmPlatformTarget):
         "toolchain": "gcc",
         "xlen": 32,
         "extensions": ["i", "m", "c"],  # TODO overwrite extensions elegantly
-        "fpu": "double",  # allowed: none, single, double
+        "fpu": None,  # allowed: none, single, double
         "arch": None,
         "abi": None,
         "attr": "",

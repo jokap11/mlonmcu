@@ -1,6 +1,6 @@
 ---
 # The MLONMCU_HOME is filled in automatically when creating the environment
-home: "/home/hansos/.config/mlonmcu/environments/default"
+home: "{{ home_dir }}"
 logging:
   level: DEBUG
   to_file: false
@@ -25,15 +25,15 @@ paths:
   # The paths will be checked in the order defined here stopping at the first match
   # Non-existant paths will be skipped without throwing an error
   models:
-    - "/home/hansos/.config/mlonmcu/environments/default/models"
+    - "{{ home_dir }}/models"
 # Here default clone_urls
 repos:
   tensorflow:
     url: "https://github.com/tensorflow/tflite-micro.git"
     ref: 93d4b1ccc6e0d1a9062acb1d79f21505daf9d940
   tvm:
-    url: "https://gitlab.lrz.de/de-tum-ei-eda-esl/fault_injection/tvm-fic.git"
-    ref: FIC/conv2d_checksum_strided_on_relay_level
+    url: "https://github.com/jokap11/TVM-ABFT_PASSES.git"
+    ref: all_ABFT_passes
   etiss:
     url: "https://github.com/jokap11/etiss.git"
     ref: working_pulp_vers
@@ -232,9 +232,7 @@ vars:
   llvm.version: "14.0.0"
   runs_per_stage: true
   # tvm.make_tool: "ninja"
-  riscv_gcc.dl_url: "https://syncandshare.lrz.de/dl/fiWBtDLWz17RBc1Yd4VDW7/GCC/default/2023.11.27/Ubuntu/20.04/rv32gc_ilp32d.tar.xz"
-  riscv_gcc.dl_url_vext: "https://syncandshare.lrz.de/dl/fiWBtDLWz17RBc1Yd4VDW7/GCC/default/2023.11.27/Ubuntu/20.04/rv32gcv_ilp32d.tar.xz"
-  riscv_gcc.dl_url_pext: "https://syncandshare.lrz.de/dl/fiWBtDLWz17RBc1Yd4VDW7/GCC/pext/2022.04.28/Ubuntu/20.04/rv32gcp_ilp32d.tar.xz"
+  riscv_gcc.dl_url: "https://github.com/PhilippvK/riscv-tools/releases/download/gnu_2024.09.03_gcc14/riscv32-unknown-elf-ubuntu-20.04-rv32im_zicsr_zifencei_ilp32.tar.xz"
 flags:
   tflmc.exe:
   - x86
