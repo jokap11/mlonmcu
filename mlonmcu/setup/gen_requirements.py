@@ -228,7 +228,7 @@ CONSTRAINTS = [
     ("kconfiglib", "==13.7.1"),
     ("matplotlib", None),
     ("networkx", None),
-    ("numpy", None),
+    ("numpy", "==1.26.4"),
     ("onnx", None),
     ("openpyxl", None),
     ("ortools", None),
